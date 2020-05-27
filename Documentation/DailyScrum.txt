@@ -18,3 +18,25 @@
 - Google cloud for hosting
 
 3. Need assistance / figure things out
+
+
+2020/05/27 Wang Wei
+1. Done since last scrum:
+- watching spring tutorials
+
+2. To do until next Scrum:
+- setup database, add home page template
+
+3. Need assistance / figure things out
+
+
+
+2020/05/27 Donghyeok Seo
+1. Done since last scrum
+-proposal discussion
+
+2. To do until next Scrum:
+- study Spring boot, Freemarker
+- Google cloud for hosting
+
+3. Need assistance / figure things out
