@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/IPD20-Spring-ChatRoom.iml" filepath="$PROJECT_DIR$/.idea/IPD20-Spring-ChatRoom.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Project_ChatRoom/Project_ChatRoom.iml" filepath="$PROJECT_DIR$/Project_ChatRoom/Project_ChatRoom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IPD20_ChatRoom/ipd20.iml" filepath="$PROJECT_DIR$/IPD20_ChatRoom/ipd20.iml" />
     </modules>
   </component>
 </project>
