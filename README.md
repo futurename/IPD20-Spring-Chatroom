@@ -1,4 +1,4 @@
-# IPD20-ASP-Chatroom
+# IPD20-SPRING-Chatroom
 One week project
 
-This project implements user login, create channels, chatting room with SingalIR.
+This project implements user login, create channels, chatting room with Spring boot.
