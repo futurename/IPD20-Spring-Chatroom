@@ -2,10 +2,12 @@ package com.chatroom.ipd20.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * @author Wei Wang
@@ -19,7 +21,20 @@ import javax.persistence.Table;
 public class Channel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
+    @NotEmpty
+    @Size(min=1, max=50)
+    private String title;
+
+    @NotEmpty
+    @Size(min=1, max=200)
+    private String description;
+
+    @NotEmpty
+    private int ownerId;
+
+    @NotEmpty
+    private LocalDateTime createdTS;
 }
