@@ -8,7 +8,11 @@
 </head>
 <body>
 <#macro headerDiv>
-    <H1>This is header</H1>
+    <h1>This is header</h1>
+</#macro>
+
+<#macro footerDiv>
+    <h1>This is footer</h1>
 </#macro>
 
 </body>

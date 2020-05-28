@@ -21,6 +21,7 @@ public class MessagesController {
     SQLRespository repo;
 
     @GetMapping("/send/{msg}")
+    @ResponseBody
     public Message sendMessage(@PathVariable String msg){
 
         Message newMsg = new Message(1, msg);
