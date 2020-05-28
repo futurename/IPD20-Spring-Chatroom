@@ -14,7 +14,9 @@
 
 
         <#list msgList as msg>
-            <p class="text-red-500 text-2xl">Message sent: ${msg}</p>
+            <p class="text-red-500 text-2xl">Message sent: ${msg.body}</p>
+        <#else>
+            <p>There is no Message</p>
         </#list>
 
         <@indexHeader.footerDiv/>

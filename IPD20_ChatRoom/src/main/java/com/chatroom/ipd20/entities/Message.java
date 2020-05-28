@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
  **/
 
 
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -29,22 +28,28 @@ public class Message {
 
     @NotEmpty
     @Size(min=1, max=1000)
+    @Column(length=1000)
     private String body;
 
+    @Column(length=200)
     private String filePath;
 
+    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name="channelId")
+    private Channel channel;
 
-    private int userId;
+    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name="userId")
+    private User user;
 
-
-    private int channelId;
-
+    @NotEmpty
     private LocalDateTime createdTS;
 
-
     public Message(int userId, String body) {
-       this.userId = userId;
-       this.body = body;
+        this.user = new User(userId);
+           this.body = body;
     }
 
 
