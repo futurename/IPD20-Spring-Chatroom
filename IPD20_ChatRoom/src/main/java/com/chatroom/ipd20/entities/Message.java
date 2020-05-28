@@ -5,7 +5,10 @@ import lombok.*;
 
 import javax.naming.Name;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author Wei Wang
@@ -16,22 +19,29 @@ import java.sql.Date;
 
 
 @Entity
+@Data
 @NoArgsConstructor
 @Table(name = "messages")
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @Getter
-    @Setter
+    @NotEmpty
+    @Size(min=1, max=1000)
+    private String body;
+
+    private String filePath;
+
+    @NotEmpty
     private int userId;
 
-    @Getter
-    @Setter
-    private String body;
+    @NotEmpty
+    private int channelId;
+
+    @NotEmpty
+    private LocalDateTime createdTS;
+
 
     public Message(int id, int userId, String body) {
         this.id = id;
