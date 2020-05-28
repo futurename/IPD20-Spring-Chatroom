@@ -16,16 +16,16 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name="messages")
 @NoArgsConstructor
-
+@Table(name = "messages")
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private int id;
 
+    @Getter
     @Setter
     private int userId;
 
@@ -39,8 +39,5 @@ public class Message {
        this.body = body;
     }
 
-    @Column(name = "userId")
-    public int getUserId() {
-        return userId;
-    }
+
 }
