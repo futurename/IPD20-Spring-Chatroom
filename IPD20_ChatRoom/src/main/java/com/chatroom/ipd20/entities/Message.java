@@ -33,13 +33,12 @@ public class Message {
 
     private String filePath;
 
-    @NotEmpty
+
     private int userId;
 
-    @NotEmpty
+
     private int channelId;
 
-    @NotEmpty
     private LocalDateTime createdTS;
 
 
