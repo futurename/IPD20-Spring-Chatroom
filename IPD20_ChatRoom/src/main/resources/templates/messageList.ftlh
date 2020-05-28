@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Message sent: ${newMsg}</h1>
+ <#list msgList as msg>
+     <h1>Message sent: ${msg}</h1>
+ </#list>
+
 </body>
 </html>

@@ -33,8 +33,7 @@ public class Message {
     @Setter
     private String body;
 
-    public Message(int id, int userId, String body) {
-        this.id = id;
+    public Message(int userId, String body) {
        this.userId = userId;
        this.body = body;
     }
