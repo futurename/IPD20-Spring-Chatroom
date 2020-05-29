@@ -66,3 +66,30 @@
 
 3. Need assistance / figure things out
 - Google cloud for hosting
+
+*************************************************
+2020/05/29 Wang Wei
+1. Done since last scrum:
+- add index page
+- test freemarker
+
+2. To do until next Scrum:
+- add login/register pages
+
+3. Need assistance / figure things out
+
+
+
+2020/05/29 Donghyeok Seo
+1. Done since last scrum
+- study Spring boot, Freemarker
+- make layout page with freemarker
+- create database
+
+2. To do until next Scrum:
+- create layout
+- create test database in memory
+- create mock data
+
+3. Need assistance / figure things out
+- Google cloud for hosting

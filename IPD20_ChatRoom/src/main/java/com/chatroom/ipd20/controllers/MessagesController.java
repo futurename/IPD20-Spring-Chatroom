@@ -32,4 +32,5 @@ public class MessagesController {
         model.addAttribute("msgList",repo.findAll());
         return "index";
     }
+
 }
