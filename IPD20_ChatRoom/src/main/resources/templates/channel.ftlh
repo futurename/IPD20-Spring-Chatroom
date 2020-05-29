@@ -6,15 +6,16 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link type="text/css" rel="stylesheet" href="/css/app.css">
-        <title>Index</title>
+        <title>channel</title>
     </head>
     <body>
         <#import "layout/indexLayout.ftlh" as indexHeader>
         <@indexHeader.headerDiv/>
 
 
-        <#list msgList as msg>
-            <p class="text-red-500 text-2xl">Message sent: ${msg.body}</p>
+        <#list searchList as search >
+            <p class="text-red-500 text-2xl">Channel title: ${search.title}</p>
+            <p class="text-red-500 text-2xl">Channel description: ${search.description}</p>
         <#else>
             <p>There is no Message</p>
         </#list>

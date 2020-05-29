@@ -2,6 +2,7 @@ package com.chatroom.ipd20.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -32,11 +33,13 @@ public class User {
     @NotEmpty
     @Size(min=5, max=50)
     @Column(length=50)
+    @Field
     private String email;
 
     @NotEmpty
     @Size(min=1, max=50)
     @Column(length=50)
+    @Field
     private String name;
 
     @NotEmpty
