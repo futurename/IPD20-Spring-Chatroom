@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Header</title>
+    <link type="text/css" rel="stylesheet" href="/css/app.css">
 </head>
 <body>
 <#macro headerDiv>
-    <h1>This is header</h1>
+    <span class="text-3xl">This is header</span>
 </#macro>
 
 <#macro footerDiv>
-    <h1>This is footer</h1>
+    <span class="text-3xl">This is footer</span>
 </#macro>
 
 </body>
