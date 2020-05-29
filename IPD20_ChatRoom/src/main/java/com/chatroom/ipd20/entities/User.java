@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -45,10 +46,10 @@ public class User {
 
 
     @OneToMany(mappedBy="owner")
-    private Set<Channel> channels;
+    private Set<Channel> channels = new HashSet<Channel>();
 
     @OneToMany(mappedBy="user")
-    private Set<Message> messages;
+    private Set<Message> messages = new HashSet<Message>();
 
     @ManyToMany
     @JoinTable(
