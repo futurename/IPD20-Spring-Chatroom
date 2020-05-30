@@ -11,10 +11,10 @@
         <link type="text/css" rel="stylesheet" href="/css/app.css">
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/live-chat-orange.jpg"/>
+        <link rel="shortcut icon" href="images/favicon.ico"/>
 
         <!-- Awesome Icons -->
-        <link rel="stylesheet" href="/css/all.min.css">
+        <link rel="stylesheet" href="/fontawesome/css/all.css">
 
         <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -31,10 +31,10 @@
         <@defPage.headerDiv/>
         <div class=" block flex justify-center">
             <div class="my-5">
-                <span class="text-2xl font-bold mb-4 inline-block">Create your own free account</span><br>
+                <span class="text-3xl font-bold mb-5 inline-block">Create Free Account</span><br>
                 <form method="post" action="/messages">
                     <label for="name" class="text-lg font-bold py-1">Name</label><br>
-                    <input type="text" id="name" class="border-solid border-2 w-full mb-3"><br>
+                    <i class="fas fa-user"></i> <input type="text" id="name" class="border-solid border-2 w-full mb-3"><br>
                     <label for="email" class="text-lg font-bold py-1">Email</label><br>
                     <input type="email" id="email" class="border-solid border-2 w-full mb-3"><br>
                     <label for="pass1" class="text-lg font-bold py-1">Password</label><br>
@@ -42,8 +42,8 @@
                     <label for="pass2" class="text-lg font-bold py-1">Password Again</label><br>
                     <input type="password" id="pass2" class="border-solid border-2 w-full mb-3"><br>
                     <div class="flex justify-center">
-                        <input type="submit" id="btSubmit" class="text-lg font-bold bg-blue-400 py-2 px-4 mt-2 mb-6 rounded-full "
-                               value="Submit">
+                        <input type="submit" id="btSubmit" class="text-xl w-full font-bold py-2 text-center mt-2 mb-6
+                        rounded-full" style="background-color: #ff5100;color: white"    value="Submit">
                     </div>
 
                 </form>

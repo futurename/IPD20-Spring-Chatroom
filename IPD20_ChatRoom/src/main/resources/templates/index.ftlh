@@ -12,7 +12,7 @@
         <link type="text/css" rel="stylesheet" href="/css/app.css">
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/icon.jpg"/>
+        <link rel="shortcut icon" href="images/favicon.ico"/>
 
         <!-- Awesome Icons -->
         <link rel="stylesheet" href="/css/all.min.css">

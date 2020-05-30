@@ -9,7 +9,7 @@
         <title>channel</title>
     </head>
     <body>
-        <#import "layout/indexLayout.ftlh" as indexHeader>
+        <#import "layout/defaultLayout.ftlh" as indexHeader>
         <@indexHeader.headerDiv/>
 
 
