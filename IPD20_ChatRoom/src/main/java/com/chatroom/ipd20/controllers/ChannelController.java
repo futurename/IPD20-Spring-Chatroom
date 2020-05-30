@@ -48,14 +48,14 @@ public class ChannelController {
 
 
     @GetMapping("/chatroom/{id}")
-    public String enterChatroom(Model model, @PathVariable String id) {
-        int channelId = Integer.parseInt(id);
-      //  Channel curChannel = channelRepository.findById(channelId).get();
-       // List<User> userList = userRepository.findAll();
-        List<Message> messageList = messageRespository.findByChannelId(channelId);
+    public String enterChatroom(Model model, @PathVariable int id) {
+        int channelId = id;
+        Channel curChannel = channelRepository.findById(channelId).get();
+        List<User> userList = userRepository.findAll();
+        List<Message> messageList = messageRespository.findByChannel(new Channel(channelId));
 
-      //  model.addAttribute("curChannel", curChannel);
-       // model.addAttribute("userList", userList);
+        model.addAttribute("curChannel", curChannel);
+        model.addAttribute("userList", userList);
         model.addAttribute("messageList", messageList);
         return "chatroom";
     }

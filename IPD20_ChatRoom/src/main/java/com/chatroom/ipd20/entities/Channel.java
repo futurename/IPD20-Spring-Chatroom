@@ -1,7 +1,10 @@
 package com.chatroom.ipd20.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
@@ -46,14 +49,17 @@ public class Channel {
     @NotEmpty
     @ManyToOne
     @JoinColumn(name="ownerId", nullable = false)
-    @IndexedEmbedded
+    @IndexedEmbedded(depth = 1)
+    @ToString.Exclude
     private User owner;
 
     @NotEmpty
     @OneToMany(mappedBy = "channel")
+    @ToString.Exclude
     private Set<Message> messages = new HashSet<Message>();
 
     @ManyToMany(mappedBy = "favoriteChannels")
+    @ToString.Exclude
     private Set<User> users = new HashSet<User>();
 
     @NotEmpty

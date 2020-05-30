@@ -35,11 +35,13 @@ public class Message {
     @NotEmpty
     @ManyToOne
     @JoinColumn(name="channelId", nullable = false)
+    @ToString.Exclude
     private Channel channel;
 
     @NotEmpty
     @ManyToOne
     @JoinColumn(name="userId", nullable = false)
+    @ToString.Exclude
     private User user;
 
     @NotEmpty

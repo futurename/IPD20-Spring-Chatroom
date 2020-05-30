@@ -33,17 +33,17 @@
 
         <div id="left" class="flex flex-col">
             <div class="inline-block border-solid border-2 bg-blue-200">
-              <#--  <span class="text-2xl font-bold">${curChannel.title}</span>-->
+               <#-- <span class="text-2xl font-bold">${curChannel.title}</span>-->
                 <button class="p-2 hover:text-orange-500"><i class="fas fa-chevron-circle-down fa-2x my-auto "></i></button>
             </div>
             <div>
-            <#--    <#list userList as user>
+                <#list userList as user>
                     <span>${user.name}</span><br>
-                </#list>-->
+                </#list>
             </div>
         </div>
         <div id="content">
-           <#list messageList as msg>
+            <#list messageList as msg>
                 <span class="text-lg font-bold">${msg}</span><br>
             </#list>
         </div>
