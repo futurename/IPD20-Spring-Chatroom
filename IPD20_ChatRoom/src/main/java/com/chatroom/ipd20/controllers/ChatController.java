@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author Wei Wang
@@ -29,6 +30,12 @@ public class ChatController {
         // Add username in web socket session
         headerAccessor.getSessionAttributes().put("username", "temSender");
         return chatMessage;
+    }
+
+
+    @GetMapping("/register")
+    public String register(){
+        return "register";
     }
 
 }

@@ -27,7 +27,7 @@ public class MessagesController {
         return newMsg;
     }
 
-    @GetMapping("/messages")
+    @RequestMapping("/messages")
     public String  getAllMessages(Model model){
         model.addAttribute("msgList",repo.findAll());
         return "index";

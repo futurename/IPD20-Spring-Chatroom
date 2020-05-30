@@ -5,11 +5,14 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link type="text/css" rel="stylesheet" href="/css/app.css">
+
         <title>Index</title>
 
+        <!-- tailwind css -->
+        <link type="text/css" rel="stylesheet" href="/css/app.css">
+
         <!-- favicon -->
-        <link rel="shortcut icon" href="../images/live-chat-icon.png"/>
+        <link rel="shortcut icon" href="images/icon.jpg"/>
 
         <!-- Awesome Icons -->
         <link rel="stylesheet" href="/css/all.min.css">
@@ -25,27 +28,31 @@
 
     </head>
     <body>
-        <#import "layout/indexLayout.ftlh" as indexHeader>
-        <@indexHeader.headerDiv/>
+        <#import "layout/defaultLayout.ftlh" as defPage>
+        <@defPage.headerDiv/>
 
 
-        <#list msgList as msg>
-            <p class="text-red-500 text-2xl">Message sent: ${msg.body}</p>
-        <#else>
-            <p>There is no Message</p>
-        </#list>
+        <div class="bg-red-200 flex-1 flex-grow">
 
-        <ul id="messageBox" class="font-bold">
-            <li>first li row</li>
-        </ul>
+            <#list msgList as msg>
+                <p class="text-red-500 text-2xl">Message sent: ${msg.body}</p>
+            <#else>
+                <p>There is no Message</p>
+            </#list>
 
-        <button id="btConn" type="submit" class="bg-blue-200 border-solid font-bold p-2">Connect</button>
-        <br>
-        <textarea id="taMessage" class="w-full h-16 border-2 border-solid"></textarea>
-        <button id="btSubmit" type="submit" class="bg-blue-200 border-solid font-bold p-2">Submit</button>
-        <br>
+            <ul id="messageBox" class="font-bold">
+                <li>first li row</li>
+            </ul>
 
-        <@indexHeader.footerDiv/>
+            <button id="btConn" type="submit" class="bg-blue-200 border-solid font-bold p-2">Connect</button>
+            <br>
+            <textarea id="taMessage" class="w-full h-16 border-2 border-solid"></textarea>
+            <button id="btSubmit" type="submit" class="bg-blue-200 border-solid font-bold p-2">Submit</button>
+            <br>
+        </div>
+
+
+        <@defPage.footerDiv/>
 
     </body>
 
@@ -92,8 +99,8 @@
 
             alert("received msg: " + msg);
             var msgBox = document.querySelector('#messageBox');
-            msgBox.append('<li>'+msg + '</li>');
-            alert('<li>'+msg + '</li>');
+            msgBox.append('<li>' + msg + '</li>');
+            alert('<li>' + msg + '</li>');
         }
 
 
