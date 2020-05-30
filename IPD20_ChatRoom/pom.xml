@@ -92,6 +92,13 @@
 			<version>1.0.2</version>
 		</dependency>
 
+		<!-- Awesome font -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>5.13.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

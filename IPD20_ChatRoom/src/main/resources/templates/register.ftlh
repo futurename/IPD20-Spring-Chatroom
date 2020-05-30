@@ -33,12 +33,16 @@
             <div class="my-5">
                 <span class="text-3xl font-bold mb-5 inline-block">Create Free Account</span><br>
                 <form method="post" action="/messages">
+                    <i class="fas fa-user"></i>
                     <label for="name" class="text-lg font-bold py-1">Name</label><br>
-                    <i class="fas fa-user"></i> <input type="text" id="name" class="border-solid border-2 w-full mb-3"><br>
+                    <input type="text" id="name" class="border-solid border-2 w-full mb-3"><br>
+                    <i class="fas fa-envelope"></i>
                     <label for="email" class="text-lg font-bold py-1">Email</label><br>
                     <input type="email" id="email" class="border-solid border-2 w-full mb-3"><br>
+                    <i class="fas fa-unlock-alt"></i>
                     <label for="pass1" class="text-lg font-bold py-1">Password</label><br>
                     <input type="password" id="pass1" class="border-solid border-2 w-full mb-3"><br>
+                    <i class="fas fa-unlock-alt"></i>
                     <label for="pass2" class="text-lg font-bold py-1">Password Again</label><br>
                     <input type="password" id="pass2" class="border-solid border-2 w-full mb-3"><br>
                     <div class="flex justify-center">

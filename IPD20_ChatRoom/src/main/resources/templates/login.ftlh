@@ -33,11 +33,12 @@
             <div class="my-5 w-1/6">
                 <span class="text-3xl font-bold mb-5 inline-block w-full text-center">Login</span><br>
                 <form method="post" action="/messages">
-                    <label for="email" class="text-lg font-bold py-1">Email</label><br>
                     <i class="fas fa-envelope"></i>
+                    <label for="email" class="text-lg font-bold py-1">Email</label><br>
                     <input type="email" id="email" class="border-solid border-2 w-full mb-3"><br>
-                    <label for="pass" class="text-lg font-bold py-1">Password</label><br>
                     <i class="fas fa-unlock-alt"></i>
+                    <label for="pass" class="text-lg font-bold py-1">Password</label><br>
+
                     <input type="password" id="pass" class="border-solid border-2 w-full mb-3"><br>
 
                     <div class="flex justify-center">
