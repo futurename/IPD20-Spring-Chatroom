@@ -1,7 +1,9 @@
 package com.chatroom.ipd20.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 
@@ -50,9 +52,11 @@ public class User {
 
 
     @OneToMany(mappedBy="owner")
+    @ToString.Exclude
     private Set<Channel> channels = new HashSet<Channel>();
 
     @OneToMany(mappedBy="user")
+    @ToString.Exclude
     private Set<Message> messages = new HashSet<Message>();
 
     @ManyToMany
@@ -61,5 +65,6 @@ public class User {
             joinColumns = { @JoinColumn(name = "userId") },
             inverseJoinColumns = { @JoinColumn(name = "channelId") }
     )
+    @ToString.Exclude
     private Set<Channel> favoriteChannels;
 }

@@ -43,9 +43,9 @@
             </div>
         </div>
         <div id="content">
-           <#-- <#list messageList as msg>
+            <#list messageList as msg>
                 <span class="text-lg font-bold">${msg}</span><br>
-            </#list>-->
+            </#list>
         </div>
         <div id="right">
 
