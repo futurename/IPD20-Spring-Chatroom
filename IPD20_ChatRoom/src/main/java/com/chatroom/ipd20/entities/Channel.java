@@ -1,6 +1,7 @@
 package com.chatroom.ipd20.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
@@ -22,8 +23,12 @@ import java.util.Set;
 @Indexed
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name="channels")
 public class Channel {
+    public Channel(int id){
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

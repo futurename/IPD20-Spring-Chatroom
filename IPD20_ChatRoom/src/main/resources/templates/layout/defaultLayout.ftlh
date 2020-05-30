@@ -15,7 +15,7 @@
             <#macro headerDiv>
                 <div class="w-full h-24 flex flex-row">
                     <div class="inline-block my-auto">
-                        <img src="images/Logo_RGB_Orange.png" class="h-16">
+                        <img src="/images/Logo_RGB_Orange.png" class="h-16">
                     </div>
                     <span class="text-4xl font-bold my-auto mx-auto pr-64" style="color: #ff5100">HEKO-WEI CHATROOM</span>
                 </div>

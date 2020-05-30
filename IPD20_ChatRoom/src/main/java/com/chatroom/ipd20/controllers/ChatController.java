@@ -1,5 +1,6 @@
 package com.chatroom.ipd20.controllers;
 
+import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.services.ChannelRepository;
@@ -46,7 +47,6 @@ public class ChatController {
         return chatMessage;
     }
 
-
     @GetMapping("/register")
     public String register(){
         return "register";
@@ -67,10 +67,11 @@ public class ChatController {
         return newMsg;
     }
 
-    @RequestMapping("/index")
+    @RequestMapping(value = {"/index","/"})
     public String  getAllMessages(Model model){
         model.addAttribute("allChannels", channelRepository.findAll());
         return "index";
     }
+
 
 }

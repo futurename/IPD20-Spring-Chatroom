@@ -1,7 +1,10 @@
 package com.chatroom.ipd20.services;
 
 import com.chatroom.ipd20.entities.Channel;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface ChannelRepository extends CrudRepository<Channel, Integer> {
+@RepositoryRestResource
+public interface ChannelRepository extends JpaRepository<Channel, Integer> {
+
 }

@@ -5,13 +5,13 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Register page</title>
+        <title>Login page</title>
 
         <!-- tailwind css -->
         <link type="text/css" rel="stylesheet" href="/css/app.css">
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico"/>
+        <link rel="shortcut icon" href="/images/favicon.ico"/>
 
         <!-- Awesome Icons -->
         <link rel="stylesheet" href="/fontawesome/css/all.css">
@@ -32,7 +32,7 @@
         <div class=" block flex justify-center">
             <div class="my-5 w-1/6">
                 <span class="text-3xl font-bold mb-5 inline-block w-full text-center">Login</span><br>
-                <form method="post" action="/messages">
+                <form method="post" action="/">
                     <i class="fas fa-envelope"></i>
                     <label for="email" class="text-lg font-bold py-1">Email</label><br>
                     <input type="email" id="email" class="border-solid border-2 w-full mb-3"><br>

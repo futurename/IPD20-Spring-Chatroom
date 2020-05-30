@@ -11,7 +11,7 @@
         <link type="text/css" rel="stylesheet" href="/css/app.css">
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico"/>
+        <link rel="shortcut icon" href="/images/favicon.ico"/>
 
         <!-- Awesome Icons -->
         <link rel="stylesheet" href="/fontawesome/css/all.css">
@@ -32,7 +32,7 @@
         <div class=" block flex justify-center">
             <div class="my-5">
                 <span class="text-3xl font-bold mb-5 inline-block">Create Free Account</span><br>
-                <form method="post" action="/messages">
+                <form method="post" action="/">
                     <i class="fas fa-user"></i>
                     <label for="name" class="text-lg font-bold py-1">Name</label><br>
                     <input type="text" id="name" class="border-solid border-2 w-full mb-3"><br>

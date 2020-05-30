@@ -5,13 +5,13 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>Index</title>
 
         <!-- tailwind css -->
         <link type="text/css" rel="stylesheet" href="/css/app.css">
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico"/>
+        <link rel="shortcut icon" href="/images/favicon.ico"/>
 
         <!-- Awesome Icons -->
         <link rel="stylesheet" href="/fontawesome/css/all.css">
@@ -46,7 +46,7 @@
             <div class="border-2 border-solid flex flex-wrap">
 
                 <#list allChannels as channel>
-                    <a class="channelWrapper w-1/3 justify-start flex pl-5 my-2">
+                    <a class="channelWrapper w-1/3 justify-start flex pl-5 my-2" href='/chatroom/${channel.id}'>
                         <div class="channelTitle inline-block font-bold px-1">${channel.title}</div>
                         <div class="ChannelInfo inline-block">(34)</div>
                     </a>
