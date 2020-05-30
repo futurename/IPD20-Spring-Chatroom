@@ -26,9 +26,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name="channels")
 public class Channel {
-    public Channel(int id){
-        this.id = id;
-    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

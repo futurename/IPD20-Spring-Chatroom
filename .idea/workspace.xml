@@ -2,47 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e0a5b18-8cb1-4c42-ab97-c5ace2748065" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_atteo_evo_inflector_1_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_rest_2_3_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_rest_core_3_3_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_rest_webmvc_3_3_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_hateoas_spring_hateoas_1_1_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_2_0_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/chatroom.ftlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p.fdt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p.nvd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p_Lucene50_0.doc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p_Lucene50_0.pos" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p_Lucene50_0.tim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.fdt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.fdx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.fnm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.nvd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.nvm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.si" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.doc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.pos" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.tim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.tip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/segments_9s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af.fdt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af.fdx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af.fnm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af.nvd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af.nvm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af.si" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af_Lucene50_0.doc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af_Lucene50_0.pos" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af_Lucene50_0.tim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_af_Lucene50_0.tip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/segments_ag" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/controllers/ChannelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/controllers/ChannelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/controllers/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/controllers/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/entities/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/entities/Channel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/services/ChannelRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/services/ChannelRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/services/MessageRespository.java" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/services/MessageRespository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/services/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/services/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/messages.sql" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/messages.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/index.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/index.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/layout/defaultLayout.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/layout/defaultLayout.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/login.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/login.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/register.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/register.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_59.fdt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_59.nvd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_59_Lucene50_0.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_59_Lucene50_0.pos" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_59_Lucene50_0.tim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/chatroom.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/chatroom.ftlh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p.fdt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p.nvd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p_Lucene50_0.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p_Lucene50_0.pos" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9p_Lucene50_0.tim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.fdt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.fdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.fnm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.nvd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.nvm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r.si" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.pos" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.tim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/_9r_Lucene50_0.tip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexpath/com.chatroom.ipd20.entities.Channel/segments_9s" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +169,7 @@
       <workItem from="1590797724824" duration="8959000" />
       <workItem from="1590808493180" duration="346000" />
       <workItem from="1590849612854" duration="719000" />
-      <workItem from="1590850827040" duration="19194000" />
+      <workItem from="1590850827040" duration="22910000" />
     </task>
     <task id="LOCAL-00001" summary="database settings">
       <created>1590596451781</created>
@@ -257,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590861978892</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add chatroom page&#10;bug: query problem(get messages sent in the chatroom)">
+      <created>1590874593835</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1590874593835</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +275,8 @@
     <MESSAGE value="add login page" />
     <MESSAGE value="add register page&#10;add awesome icon" />
     <MESSAGE value="add index page to display all channels" />
-    <option name="LAST_COMMIT_MESSAGE" value="add index page to display all channels" />
+    <MESSAGE value="add chatroom page&#10;bug: query problem(get messages sent in the chatroom)" />
+    <option name="LAST_COMMIT_MESSAGE" value="add chatroom page&#10;bug: query problem(get messages sent in the chatroom)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="858" y="410" key="#Assign_Data_Sources" timestamp="1590635198599">
@@ -302,10 +301,10 @@
     </state>
     <state x="764" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590681846127" />
     <state x="2684" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590625582914" />
-    <state x="2417" y="83" key="CommitChangelistDialog2" timestamp="1590861975290">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="497" y="83" key="CommitChangelistDialog2" timestamp="1590874590807">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="497" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590783975458" />
+    <state x="497" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874590807" />
     <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590861975290" />
     <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596519809" />
     <state width="471" height="466" key="DebuggerActiveHint" timestamp="1590862900673">
@@ -321,90 +320,90 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2638" y="203" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590870592605" />
-    <state width="1875" height="273" key="GridCell.Tab.0.bottom" timestamp="1590874562023">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.0.bottom" timestamp="1590879519981">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562023" />
-    <state width="1875" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018507" />
+    <state width="1875" height="337" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519981" />
     <state width="1875" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865167" />
     <state width="1875" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427454" />
     <state width="1875" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="273" key="GridCell.Tab.0.center" timestamp="1590874562023">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.0.center" timestamp="1590879519981">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562023" />
-    <state width="1875" height="273" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018507" />
+    <state width="1875" height="337" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519981" />
     <state width="1875" height="273" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865167" />
     <state width="1875" height="273" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427454" />
     <state width="1875" height="273" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="273" key="GridCell.Tab.0.left" timestamp="1590874562022">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.0.left" timestamp="1590879519981">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562022" />
-    <state width="1875" height="273" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018507" />
+    <state width="1875" height="337" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519981" />
     <state width="1875" height="273" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865167" />
     <state width="1875" height="273" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427453" />
     <state width="1875" height="273" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="273" key="GridCell.Tab.0.right" timestamp="1590874562023">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.0.right" timestamp="1590879519981">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562023" />
-    <state width="1875" height="273" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018507" />
+    <state width="1875" height="337" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519981" />
     <state width="1875" height="273" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865167" />
     <state width="1875" height="273" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427454" />
     <state width="1875" height="273" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="273" key="GridCell.Tab.1.bottom" timestamp="1590874562023">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.1.bottom" timestamp="1590879537259">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562023" />
-    <state width="1875" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018508" />
+    <state width="1875" height="337" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879537259" />
     <state width="1875" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865168" />
     <state width="1875" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427454" />
     <state width="1875" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="273" key="GridCell.Tab.1.center" timestamp="1590874562023">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.1.center" timestamp="1590879537259">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562023" />
-    <state width="1875" height="273" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018508" />
+    <state width="1875" height="337" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879537259" />
     <state width="1875" height="273" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865167" />
     <state width="1875" height="273" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427454" />
     <state width="1875" height="273" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="273" key="GridCell.Tab.1.left" timestamp="1590874562023">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.1.left" timestamp="1590879537259">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562023" />
-    <state width="1875" height="273" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018507" />
+    <state width="1875" height="337" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879537259" />
     <state width="1875" height="273" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865167" />
     <state width="1875" height="273" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427454" />
     <state width="1875" height="273" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="273" key="GridCell.Tab.1.right" timestamp="1590874562023">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.1.right" timestamp="1590879537259">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="273" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874562023" />
-    <state width="1875" height="273" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872018508" />
+    <state width="1875" height="337" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879537259" />
     <state width="1875" height="273" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1920.1040@1920.0.1920.1040" timestamp="1590597865167" />
     <state width="1875" height="273" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590595427454" />
     <state width="1875" height="273" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596570119" />
-    <state width="1875" height="337" key="GridCell.Tab.2.bottom" timestamp="1590874382784">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.2.bottom" timestamp="1590879519830">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="337" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874382784" />
-    <state width="1875" height="337" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590871345006" />
-    <state width="1875" height="337" key="GridCell.Tab.2.center" timestamp="1590874382784">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519830" />
+    <state width="1875" height="337" key="GridCell.Tab.2.center" timestamp="1590879519830">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="337" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874382784" />
-    <state width="1875" height="337" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590871345006" />
-    <state width="1875" height="337" key="GridCell.Tab.2.left" timestamp="1590874382784">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519830" />
+    <state width="1875" height="337" key="GridCell.Tab.2.left" timestamp="1590879519830">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="337" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874382784" />
-    <state width="1875" height="337" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590871345006" />
-    <state width="1875" height="337" key="GridCell.Tab.2.right" timestamp="1590874382784">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1875" height="337" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519830" />
+    <state width="1875" height="337" key="GridCell.Tab.2.right" timestamp="1590879519830">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="337" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874382784" />
-    <state width="1875" height="337" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590871345006" />
+    <state width="1875" height="337" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879519830" />
     <state width="226" height="477" key="HiddenNamespacesPopup" timestamp="1590675888448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -431,10 +430,10 @@
     <state x="439" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590679058389" />
     <state x="2359" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590870647640" />
     <state x="439" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590593135822" />
-    <state x="2471" y="252" key="Vcs.Push.Dialog.v2" timestamp="1590861981109">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="551" y="252" key="Vcs.Push.Dialog.v2" timestamp="1590874595797">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="551" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590783979704" />
+    <state x="551" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874595797" />
     <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590861981109" />
     <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596526864" />
     <state x="845" y="408" width="318" height="242" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1590676943601">
@@ -454,11 +453,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2564" y="307" key="git4idea.merge.GitPullDialog/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590805309299" />
-    <state width="465" height="124" key="javadoc.popup.new" timestamp="1590874155808">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="465" height="124" key="javadoc.popup.new" timestamp="1590879326114">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="465" height="124" key="javadoc.popup.new/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590874155808" />
-    <state width="465" height="124" key="javadoc.popup.new/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590872014711" />
+    <state width="465" height="124" key="javadoc.popup.new/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590879326114" />
     <state x="2536" y="240" width="672" height="677" key="run.anything.popup" timestamp="1590865376592">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -479,13 +478,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/controllers/ChannelController.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/IPD20_ChatRoom/src/main/java/com/chatroom/ipd20/controllers/ChannelController.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="13" />
+          <line>58</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
