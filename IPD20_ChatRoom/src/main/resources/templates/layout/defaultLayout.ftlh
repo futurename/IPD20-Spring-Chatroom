@@ -10,21 +10,24 @@
 
 
     </head>
-    <body class="flex flex-col min-h-screen leading-normal">
-        <#macro headerDiv>
-            <div class="w-full h-24 flex flex-row block">
-                <div class="inline-block my-auto">
-                    <img src="images/Logo_RGB_Orange.png" class="h-16">
+    <body class="flex flex-col min-h-screen h-screen " >
+        <div class="min-h-screen h-full flex">
+            <#macro headerDiv>
+                <div class="w-full h-24 flex flex-row">
+                    <div class="inline-block my-auto">
+                        <img src="images/Logo_RGB_Orange.png" class="h-16">
+                    </div>
+                    <span class="text-4xl font-bold my-auto mx-auto pr-64" style="color: #ff5100">HEKO-WEI CHATROOM</span>
                 </div>
-                <span class="text-4xl font-bold my-auto mx-auto pr-64" style="color: #ff5100">HEKO-WEI CHATROOM</span>
-            </div>
-        </#macro>
+            </#macro>
 
-        <#macro footerDiv>
-            <div class="w-full h-24 bg-gray-300  text-center ">
-                <span class="text-3xl">This is footer</span>
-            </div>
-        </#macro>
+            <#macro footerDiv>
+                <div class="w-full h-24 bg-gray-300  text-center ">
+                    <span class="text-3xl">This is footer</span>
+                </div>
+            </#macro>
+
+        </div>
 
 
     </body>

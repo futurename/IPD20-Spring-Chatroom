@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 
 
-public interface SQLRespository extends CrudRepository<Message, Integer> {
+public interface MessageRespository extends CrudRepository<Message, Integer> {
 
 }

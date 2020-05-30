@@ -1,12 +1,19 @@
 package com.chatroom.ipd20.controllers;
 
+import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.models.ChatMessage;
+import com.chatroom.ipd20.services.ChannelRepository;
+import com.chatroom.ipd20.services.MessageRespository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Wei Wang
@@ -16,6 +23,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ChatController {
+
+    @Autowired
+    MessageRespository messageRespository;
+
+    @Autowired
+    ChannelRepository channelRepository;
+
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
@@ -41,6 +55,22 @@ public class ChatController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+
+    @GetMapping("/send/{msg}")
+    @ResponseBody
+    public Message sendMessage(@PathVariable String msg){
+
+        Message newMsg = new Message(1, msg);
+        messageRespository.save(newMsg);
+        return newMsg;
+    }
+
+    @RequestMapping("/index")
+    public String  getAllMessages(Model model){
+        model.addAttribute("allChannels", channelRepository.findAll());
+        return "index";
     }
 
 }
