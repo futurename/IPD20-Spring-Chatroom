@@ -2,12 +2,12 @@ package com.chatroom.ipd20.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +39,7 @@ public class User {
     @NotEmpty
     @Size(min=1, max=50)
     @Column(length=50)
+    @ContainedIn
     @Field
     private String name;
 

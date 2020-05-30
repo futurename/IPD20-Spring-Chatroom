@@ -19,31 +19,30 @@ public class HibernateSearchService {
 
     @Autowired
     public HibernateSearchService(EntityManager entityManager) {
-        super();
         this.entityManager = entityManager;
     }
 
-    // User MassIndexer for performance(Don't need for now)
+    @Transactional
     public void initializeHibernateSearch() {
         try {
             FullTextEntityManager fullTextEntityManager
                     = Search.getFullTextEntityManager(entityManager);
             fullTextEntityManager.createIndexer().startAndWait();
-            System.out.println("Create Indexer?");
         } catch (InterruptedException ex){
             ex.printStackTrace();
         }
     }
 
-//    @Transactional
     public List<Channel> channelSearch(String searchTerm) {
-//        entityManager.getTransaction().begin();
         FullTextEntityManager fullTextEntityManager
                 = Search.getFullTextEntityManager(entityManager);
         QueryBuilder qb = fullTextEntityManager.getSearchFactory()
                 .buildQueryBuilder().forEntity(Channel.class).get();
         org.apache.lucene.search.Query query = qb
                 .keyword()
+                    .fuzzy()
+                    .withEditDistanceUpTo(1)
+                    .withPrefixLength(1)
                 .onFields("title", "description", "owner.name")
                 .matching(searchTerm)
                 .createQuery();
@@ -52,7 +51,7 @@ public class HibernateSearchService {
                 fullTextEntityManager.createFullTextQuery(query, Channel.class);
 
         List result = persistenceQuery.getResultList();
-//        entityManager.getTransaction().commit();
+
         return result;
     }
 }

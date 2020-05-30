@@ -2,16 +2,12 @@ package com.chatroom.ipd20.controllers;
 
 import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.services.HibernateSearchService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
