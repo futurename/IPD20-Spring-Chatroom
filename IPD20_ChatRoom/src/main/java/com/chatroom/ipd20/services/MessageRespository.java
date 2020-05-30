@@ -14,5 +14,6 @@ public interface MessageRespository extends JpaRepository<Message, Integer> {
 
    // List<Message> findByChannelId(int channelId);
 
+
     List<Message> findByChannel(Channel channel);
 }
