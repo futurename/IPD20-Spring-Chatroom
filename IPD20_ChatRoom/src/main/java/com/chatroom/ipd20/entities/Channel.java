@@ -1,6 +1,9 @@
 package com.chatroom.ipd20.entities;
 
 import lombok.Data;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +19,7 @@ import java.util.Set;
  * @since 2020/05/27
  **/
 
+@Indexed
 @Entity
 @Data
 @Table(name="channels")
@@ -28,16 +32,19 @@ public class Channel {
     @NotEmpty
     @Size(min=1, max=100)
     @Column(length=100, nullable = false)
+    @Field
     private String title;
 
     @NotEmpty
     @Size(min=1, max=200)
     @Column(length=200, nullable = false)
+    @Field
     private String description;
 
     @NotEmpty
     @ManyToOne
     @JoinColumn(name="ownerId", nullable = false)
+    @IndexedEmbedded
     private User owner;
 
     @NotEmpty

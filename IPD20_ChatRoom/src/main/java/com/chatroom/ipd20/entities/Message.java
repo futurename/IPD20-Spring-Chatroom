@@ -1,6 +1,9 @@
 package com.chatroom.ipd20.entities;
 
 import lombok.*;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
