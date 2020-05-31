@@ -1,6 +1,5 @@
 package com.chatroom.ipd20.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
