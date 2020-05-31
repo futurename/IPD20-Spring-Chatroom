@@ -14,7 +14,8 @@ import lombok.Setter;
 public class ChatMessage {
     private MessageType type;
     private String body;
-    private String sender;
+    private int channelId;
+    private int senderId;
 
 
 
