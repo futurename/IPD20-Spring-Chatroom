@@ -93,3 +93,29 @@
 
 3. Need assistance / figure things out
 - Google cloud for hosting
+
+*************************************************
+2020/05/30 Wang Wei
+1. Done since last scrum:
+- add login/register/chatroom pages
+
+
+2. To do until next Scrum:
+- chatroom functions
+
+3. Need assistance / figure things out
+
+
+
+2020/05/30 Donghyeok Seo
+1. Done since last scrum:
+- create layout
+- create test database in memory
+- create mock data
+
+2. To do until next Scrum:
+- Update Database
+- Hibernate Fuzzy Search
+
+3. Need assistance / figure things out
+- Google cloud for hosting

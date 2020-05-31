@@ -10,8 +10,8 @@
 
 
     </head>
-    <body class="flex flex-col min-h-screen h-screen " >
-        <div class="min-h-screen h-full flex">
+    <body class="" >
+        <div class=" h-screen flex">
             <#macro headerDiv>
                 <div class="w-full h-24 flex flex-row">
                     <div class="inline-block my-auto">
@@ -22,7 +22,7 @@
             </#macro>
 
             <#macro footerDiv>
-                <div class="w-full h-24 bg-gray-300  text-center ">
+                <div class="w-full h-24 bg-gray-300  text-center block">
                     <span class="text-3xl">This is footer</span>
                 </div>
             </#macro>

@@ -52,6 +52,7 @@ public class ChannelController {
         int channelId = id;
         Channel curChannel = channelRepository.findById(channelId).get();
         List<User> userList = userRepository.findAll();
+
         List<Message> messageList = messageRespository.findByChannel(new Channel(channelId));
 
         model.addAttribute("curChannel", curChannel);

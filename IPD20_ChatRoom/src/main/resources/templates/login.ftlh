@@ -25,11 +25,12 @@
         <!-- SockJs -->
         <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     </head>
-    <body>
+    <body >
 
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
-        <div class=" block flex justify-center">
+
+        <div class="block flex justify-center h-full">
             <div class="my-5 w-1/6">
                 <span class="text-3xl font-bold mb-5 inline-block w-full text-center">Login</span><br>
                 <form method="post" action="/">
