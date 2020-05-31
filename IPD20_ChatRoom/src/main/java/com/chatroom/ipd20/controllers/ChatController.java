@@ -6,6 +6,7 @@ import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRespository;
+import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -34,6 +35,9 @@ public class ChatController {
     @Autowired
     ChannelRepository channelRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
@@ -42,11 +46,16 @@ public class ChatController {
         /*
          * FixMe: simulate saving message sent by user 2
          */
+        LocalDateTime createdTS = LocalDateTime.now();
         Message newMsg = new Message(0, chatMessage.getBody(), null,
-                new Channel(chatMessage.getChannelId()), new User(chatMessage.getSenderId()), LocalDateTime.now());
+                new Channel(chatMessage.getChannelId()), new User(chatMessage.getSenderId()), createdTS);
 
-        //Message newMsg = new Message(0, "direct saving test",null,new Channel(4),new User(2),LocalDateTime.now());
         messageRespository.save(newMsg);
+
+        String senderName = userRepository.findById(chatMessage.getSenderId()).get().getName();
+
+        chatMessage.setCreatedTS(createdTS);
+        chatMessage.setSenderName(senderName);
 
         return chatMessage;
     }

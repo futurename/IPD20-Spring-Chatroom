@@ -25,7 +25,7 @@
         <!-- SockJs -->
         <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     </head>
-    <body onload="connect()">
+    <body onload="connect()" onclose="">
 
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
@@ -58,9 +58,19 @@
 
             <div id="content" class="w-1/2  px-2 flex-col flex">
                 <div class="h-full border-2 border-solid mb-4">
-                    <ul id="messagesList" class="text-base font-bold">
+                    <ul id="messagesList" class="p-2">
                         <#list messageList as msg>
-                            <li >${msg.body} by ${msg.user.name}</li>
+                            <li>
+                                <span class="text-base font-bold">${msg.user.name}</span>
+                                <#assign hour = msg.createdTS.hour>
+                                <#assign min =msg.createdTS.minute>
+                                <#assign sec = msg.createdTS.second>
+
+                                <span class="text-sm">(${(hour < 10)?then('0'+hour, hour + '')}:${(min < 10)?then('0'+min, min
+                                    + '')}:${(sec < 10)?then('0'+sec, sec + '')})
+                                </span><br>
+                                <span class="text-sm">${msg.body}</span>
+                            </li>
                         </#list>
                     </ul>
 
@@ -91,13 +101,13 @@
                 var socket = new SockJS('/ws');
                 stompClient = Stomp.over(socket);
                 stompClient.connect({}, onConnected);
-               // event.preventDefault();
+                // event.preventDefault();
             }
 
             function onConnected() {
-               // alert("connecting...");
+                // alert("connecting...");
                 stompClient.subscribe('/topic/public', messageReceieved);
-               // alert("finish");
+                // alert("finish");
 
             }
 
@@ -127,8 +137,39 @@
                 //alert("received msg: " + msg.body);
                 var msgBox = document.querySelector('#messagesList');
                 var li = document.createElement('li');
-                li.appendChild(document.createTextNode(msg.body));
+
+                var spanUser = document.createElement('span');
+                var userText = document.createTextNode(msg.senderName);
+                spanUser.append(userText);
+                spanUser.classList.add("font-bold");
+                spanUser.classList.add("text-base");
+
+                var spanTime = document.createElement('span');
+
+                var datetime = new Date(msg.createdTS);
+
+                var timeText = document.createTextNode(" (" + formatTime(datetime.getHours()) + ":" + formatTime(datetime.getMinutes())+
+                    ":" + formatTime(datetime.getSeconds()) + ")");
+                spanTime.append(timeText);
+                spanTime.classList.add("text-sm");
+
+                var br = document.createElement('br');
+
+                var spanMsg = document.createElement('span');
+                var msgText = document.createTextNode(msg.body)
+                spanMsg.append(msgText);
+                spanMsg.classList.add("text-sm");
+
+                li.append(spanUser);
+                li.append(spanTime);
+                li.append(br);
+                li.append(spanMsg);
+
                 msgBox.append(li);
+            }
+
+            function formatTime(number){
+                return number < 10? '0' + number : number;
             }
 
 

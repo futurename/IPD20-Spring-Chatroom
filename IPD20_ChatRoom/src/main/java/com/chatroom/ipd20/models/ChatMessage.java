@@ -3,6 +3,8 @@ package com.chatroom.ipd20.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Wei Wang
  * @version 1.0
@@ -16,6 +18,8 @@ public class ChatMessage {
     private String body;
     private int channelId;
     private int senderId;
+    private LocalDateTime createdTS;
+    private String senderName;
 
 
 
