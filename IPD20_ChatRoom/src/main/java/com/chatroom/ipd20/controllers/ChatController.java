@@ -47,17 +47,6 @@ public class ChatController {
         return chatMessage;
     }
 
-    @GetMapping("/register")
-    public String register(){
-        return "register";
-    }
-
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-
-
     @GetMapping("/send/{msg}")
     @ResponseBody
     public Message sendMessage(@PathVariable String msg){

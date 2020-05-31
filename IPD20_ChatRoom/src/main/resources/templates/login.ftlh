@@ -33,14 +33,18 @@
         <div class="block flex justify-center h-full">
             <div class="my-5 w-1/6">
                 <span class="text-3xl font-bold mb-5 inline-block w-full text-center">Login</span><br>
-                <form method="post" action="/">
+
+                <#if error >
+                    <p class="text-sm text-red-400">Invalid confidential.</p>
+                </#if>
+                <form method="post" action="/login">
                     <i class="fas fa-envelope"></i>
                     <label for="email" class="text-lg font-bold py-1">Email</label><br>
-                    <input type="email" id="email" class="border-solid border-2 w-full mb-3"><br>
+                    <input type="email" id="email" name="email" class="border-solid border-2 w-full mb-3"><br>
                     <i class="fas fa-unlock-alt"></i>
                     <label for="pass" class="text-lg font-bold py-1">Password</label><br>
 
-                    <input type="password" id="pass" class="border-solid border-2 w-full mb-3"><br>
+                    <input type="password" id="pass" name="password" class="border-solid border-2 w-full mb-3"><br>
 
                     <div class="flex justify-center">
                         <input type="submit" id="btSubmit" class="text-xl w-full font-bold py-2 text-center mt-2 mb-6

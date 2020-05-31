@@ -39,8 +39,6 @@ public class ChannelController {
             return "channel";
         }
 
-//        searchService.initializeHibernateSearch();
-
         searchResults = searchService.channelSearch(search);
         model.addAttribute("searchList", searchResults);
         return "channel";
