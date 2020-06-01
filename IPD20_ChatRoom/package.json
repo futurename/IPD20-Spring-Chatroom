@@ -1,0 +1,7 @@
+{
+  "name": "IPD20_ChatRoom",
+  "version": "1.0.0",
+  "dependencies": {
+    "@joeattardi/emoji-button": "^3.0.3"
+  }
+}

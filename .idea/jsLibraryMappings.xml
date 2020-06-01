@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/IPD20_ChatRoom" libraries="{sockjs-client, stomp}" />
+    <file url="file://$PROJECT_DIR$/IPD20_ChatRoom" libraries="{@joeattardi/emoji-button, emoji-button, sockjs-client, stomp}" />
     <file url="PROJECT" libraries="{jquery, sockjs-client, stomp}" />
   </component>
 </project>
