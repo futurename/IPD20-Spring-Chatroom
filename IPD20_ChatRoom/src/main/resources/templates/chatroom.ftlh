@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div id="content" class="w-1/2  px-2 flex-col flex">
+            <div id="content" class="w-2/5  px-2 flex-col flex">
                 <div class="h-full border-2 border-solid mb-4">
                     <ul id="messagesList" class="p-2">
                         <#list messageList as msg>
