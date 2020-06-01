@@ -1,26 +1,19 @@
 package com.chatroom.ipd20.entities;
 
 import com.chatroom.ipd20.models.UserForm;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author Wei Wang
- * @version 1.0
- * @since 2020/05/27
- **/
-
-@Entity
-@Data
+@Entity @Getter @Setter
 @NoArgsConstructor
 @Table(name = "users")
 public class User {
@@ -37,22 +30,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty
+    @NotNull
     @Size(min=5, max=50)
-    @Column(length=50)
+    @Column(length=50, nullable = false, unique = true)
     @Field
     private String email;
 
     @NotEmpty
     @Size(min=1, max=50)
-    @Column(length=50)
+    @Column(length=50, nullable = false)
     @ContainedIn
     @Field
     private String name;
 
     @NotEmpty
     @Size(min=5, max=50)
-    @Column(length=50)
+    @Column(length=50, nullable = false)
     private String password;
 
 

@@ -1,8 +1,10 @@
 package com.chatroom.ipd20.controllers;
 
+import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.UserForm;
 import com.chatroom.ipd20.security.CustomUserDetails;
+import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,16 +12,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Set;
 
 @Controller
 public class AuthController {
 
     @Autowired
     UserRepository userRepo;
+    @Autowired
+    ChannelRepository chRepo;
 
     @ModelAttribute
     public void addAttributes(Model model, Authentication authentication) {
@@ -49,7 +55,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid UserForm userForm, BindingResult bindingResult, Model model) {
+    public String registerUser(
+            @Valid UserForm userForm,
+            BindingResult bindingResult, Model model)
+    {
         if(bindingResult.hasErrors()){
             model.addAttribute("bindingResult",bindingResult);
             return "register";

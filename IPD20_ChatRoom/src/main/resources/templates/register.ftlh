@@ -34,7 +34,7 @@
         <div class=" block flex justify-center">
             <div class="my-5">
                 <span class="text-3xl font-bold mb-5 inline-block">Create Free Account</span><br>
-                <form method="post" action="/register">
+                <form method="post" action="/register" enctype="multipart/form-data">
                     <div>
                         <i class="fas fa-user"></i>
                         <label for="name" class="text-lg font-bold py-1">Name</label><br>
@@ -59,6 +59,18 @@
                         <input type="password" id="pass2" name="pass2" class="border-solid border-2 w-full mb-3">
                         <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getGlobalError().getDefaultMessage())!}</p>
                     </div>
+                    <div class="flex">
+                        <div>
+                            <i class="fas fa-unlock-alt"></i>
+                            <span class="text-lg font-bold py-1">Icon</span>
+                        </div>
+                        <div class="ml-5">
+                            <label id="lblIcon" for="icon" class="flex items-center w-32 h-32 cursor-pointer">
+                                <img id="iconImg" class="border-solid border-2 w-full h-32" src="/images/icon.jpg" />
+                            </label>
+                            <input type="file" id="icon" name="icon" class="hidden">
+                        </div>
+                    </div>
                     <div class="flex justify-center">
                         <input type="submit" id="btSubmit" class="text-xl w-full font-bold py-2 text-center mt-2 mb-6
                         rounded-full" style="background-color: #ff5100;color: white"    value="Submit">
@@ -72,21 +84,11 @@
 
         <script>
             $(document).ready(function () {
-               /* $("#btSubmit").on("click", function () {
-                    $.ajax({
-                        type: "POST",
-                        url: "/messages",
-                        dataType: "json",
-                        data: JSON.stringify({}),
-                        success: function (data, textStatus, jQxhr) {
-
-                        },
-                        error: function (jqxhr, status, errorThrown) {
-
-                        }
-                    })
-                })*/
-            })
+                $("input[name=icon]").change(function() {
+                    let imgFile = this.files[0];
+                    $("#iconImg").attr("src",URL.createObjectURL(imgFile));
+                });
+            });
         </script>
 
     </body>

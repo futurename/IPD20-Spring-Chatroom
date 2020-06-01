@@ -10,14 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-/**
- * @author Wei Wang
- * @version 1.0
- * @since 2020/05/27
- **/
-
-@Entity
-@Data
+@Entity @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "messages")
@@ -26,7 +19,7 @@ public class Message {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty
+    @NotNull
     @Size(min=1, max=1000)
     @Column(length=1000, nullable = false)
     private String body;
@@ -45,6 +38,7 @@ public class Message {
     private User user;
 
     @NotNull
+    @Column(nullable = false)
     private LocalDateTime createdTS = LocalDateTime.now();
 
     public Message(int userId, String body) {
