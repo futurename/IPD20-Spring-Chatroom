@@ -4,6 +4,7 @@ import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
+import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRespository;
 import com.chatroom.ipd20.services.UserRepository;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,22 +39,19 @@ public class ChatController {
     UserRepository userRepository;
 
     @ModelAttribute
-    public void addAttributes(Model model, Principal principal) {
-        if(principal != null) {
-            model.addAttribute("user", principal.getName());
+    public void addAttributes(Model model, Authentication authentication) {
+        if(authentication != null) {
+            Object object = authentication.getPrincipal();
+            if(object instanceof CustomUserDetails){
+                CustomUserDetails user = (CustomUserDetails) object;
+                model.addAttribute("user", user);
+            }
         }
     }
 
-    private SimpMessagingTemplate msgTemplate;
-
-    @Autowired
-    public ChatController(SimpMessagingTemplate template){
-        this.msgTemplate = template;
-    }
-
     @MessageMapping("/chat.sendMessage")
-  //  @SendTo("/topic/{channelId}")
-    public void sendMessage(ChatMessage chatMessage) {
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(ChatMessage chatMessage) {
 
         /*
          * FixMe: simulate saving message sent by user 2
@@ -68,7 +66,8 @@ public class ChatController {
 
         chatMessage.setCreatedTS(createdTS);
         chatMessage.setSenderName(senderName);
-        msgTemplate.convertAndSend("/chatroom/" + chatMessage.getChannelId(), chatMessage);
+
+        return chatMessage;
     }
 
     @MessageMapping("/chat.addUser")

@@ -20,7 +20,7 @@
                     <span class="text-4xl font-bold my-auto mx-auto pr-64" style="color: #ff5100">HEKO-WEI CHATROOM</span>
 
                     <#if user?? >
-                        <p>Hello, ${user} <a class="underline text-sm" href="/logout">logout</a></p>
+                        <p>Hello, ${user.name} <a class="underline text-sm" href="/logout">logout</a></p>
                     <#else>
                         <a class="underline text-sm" href="/login">Login</a>
                     </#if>

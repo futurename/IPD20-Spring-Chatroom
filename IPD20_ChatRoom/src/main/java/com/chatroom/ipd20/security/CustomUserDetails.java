@@ -1,4 +1,4 @@
-package com.chatroom.ipd20.Security;
+package com.chatroom.ipd20.security;
 
 import com.chatroom.ipd20.entities.User;
 import lombok.Getter;
@@ -11,11 +11,14 @@ public class CustomUserDetails implements UserDetails {
 
     @Getter
     private int id;
+    @Getter
+    private String name;
     private String email;
     private String password;
 
     public CustomUserDetails(User user){
         this.id = user.getId();
+        this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
     }

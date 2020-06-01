@@ -1,4 +1,4 @@
-package com.chatroom.ipd20.Security;
+package com.chatroom.ipd20.security;
 
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.services.UserRepository;
