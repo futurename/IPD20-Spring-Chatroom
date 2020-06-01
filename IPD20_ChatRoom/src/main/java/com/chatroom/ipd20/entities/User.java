@@ -1,5 +1,6 @@
 package com.chatroom.ipd20.entities;
 
+import com.chatroom.ipd20.models.UserForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -25,6 +26,11 @@ import java.util.Set;
 public class User {
     public User(int id){
         this.id = id;
+    }
+    public User(UserForm userForm){
+        this.email = userForm.getEmail();
+        this.name = userForm.getName();
+        this.password = userForm.getPass1();
     }
 
     @Id

@@ -5,6 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
         <title>Register page</title>
 
         <!-- tailwind css -->
@@ -29,22 +30,35 @@
 
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
+
         <div class=" block flex justify-center">
             <div class="my-5">
                 <span class="text-3xl font-bold mb-5 inline-block">Create Free Account</span><br>
-                <form method="post" action="/">
-                    <i class="fas fa-user"></i>
-                    <label for="name" class="text-lg font-bold py-1">Name</label><br>
-                    <input type="text" id="name" class="border-solid border-2 w-full mb-3"><br>
-                    <i class="fas fa-envelope"></i>
-                    <label for="email" class="text-lg font-bold py-1">Email</label><br>
-                    <input type="email" id="email" class="border-solid border-2 w-full mb-3"><br>
-                    <i class="fas fa-unlock-alt"></i>
-                    <label for="pass1" class="text-lg font-bold py-1">Password</label><br>
-                    <input type="password" id="pass1" class="border-solid border-2 w-full mb-3"><br>
-                    <i class="fas fa-unlock-alt"></i>
-                    <label for="pass2" class="text-lg font-bold py-1">Password Again</label><br>
-                    <input type="password" id="pass2" class="border-solid border-2 w-full mb-3"><br>
+                <form method="post" action="/register">
+                    <div>
+                        <i class="fas fa-user"></i>
+                        <label for="name" class="text-lg font-bold py-1">Name</label><br>
+                        <input type="text" id="name" name="name" value="${(userForm.name)!}" class="border-solid border-2 w-full mb-3">
+                        <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("name").getDefaultMessage())!}</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-envelope"></i>
+                        <label for="email" class="text-lg font-bold py-1">Email</label><br>
+                        <input type="email" id="email" name="email" value="${(userForm.email)!}" class="border-solid border-2 w-full mb-3">
+                        <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("email").getDefaultMessage())!}</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-unlock-alt"></i>
+                        <label for="pass1" class="text-lg font-bold py-1">Password</label><br>
+                        <input type="password" id="pass1" name="pass1" class="border-solid border-2 w-full mb-3">
+                        <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("pass1").getDefaultMessage())!}</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-unlock-alt"></i>
+                        <label for="pass2" class="text-lg font-bold py-1">Password Again</label><br>
+                        <input type="password" id="pass2" name="pass2" class="border-solid border-2 w-full mb-3">
+                        <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getGlobalError().getDefaultMessage())!}</p>
+                    </div>
                     <div class="flex justify-center">
                         <input type="submit" id="btSubmit" class="text-xl w-full font-bold py-2 text-center mt-2 mb-6
                         rounded-full" style="background-color: #ff5100;color: white"    value="Submit">
