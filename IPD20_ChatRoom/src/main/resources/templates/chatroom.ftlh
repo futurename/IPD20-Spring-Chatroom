@@ -24,6 +24,11 @@
 
         <!-- SockJs -->
         <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+        <!-- Emojis -->
+        <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script>
+
+
     </head>
     <body onload="connect()" onclose="">
 
@@ -80,6 +85,7 @@
                               placeholder="Input here..."></textarea>
                 </div>
                 <div class="inline-block justify-end flex mb-6">
+                    <button id="btEmoji" class="px-3 py-1 mr-2">&#128515;</button>
                     <button id="btSubmit" type="Submit" class="border-2 border-solid border-red-500 text-lg font-bold
                     rounded-full py-1 px-8
                     hover:bg-red-500 hover:text-white">
@@ -94,6 +100,7 @@
 
 
         <script>
+
             var stompClient = null;
 
             function connect() {
@@ -148,7 +155,7 @@
 
                 var datetime = new Date(msg.createdTS);
 
-                var timeText = document.createTextNode(" (" + formatTime(datetime.getHours()) + ":" + formatTime(datetime.getMinutes())+
+                var timeText = document.createTextNode(" (" + formatTime(datetime.getHours()) + ":" + formatTime(datetime.getMinutes()) +
                     ":" + formatTime(datetime.getSeconds()) + ")");
                 spanTime.append(timeText);
                 spanTime.classList.add("text-sm");
@@ -168,8 +175,8 @@
                 msgBox.append(li);
             }
 
-            function formatTime(number){
-                return number < 10? '0' + number : number;
+            function formatTime(number) {
+                return number < 10 ? '0' + number : number;
             }
 
 
@@ -186,8 +193,11 @@
             var btSubmit = document.querySelector('#btSubmit');
             btSubmit.addEventListener("submit", sendMsg, true);
 
+
+
         </script>
 
+        <script src="/js/emoji.js"></script>
 
     </body>
 </html>
