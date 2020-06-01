@@ -13,11 +13,9 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 /**
@@ -38,6 +36,12 @@ public class ChatController {
     @Autowired
     UserRepository userRepository;
 
+    @ModelAttribute
+    public void addAttributes(Model model, Principal principal) {
+        if(principal != null) {
+            model.addAttribute("user", principal.getName());
+        }
+    }
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
@@ -68,17 +72,6 @@ public class ChatController {
         headerAccessor.getSessionAttributes().put("username", "temSender");
         return chatMessage;
     }
-
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
 
     @GetMapping("/send/{msg}")
     @ResponseBody
