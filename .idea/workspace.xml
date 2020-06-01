@@ -20,13 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e0a5b18-8cb1-4c42-ab97-c5ace2748065" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/js/emoji.js" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/js/emoji.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/richtext/nicEdit.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/chatroom.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/chatroom.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/index.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/index.ftlh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +165,7 @@
       <workItem from="1590889961315" duration="6648000" />
       <workItem from="1590934134188" duration="8611000" />
       <workItem from="1590972185417" duration="4259000" />
-      <workItem from="1591019463014" duration="24063000" />
+      <workItem from="1591019463014" duration="25453000" />
     </task>
     <task id="LOCAL-00001" summary="database settings">
       <created>1590596451781</created>
@@ -333,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591040401649</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="add ckeditor">
+      <created>1591045885842</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1591045885842</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +376,8 @@
     <MESSAGE value="daily scrum" />
     <MESSAGE value="update textarea" />
     <MESSAGE value="add fav icon, no codes" />
-    <option name="LAST_COMMIT_MESSAGE" value="add fav icon, no codes" />
+    <MESSAGE value="add ckeditor" />
+    <option name="LAST_COMMIT_MESSAGE" value="add ckeditor" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2778" y="410" key="#Assign_Data_Sources" timestamp="1591040168169">
@@ -412,11 +415,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2456" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591039917677" />
-    <state x="2417" y="83" key="CommitChangelistDialog2" timestamp="1591040400079">
+    <state x="2417" y="83" key="CommitChangelistDialog2" timestamp="1591045883119">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="497" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590883899775" />
-    <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591040400079" />
+    <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591045883119" />
     <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596519809" />
     <state width="471" height="466" key="DebuggerActiveHint" timestamp="1590979074526">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -543,11 +546,11 @@
     <state x="439" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590882854376" />
     <state x="2359" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590870647640" />
     <state x="439" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590593135822" />
-    <state x="2471" y="252" key="Vcs.Push.Dialog.v2" timestamp="1591040404236">
+    <state x="2471" y="252" key="Vcs.Push.Dialog.v2" timestamp="1591045888846">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="551" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590883903800" />
-    <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591040404236" />
+    <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591045888846" />
     <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596526864" />
     <state x="845" y="408" width="318" height="242" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1590676943601">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -562,11 +565,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2735" y="64" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591039071525" />
-    <state x="2564" y="307" key="git4idea.merge.GitPullDialog" timestamp="1591025429442">
+    <state x="2564" y="307" key="git4idea.merge.GitPullDialog" timestamp="1591050024673">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="644" y="307" key="git4idea.merge.GitPullDialog/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590881038759" />
-    <state x="2564" y="307" key="git4idea.merge.GitPullDialog/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591025429442" />
+    <state x="2564" y="307" key="git4idea.merge.GitPullDialog/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591050024673" />
     <state x="710" y="418" key="git4idea.ui.GitStashDialog" timestamp="1590880945159">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

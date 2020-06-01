@@ -67,9 +67,9 @@
 
             <div id="content" class="w-2/5  px-2 flex-col flex">
                 <div class="h-full border-2 border-solid mb-4">
-                    <ul id="messagesList" class="p-2">
+                    <div id="messagesList" class="p-2">
                         <#list messageList as msg>
-                            <li>
+                            <div>
                                 <span class="text-base font-bold">${msg.user.name}</span>
                                 <#assign hour = msg.createdTS.hour>
                                 <#assign min =msg.createdTS.minute>
@@ -78,10 +78,10 @@
                                 <span class="text-sm">(${(hour < 10)?then('0'+hour, hour + '')}:${(min < 10)?then('0'+min, min
                                     + '')}:${(sec < 10)?then('0'+sec, sec + '')})
                                 </span><br>
-                                <pre class="text-sm">${msg.body}</pre>
-                            </li>
+                                <div class="text-sm">${msg.body}</div>
+                            </div>
                         </#list>
-                    </ul>
+                    </div>
 
                 </div>
                 <div class="mb-4">
@@ -101,10 +101,11 @@
                         </button>
                     </div>
                 </div>
-                <div id="right">
-                    <div id="editor">
+            </div>
+            
+            <div id="right">
+                <div id="editor">
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -154,7 +155,7 @@
 
             //alert("received msg: " + msg.body);
             var msgBox = document.querySelector('#messagesList');
-            var li = document.createElement('li');
+            var li = document.createElement('div');
 
             var spanUser = document.createElement('span');
             var userText = document.createTextNode(msg.senderName);
@@ -173,7 +174,7 @@
 
             var br = document.createElement('br');
 
-            var spanMsg = document.createElement('pre');
+            var spanMsg = document.createElement('div');
             var msgText = document.createTextNode(msg.body)
             spanMsg.append(msgText);
             spanMsg.classList.add("text-sm");
