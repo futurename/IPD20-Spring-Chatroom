@@ -46,7 +46,8 @@
 
                     <input type="password" id="pass" name="password" class="border-solid border-2 w-full mb-3"><br>
 
-                    <div class="flex justify-center">
+                    <div class="flex justify-center items-center">
+                        <a href="/register">Register</a>
                         <input type="submit" id="btSubmit" class="text-xl w-full font-bold py-2 text-center mt-2 mb-6
                         rounded-full" style="background-color: #ff5100;color: white"    value="Submit">
                     </div>

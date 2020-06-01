@@ -4,6 +4,7 @@ import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.UserForm;
 import com.chatroom.ipd20.security.CustomUserDetails;
+import com.chatroom.ipd20.services.BlobService;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
+import java.sql.Blob;
 import java.util.Set;
 
 @Controller
@@ -26,6 +29,8 @@ public class AuthController {
     UserRepository userRepo;
     @Autowired
     ChannelRepository chRepo;
+    @Autowired
+    BlobService blobService;
 
     @ModelAttribute
     public void addAttributes(Model model, Authentication authentication) {
@@ -62,6 +67,16 @@ public class AuthController {
         if(bindingResult.hasErrors()){
             model.addAttribute("bindingResult",bindingResult);
             return "register";
+        }
+
+        try {
+            Blob iconBlob = blobService.createBlob(
+                    userForm.getIcon().getInputStream(),
+                    userForm.getIcon().getSize()
+            );
+            userForm.setIconBlob(iconBlob);
+        } catch (IOException ex){
+            // icon doesn't have file in it // Do Nothing
         }
 
         userRepo.save(new User(userForm));
