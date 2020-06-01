@@ -27,9 +27,10 @@
 
         <!-- Emojis -->
         <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script>
+        <script src="/js/emoji.js" type="text/javascript"></script>
 
-        <!-- NicEdit -->
-        <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+        <!-- CKEditor -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/19.1.1/classic/ckeditor.js"></script>
 
 
     </head>
@@ -77,15 +78,14 @@
                                 <span class="text-sm">(${(hour < 10)?then('0'+hour, hour + '')}:${(min < 10)?then('0'+min, min
                                     + '')}:${(sec < 10)?then('0'+sec, sec + '')})
                                 </span><br>
-                                <span class="text-sm">${msg.body}</span>
+                                <pre class="text-sm">${msg.body}</pre>
                             </li>
                         </#list>
                     </ul>
 
                 </div>
-                <div>
-                    <textarea id="textInput" class="h-20 block w-full border-solid border-2 mb-4"
-                              placeholder="Input here..."></textarea>
+                <div class="mb-4">
+                    <textarea id="textInput" class="block w-full"></textarea>
                 </div>
                 <div class="inline-block flex mb-6 justify-between">
                     <div>
@@ -102,7 +102,9 @@
                     </div>
                 </div>
                 <div id="right">
+                    <div id="editor">
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,7 +131,7 @@
 
 
         function sendMsg(event) {
-            var body = $("#textInput").val();
+            var body = $(".ck-content").html();
 
             if (body && stompClient) {
                 //alert("Sending msg: " + body);
@@ -140,7 +142,7 @@
                     type: 'CHAT'
                 };
                 stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-                $("#textInput").val("");
+                $(".ck-content").empty();
 
             }
             event.preventDefault();
@@ -171,7 +173,7 @@
 
             var br = document.createElement('br');
 
-            var spanMsg = document.createElement('span');
+            var spanMsg = document.createElement('pre');
             var msgText = document.createTextNode(msg.body)
             spanMsg.append(msgText);
             spanMsg.classList.add("text-sm");
@@ -201,19 +203,20 @@
 
         })
 
+
         var btSubmit = document.querySelector('#btSubmit');
         btSubmit.addEventListener("submit", sendMsg, true);
 
 
     </script>
-    <#--
-            <script>
-                bkLib.onDomLoaded(function () {
-                    nicEditors.allTextAreas()
-                });
-            </script>-->
 
-    <script src="/js/emoji.js" type="text/javascript"></script>
 
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#textInput'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 
 </html>

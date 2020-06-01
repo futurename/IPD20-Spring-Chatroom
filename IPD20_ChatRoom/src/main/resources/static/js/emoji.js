@@ -68,7 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     picker.on('emoji', emoji => {
-        document.querySelector('#textInput').value += emoji;
+        $(".ck-content").html($(".ck-content").val() + emoji) ;
     });
 
     button.addEventListener('click', () => {

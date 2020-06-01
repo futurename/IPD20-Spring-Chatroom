@@ -51,7 +51,7 @@
                             <div class="channelTitle inline-block font-bold px-1 text-lg">${channel.title}</div>
                             <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
                         </a>
-                        <a class="px-2 py-1 my-auto favStar text-red-700" id="${channel.id}">
+                        <a class="px-2 py-1 my-auto favStar text-red-700 transform hover:scale-150" id="${channel.id}">
                             <i class="fas fa-star"></i>
                         </a>
                     </div>
