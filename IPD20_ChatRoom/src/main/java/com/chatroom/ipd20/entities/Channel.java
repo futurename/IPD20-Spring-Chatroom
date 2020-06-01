@@ -52,14 +52,12 @@ public class Channel {
     @Field
     private String description;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name="ownerId", nullable = false)
     @IndexedEmbedded(depth = 1)
     @ToString.Exclude
     private User owner;
 
-    @NotEmpty
     @OneToMany(mappedBy = "channel")
     @ToString.Exclude
     private Set<Message> messages = new HashSet<Message>();

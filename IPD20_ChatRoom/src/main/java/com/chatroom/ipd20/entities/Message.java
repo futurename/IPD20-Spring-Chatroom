@@ -6,6 +6,7 @@ import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -43,6 +44,7 @@ public class Message {
     @ToString.Exclude
     private User user;
 
+    @NotNull
     private LocalDateTime createdTS = LocalDateTime.now();
 
     public Message(int userId, String body) {
