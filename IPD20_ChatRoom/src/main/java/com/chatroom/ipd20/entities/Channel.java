@@ -2,6 +2,7 @@ package com.chatroom.ipd20.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -27,6 +28,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="channels")
 public class Channel {
 
@@ -69,4 +71,6 @@ public class Channel {
     @NotEmpty
     @Column(nullable = false)
     private LocalDateTime createdTS = LocalDateTime.now();
+
+
 }

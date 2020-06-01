@@ -59,9 +59,7 @@ public class ChatController {
 
 
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(ChatMessage chatMessage) {
-
+    public void sendMessage(ChatMessage chatMessage) {
         /*
          * FixMe: simulate saving message sent by user 2
          */
@@ -76,7 +74,7 @@ public class ChatController {
         chatMessage.setCreatedTS(createdTS);
         chatMessage.setSenderName(senderName);
 
-        return chatMessage;
+        msgTemplate.convertAndSend("/chatroom/"+chatMessage.getChannelId(), chatMessage);
     }
 
     @MessageMapping("/chat.addUser")
