@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +44,16 @@ public class ChatController {
         }
     }
 
+    private SimpMessagingTemplate msgTemplate;
+
+    @Autowired
+    public ChatController(SimpMessagingTemplate template){
+        this.msgTemplate = template;
+    }
+
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(ChatMessage chatMessage) {
+  //  @SendTo("/topic/{channelId}")
+    public void sendMessage(ChatMessage chatMessage) {
 
         /*
          * FixMe: simulate saving message sent by user 2
@@ -60,8 +68,7 @@ public class ChatController {
 
         chatMessage.setCreatedTS(createdTS);
         chatMessage.setSenderName(senderName);
-
-        return chatMessage;
+        msgTemplate.convertAndSend("/chatroom/" + chatMessage.getChannelId(), chatMessage);
     }
 
     @MessageMapping("/chat.addUser")

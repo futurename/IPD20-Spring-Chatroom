@@ -106,7 +106,7 @@
 
             function onConnected() {
                 // alert("connecting...");
-                stompClient.subscribe('/topic/public', messageReceieved);
+                stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
                 // alert("finish");
 
             }
