@@ -9,15 +9,9 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<Email, String> {
 
-    private Email constraintAnnotation;
-
     @Autowired
     UserRepository userRepo;
 
-    @Override
-    public void initialize(Email constraintAnnotation) {
-        this.constraintAnnotation = constraintAnnotation;
-    }
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintContext){

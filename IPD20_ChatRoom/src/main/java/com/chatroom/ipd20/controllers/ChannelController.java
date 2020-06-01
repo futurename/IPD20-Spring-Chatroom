@@ -6,7 +6,7 @@ import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.HibernateSearchService;
-import com.chatroom.ipd20.services.MessageRespository;
+import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
-import java.sql.SQLOutput;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +27,14 @@ public class ChannelController {
     @Autowired
     ChannelRepository channelRepository;
     @Autowired
-    MessageRespository messageRespository;
+    MessageRepository messageRepository;
     @Autowired
     UserRepository userRepository;
     @Autowired
     private HibernateSearchService searchService;
 
     @ModelAttribute
-    public void addAttributes(Model model, Authentication authentication) {
+    public void addAttributes(Model model, Authentication authentication, HttpSession session) {
         if(authentication != null) {
             Object object = authentication.getPrincipal();
             if(object instanceof CustomUserDetails){
@@ -66,7 +65,7 @@ public class ChannelController {
         Channel curChannel = channelRepository.findById(channelId).get();
         List<User> userList = userRepository.findAll();
 
-        List<Message> messageList = messageRespository.findByChannel(new Channel(channelId));
+        List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
 
         model.addAttribute("curChannel", curChannel);
         model.addAttribute("userList", userList);

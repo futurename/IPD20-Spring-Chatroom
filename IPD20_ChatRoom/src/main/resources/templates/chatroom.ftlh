@@ -28,6 +28,8 @@
         <!-- Emojis -->
         <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script>
 
+        <!-- NicEdit -->
+        <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
 
 
     </head>
@@ -85,121 +87,133 @@
                     <textarea id="textInput" class="h-20 block w-full border-solid border-2 mb-4"
                               placeholder="Input here..."></textarea>
                 </div>
-                <div class="inline-block justify-end flex mb-6">
-                    <button id="btEmoji" class="px-3 py-1 mr-2">&#128515;</button>
-                    <button id="btSubmit" type="Submit" class="border-2 border-solid border-red-500 text-lg font-bold
-                    rounded-full py-1 px-8
-                    hover:bg-red-500 hover:text-white">
-                        Send
-                    </button>
+                <div class="inline-block flex mb-6 justify-between">
+                    <div>
+                        <a id="btReturn" class="border-2 border-solid border-red-500 text-lg font-bold
+                    rounded-full py-1 px-8 hover:bg-red-500 hover:text-white" href="/">Return to index
+                        </a>
+                    </div>
+                    <div>
+                        <button id="btEmoji" class="px-3 py-1 mr-2">&#128515;</button>
+                        <button id="btSubmit" type="Submit" class="border-2 border-solid border-red-500 text-lg font-bold
+                    rounded-full py-1 px-8 hover:bg-red-500 hover:text-white">
+                            Send
+                        </button>
+                    </div>
+                </div>
+                <div id="right">
+
                 </div>
             </div>
-            <div id="right">
-
-            </div>
         </div>
-
-
-        <script>
-
-            var stompClient = null;
-
-            function connect() {
-
-                var socket = new SockJS('/ws');
-                stompClient = Stomp.over(socket);
-                stompClient.connect({}, onConnected);
-                // event.preventDefault();
-            }
-
-            function onConnected() {
-                // alert("connecting...");
-                stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
-                // alert("finish");
-
-            }
-
-
-            function sendMsg(event) {
-                var body = $("#textInput").val();
-
-                if (body && stompClient) {
-                    //alert("Sending msg: " + body);
-                    var chatMessage = {
-                        body: body,
-                        channelId: ${curChannel.id},
-                        senderId: 2,
-                        type: 'CHAT'
-                    };
-                    stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-                    $("#textInput").val("");
-
-                }
-                event.preventDefault();
-            }
-
-            function messageReceieved(payload) {
-
-                let msg = JSON.parse(payload.body);
-
-                //alert("received msg: " + msg.body);
-                var msgBox = document.querySelector('#messagesList');
-                var li = document.createElement('li');
-
-                var spanUser = document.createElement('span');
-                var userText = document.createTextNode(msg.senderName);
-                spanUser.append(userText);
-                spanUser.classList.add("font-bold");
-                spanUser.classList.add("text-base");
-
-                var spanTime = document.createElement('span');
-
-                var datetime = new Date(msg.createdTS);
-
-                var timeText = document.createTextNode(" (" + formatTime(datetime.getHours()) + ":" + formatTime(datetime.getMinutes()) +
-                    ":" + formatTime(datetime.getSeconds()) + ")");
-                spanTime.append(timeText);
-                spanTime.classList.add("text-sm");
-
-                var br = document.createElement('br');
-
-                var spanMsg = document.createElement('span');
-                var msgText = document.createTextNode(msg.body)
-                spanMsg.append(msgText);
-                spanMsg.classList.add("text-sm");
-
-                li.append(spanUser);
-                li.append(spanTime);
-                li.append(br);
-                li.append(spanMsg);
-
-                msgBox.append(li);
-            }
-
-            function formatTime(number) {
-                return number < 10 ? '0' + number : number;
-            }
-
-
-            $(document).ready(function () {
-                $("#btConn").on("click", function (e) {
-                    connect(e);
-                });
-
-                $("#btSubmit").on("click", function (e) {
-                    sendMsg(e);
-                });
-
-
-            })
-
-            var btSubmit = document.querySelector('#btSubmit');
-            btSubmit.addEventListener("submit", sendMsg, true);
-
-
-        </script>
-
-        <script src="/js/emoji.js" type="text/javascript"></script>
-
     </body>
+
+    <script>
+
+        var stompClient = null;
+
+        function connect() {
+
+            var socket = new SockJS('/ws');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, onConnected);
+            // event.preventDefault();
+        }
+
+        function onConnected() {
+            // alert("connecting...");
+            stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
+            // alert("finish");
+
+        }
+
+
+        function sendMsg(event) {
+            var body = $("#textInput").val();
+
+            if (body && stompClient) {
+                //alert("Sending msg: " + body);
+                var chatMessage = {
+                    body: body,
+                    channelId: ${curChannel.id},
+                    senderId: 2,
+                    type: 'CHAT'
+                };
+                stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+                $("#textInput").val("");
+
+            }
+            event.preventDefault();
+        }
+
+        function messageReceieved(payload) {
+
+            let msg = JSON.parse(payload.body);
+
+            //alert("received msg: " + msg.body);
+            var msgBox = document.querySelector('#messagesList');
+            var li = document.createElement('li');
+
+            var spanUser = document.createElement('span');
+            var userText = document.createTextNode(msg.senderName);
+            spanUser.append(userText);
+            spanUser.classList.add("font-bold");
+            spanUser.classList.add("text-base");
+
+            var spanTime = document.createElement('span');
+
+            var datetime = new Date(msg.createdTS);
+
+            var timeText = document.createTextNode(" (" + formatTime(datetime.getHours()) + ":" + formatTime(datetime.getMinutes()) +
+                ":" + formatTime(datetime.getSeconds()) + ")");
+            spanTime.append(timeText);
+            spanTime.classList.add("text-sm");
+
+            var br = document.createElement('br');
+
+            var spanMsg = document.createElement('span');
+            var msgText = document.createTextNode(msg.body)
+            spanMsg.append(msgText);
+            spanMsg.classList.add("text-sm");
+
+            li.append(spanUser);
+            li.append(spanTime);
+            li.append(br);
+            li.append(spanMsg);
+
+            msgBox.append(li);
+        }
+
+        function formatTime(number) {
+            return number < 10 ? '0' + number : number;
+        }
+
+
+        $(document).ready(function () {
+            $("#btConn").on("click", function (e) {
+                connect(e);
+            });
+
+            $("#btSubmit").on("click", function (e) {
+                sendMsg(e);
+            });
+
+
+        })
+
+        var btSubmit = document.querySelector('#btSubmit');
+        btSubmit.addEventListener("submit", sendMsg, true);
+
+
+    </script>
+    <#--
+            <script>
+                bkLib.onDomLoaded(function () {
+                    nicEditors.allTextAreas()
+                });
+            </script>-->
+
+    <script src="/js/emoji.js" type="text/javascript"></script>
+
+
 </html>

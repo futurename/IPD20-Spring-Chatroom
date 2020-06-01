@@ -6,7 +6,7 @@ import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
-import com.chatroom.ipd20.services.MessageRespository;
+import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.time.LocalDateTime;
 
 /**
@@ -31,7 +30,7 @@ import java.time.LocalDateTime;
 public class ChatController {
 
     @Autowired
-    MessageRespository messageRespository;
+    MessageRepository messageRepository;
 
     @Autowired
     ChannelRepository channelRepository;
@@ -67,7 +66,7 @@ public class ChatController {
         Message newMsg = new Message(0, chatMessage.getBody(), null,
                 new Channel(chatMessage.getChannelId()), new User(chatMessage.getSenderId()), createdTS);
 
-        messageRespository.save(newMsg);
+        messageRepository.save(newMsg);
 
         String senderName = userRepository.findById(chatMessage.getSenderId()).get().getName();
 
@@ -91,7 +90,7 @@ public class ChatController {
     public Message sendMessage(@PathVariable String msg) {
 
         Message newMsg = new Message(1, msg);
-        messageRespository.save(newMsg);
+        messageRepository.save(newMsg);
         return newMsg;
     }
 
@@ -99,6 +98,11 @@ public class ChatController {
     public String getAllMessages(Model model) {
         model.addAttribute("allChannels", channelRepository.findAll());
         return "index";
+    }
+
+    @GetMapping("/chatroom/addFavChannel")
+    public void addFavChannel(){
+
     }
 
 
