@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 
-public interface MessageRespository extends JpaRepository<Message, Integer> {
+public interface MessageRepository extends JpaRepository<Message, Integer> {
 
     List<Message> findByChannel(Channel channel);
 }

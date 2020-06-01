@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -14,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    CustomUserDetailsService userDetailsService;
+    com.chatroom.ipd20.security.CustomUserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -26,14 +27,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
             .authorizeRequests()
-                .antMatchers("/", "/home","/h2-console/**").permitAll()
-//                .anyRequest().authenticated()
+                .antMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
                 .permitAll()
-//                .successForwardUrl("/")
                 .failureUrl("/login?error=true")
                 .and()
             .logout()
@@ -48,12 +48,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers(
-////            "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**",
-////            "/resources/static/**", "/css/**", "/js/**", "/img/**", "/fontawesome/**", "/fonts/**",
-////            "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/favicon.png"
-//        );
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+            "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**",
+            "/resources/static/**", "/fontawesome/**", "/fonts/**",
+            "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/favicon.png"
+        );
+    }
 }

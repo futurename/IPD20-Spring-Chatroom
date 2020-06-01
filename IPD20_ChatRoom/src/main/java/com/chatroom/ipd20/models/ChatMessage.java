@@ -21,8 +21,6 @@ public class ChatMessage {
     private LocalDateTime createdTS;
     private String senderName;
 
-
-
     public enum MessageType {
         CHAT,
         JOIN,

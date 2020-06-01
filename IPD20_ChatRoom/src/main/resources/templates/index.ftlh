@@ -35,7 +35,7 @@
             <span class="text-lg font-bold mb-2">Select a room you would like to join from the list below</span><br>
             <div class="block flex justify-between mb-2 bg-gray-200">
                 <div class="w-1/2 inline-block my-auto py-2 flex justify-start">
-                    <input type="text" class="border-solid border-2 w-2/3 ml-5" placeholder="Search chatroom">
+                    <input type="text" class="border-solid border-2 w-2/3 ml-4" placeholder="Search chatroom">
                     <button><i class="fas fa-search p-2"></i></button>
                 </div>
                 <div class="my-auto mr-5">
@@ -46,10 +46,15 @@
             <div class="border-2 border-solid flex flex-wrap">
 
                 <#list allChannels as channel>
-                    <a class="channelWrapper w-1/3 justify-start flex pl-5 my-2" href='/chatroom/${channel.id}'>
-                        <div class="channelTitle inline-block font-bold px-1">${channel.title}</div>
-                        <div class="ChannelInfo inline-block">(34)</div>
-                    </a>
+                    <div class="w-1/3 inline-block flex flex-row my-2 channelWrapper">
+                        <a class=" justify-start flex pl-2 my-2" href='/chatroom/${channel.id}'>
+                            <div class="channelTitle inline-block font-bold px-1 text-lg">${channel.title}</div>
+                            <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
+                        </a>
+                        <a class="px-2 py-1 my-auto favStar text-red-700" id="${channel.id}">
+                            <i class="fas fa-star"></i>
+                        </a>
+                    </div>
                 </#list>
 
             </div>
@@ -58,4 +63,51 @@
         <@defPage.footerDiv/>
 
     </body>
+
+    <script>
+        $(".favStar").hide();
+
+        $(document).ready(function () {
+
+            $(".channelWrapper").on("mouseover",function () {
+                if(!$(this).children("a:nth-child(2)").hasClass("showFav")){
+                    $(this).children("a:nth-child(2)").show();
+                }
+            });
+
+            $(".channelWrapper").on("mouseout", function () {
+                if(!$(this).children("a:nth-child(2)").hasClass("showFav")){
+                    $(this).children("a:nth-child(2)").hide();
+                }
+            })
+
+            $(".favStar").on("click", function () {
+                if($(this).hasClass("showFav")){
+                    $(this).removeClass("showFav");
+                    $(this).hide();
+                }else{
+                    $(this).addClass("showFav");
+                    $(this).show();
+                    var dataContent = {
+                        "userId": 1,
+                        "channelId": $(this).id
+                    }
+                    $.ajax({
+                        url: "/chatroom/addFavChannel",
+                        type: "POST",
+                        dataType: "json",
+                        data: JSON.stringify(dataContent),
+                        error: function (jqxhr, status, errorThrown) {
+
+                        }.done(function (result) {
+
+                        }).always(function () {
+
+                        })
+                    });
+                }
+            })
+
+        })
+    </script>
 </html>
