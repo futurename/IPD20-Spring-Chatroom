@@ -20,15 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e0a5b18-8cb1-4c42-ab97-c5ace2748065" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/emoji/emoji.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/emoji/emoji.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/emoji/emoji.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/emoji/jquery.emoji.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/js/emoji.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/js/emoji.js" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/static/js/emoji.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/chatroom.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/IPD20_ChatRoom/src/main/resources/templates/chatroom.ftlh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +166,7 @@
       <workItem from="1590889961315" duration="6648000" />
       <workItem from="1590934134188" duration="8611000" />
       <workItem from="1590972185417" duration="4259000" />
-      <workItem from="1591019463014" duration="3838000" />
+      <workItem from="1591019463014" duration="5930000" />
     </task>
     <task id="LOCAL-00001" summary="database settings">
       <created>1590596451781</created>
@@ -307,7 +301,21 @@
       <option name="project" value="LOCAL" />
       <updated>1590978475528</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="add emoji to chatroom">
+      <created>1591023328376</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1591023328376</updated>
+    </task>
+    <task id="LOCAL-00021" summary="daily scrum">
+      <created>1591023497833</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1591023497833</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +341,6 @@
     <MESSAGE value="update db" />
     <MESSAGE value="test adding header" />
     <MESSAGE value="test websocket" />
-    <MESSAGE value="daily scrum" />
     <MESSAGE value="add simple default layout&#10;add registration page" />
     <MESSAGE value="add login page" />
     <MESSAGE value="add register page&#10;add awesome icon" />
@@ -345,7 +352,9 @@
     <MESSAGE value="can add formatted message in chatroom" />
     <MESSAGE value="different chatroom create own stomp connection" />
     <MESSAGE value="update merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="update merge" />
+    <MESSAGE value="add emoji to chatroom" />
+    <MESSAGE value="daily scrum" />
+    <option name="LAST_COMMIT_MESSAGE" value="daily scrum" />
   </component>
   <component name="WindowStateProjectService">
     <state x="858" y="410" key="#Assign_Data_Sources" timestamp="1590635198599">
@@ -374,11 +383,11 @@
     </state>
     <state x="764" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590681846127" />
     <state x="2684" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590895826817" />
-    <state x="2417" y="83" key="CommitChangelistDialog2" timestamp="1590978474462">
+    <state x="2417" y="83" key="CommitChangelistDialog2" timestamp="1591023496801">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="497" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590883899775" />
-    <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590978474462" />
+    <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591023496801" />
     <state x="2417" y="83" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596519809" />
     <state width="471" height="466" key="DebuggerActiveHint" timestamp="1590979074526">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -505,11 +514,11 @@
     <state x="439" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590882854376" />
     <state x="2359" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590870647640" />
     <state x="439" y="93" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590593135822" />
-    <state x="2471" y="252" key="Vcs.Push.Dialog.v2" timestamp="1590972326562">
+    <state x="2471" y="252" key="Vcs.Push.Dialog.v2" timestamp="1591023501160">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="551" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590883903800" />
-    <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1590972326562" />
+    <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591023501160" />
     <state x="2471" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1590596526864" />
     <state x="845" y="408" width="318" height="242" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1590676943601">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -533,11 +542,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="710" y="418" key="git4idea.ui.GitStashDialog/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590880945159" />
-    <state width="465" height="124" key="javadoc.popup.new" timestamp="1591023116072">
+    <state width="465" height="124" key="javadoc.popup.new" timestamp="1591024936421">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="465" height="124" key="javadoc.popup.new/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@0.0.1920.1040" timestamp="1590883719764" />
-    <state width="465" height="124" key="javadoc.popup.new/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591023116072" />
+    <state width="465" height="124" key="javadoc.popup.new/0.0.1920.1040/1920.0.1920.1040/3840.0.1024.728@1920.0.1920.1040" timestamp="1591024936421" />
     <state x="2536" y="240" width="672" height="677" key="run.anything.popup" timestamp="1590865376592">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

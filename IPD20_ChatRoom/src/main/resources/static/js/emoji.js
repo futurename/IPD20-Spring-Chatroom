@@ -47,10 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
             'animals',
             'food',
             'activities',
-            'travel',
-            'objects',
-            'symbols',
-            'flags'
+            'travel'
         ],
 
         // i18n
@@ -62,10 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 animals: 'Animals & Nature',
                 food: 'Food & Drink',
                 activities: 'Activities',
-                travel: 'Travel & Places',
-                objects: 'Objects',
-                symbols: 'Symbols',
-                flags: 'Flags'
+                travel: 'Travel & Places'
             },
             notFound: 'No emojis found'
         }

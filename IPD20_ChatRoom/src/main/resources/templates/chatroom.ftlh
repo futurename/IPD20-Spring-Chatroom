@@ -29,8 +29,9 @@
         <script src="https://cdn.jsdelivr.net/npm/emoji-button@latest/dist/index.min.js"></script>
 
 
+
     </head>
-    <body onload="connect()" onclose="">
+    <body onload="connect()">
 
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
@@ -183,21 +184,22 @@
             $(document).ready(function () {
                 $("#btConn").on("click", function (e) {
                     connect(e);
-                })
+                });
 
                 $("#btSubmit").on("click", function (e) {
                     sendMsg(e);
-                })
+                });
+
+
             })
 
             var btSubmit = document.querySelector('#btSubmit');
             btSubmit.addEventListener("submit", sendMsg, true);
 
 
-
         </script>
 
-        <script src="/js/emoji.js"></script>
+        <script src="/js/emoji.js" type="text/javascript"></script>
 
     </body>
 </html>
