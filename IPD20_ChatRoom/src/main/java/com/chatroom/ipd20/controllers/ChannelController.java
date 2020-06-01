@@ -3,11 +3,13 @@ package com.chatroom.ipd20.controllers;
 import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
+import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.HibernateSearchService;
 import com.chatroom.ipd20.services.MessageRespository;
 import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,9 +35,13 @@ public class ChannelController {
     private HibernateSearchService searchService;
 
     @ModelAttribute
-    public void addAttributes(Model model, Principal principal) {
-        if(principal != null) {
-            model.addAttribute("user", principal.getName());
+    public void addAttributes(Model model, Authentication authentication) {
+        if(authentication != null) {
+            Object object = authentication.getPrincipal();
+            if(object instanceof CustomUserDetails){
+                CustomUserDetails user = (CustomUserDetails) object;
+                model.addAttribute("user", user);
+            }
         }
     }
 
