@@ -33,19 +33,16 @@ public class Message {
     @Column(length=200)
     private String filePath;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name="channelId", nullable = false)
     @ToString.Exclude
     private Channel channel;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name="userId", nullable = false)
     @ToString.Exclude
     private User user;
 
-    @NotEmpty
     private LocalDateTime createdTS = LocalDateTime.now();
 
     public Message(int userId, String body) {
