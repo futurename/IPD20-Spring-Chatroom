@@ -1,5 +1,9 @@
 package com.chatroom.ipd20.security;
 
+import com.chatroom.ipd20.security.handler.CustomLoginSuccessHandler;
+import com.chatroom.ipd20.security.handler.CustomLogoutSuccessHandler;
+import com.chatroom.ipd20.services.BlobService;
+import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     com.chatroom.ipd20.security.CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    BlobService blobService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -35,9 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .permitAll()
+                .successHandler(new CustomLoginSuccessHandler(blobService))
                 .failureUrl("/login?error=true")
                 .and()
             .logout()
+                .logoutSuccessHandler(new CustomLogoutSuccessHandler())
                 .permitAll();
 
         // not to deny access h2-console
@@ -53,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
             "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**",
-            "/resources/static/**", "/fontawesome/**", "/fonts/**",
+            "/resources/static/**", "/fontawesome/**", "/fonts/**", "/tmp/**", "/userIcons/**",
             "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/favicon.png"
         );
     }

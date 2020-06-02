@@ -38,25 +38,25 @@
                     <div>
                         <i class="fas fa-user"></i>
                         <label for="name" class="text-lg font-bold py-1">Name</label>
-                        <input type="text" id="name" name="name" value="${(userForm.name)!}" class="border-solid border-2 w-full mb-3">
+                        <input type="text" id="name" name="name" value="${(userForm.name)!"aerry"}" class="border-solid border-2 w-full mb-3">
                         <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("name").getDefaultMessage())!}</p>
                     </div>
                     <div>
                         <i class="fas fa-envelope"></i>
                         <label for="email" class="text-lg font-bold py-1">Email</label>
-                        <input type="email" id="email" name="email" value="${(userForm.email)!}" class="border-solid border-2 w-full mb-3">
+                        <input type="email" id="email" name="email" value="${(userForm.email)!"aerry@aerry.com"}" class="border-solid border-2 w-full mb-3">
                         <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("email").getDefaultMessage())!}</p>
                     </div>
                     <div>
                         <i class="fas fa-unlock-alt"></i>
                         <label for="pass1" class="text-lg font-bold py-1">Password</label>
-                        <input type="password" id="pass1" name="pass1" class="border-solid border-2 w-full mb-3">
+                        <input type="password" id="pass1" name="pass1" value="aerry" class="border-solid border-2 w-full mb-3">
                         <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("pass1").getDefaultMessage())!}</p>
                     </div>
                     <div>
                         <i class="fas fa-unlock-alt"></i>
                         <label for="pass2" class="text-lg font-bold py-1">Password Again</label>
-                        <input type="password" id="pass2" name="pass2" class="border-solid border-2 w-full mb-3">
+                        <input type="password" id="pass2" name="pass2" value="aerry" class="border-solid border-2 w-full mb-3">
                         <p class="-mt-3 h-3 text-right text-xs text-red-400">${(bindingResult.getGlobalError().getDefaultMessage())!}</p>
                     </div>
                     <div class="flex">

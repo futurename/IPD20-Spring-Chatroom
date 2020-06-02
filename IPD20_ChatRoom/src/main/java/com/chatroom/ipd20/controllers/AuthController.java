@@ -55,7 +55,10 @@ public class AuthController {
 
 
     @GetMapping("/register")
-    public String register(){
+    public String register(Principal principal){
+        if(principal != null){
+            return "redirect:/";
+        }
         return "register";
     }
 
@@ -69,14 +72,14 @@ public class AuthController {
             return "register";
         }
 
-        try {
-            Blob iconBlob = blobService.createBlob(
-                    userForm.getIcon().getInputStream(),
-                    userForm.getIcon().getSize()
-            );
-            userForm.setIconBlob(iconBlob);
-        } catch (IOException ex){
-            // icon doesn't have file in it // Do Nothing
+        // Set Icon image. Scale down and convert to png extension.
+        if(!userForm.getIcon().isEmpty()) {
+            try {
+                Blob iconBlob = blobService.createBlob(userForm.getIcon().getInputStream());
+                userForm.setIconBlob(iconBlob);
+            } catch (IOException ex) {
+                System.out.println("Fail to scale down icon");
+            }
         }
 
         userRepo.save(new User(userForm));

@@ -2,6 +2,7 @@ package com.chatroom.ipd20.security;
 
 import com.chatroom.ipd20.entities.User;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,6 +16,9 @@ public class CustomUserDetails implements UserDetails {
     private String name;
     private String email;
     private String password;
+
+    @Getter @Setter
+    private boolean hasIcon;
 
     public CustomUserDetails(User user){
         this.id = user.getId();
