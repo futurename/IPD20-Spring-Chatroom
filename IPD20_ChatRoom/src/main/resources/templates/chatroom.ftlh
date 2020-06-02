@@ -78,7 +78,7 @@
                                 <span class="text-sm">(${(hour < 10)?then('0'+hour, hour + '')}:${(min < 10)?then('0'+min, min
                                     + '')}:${(sec < 10)?then('0'+sec, sec + '')})
                                 </span><br>
-                                    <div class="whitespace-pre-wrap text-sm break-words"><#noautoesc>${msg.body}</#noautoesc></div>
+                                <div class="whitespace-pre-wrap text-sm break-words"><#noautoesc>${msg.body}</#noautoesc></div>
                             </div>
                         </#list>
                     </div>
@@ -127,6 +127,12 @@
             // alert("connecting...");
             stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
             // alert("finish");
+            var userConnInfo = {
+                senderName: "Jerry",
+                channelId:${curChannel.id},
+                senderId: 1
+            }
+            stompClient.send("/app/chat.addUser", {}, JSON.stringify(userConnInfo));
 
         }
 
@@ -139,7 +145,7 @@
                 var chatMessage = {
                     body: body,
                     channelId: ${curChannel.id},
-                    senderId: 2,
+                    senderId: 1,
                     type: 'CHAT'
                 };
                 stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
@@ -197,9 +203,6 @@
 
 
         $(document).ready(function () {
-            $("#btConn").on("click", function (e) {
-                connect(e);
-            });
 
             $("#btSubmit").on("click", function (e) {
                 sendMsg(e);

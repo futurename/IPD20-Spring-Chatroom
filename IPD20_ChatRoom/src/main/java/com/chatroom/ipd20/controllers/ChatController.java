@@ -5,6 +5,7 @@ import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.FavChannel;
+import com.chatroom.ipd20.models.UserConnectInfo;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
@@ -80,21 +81,25 @@ public class ChatController {
     }
 
     @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public ChatMessage addUser(ChatMessage chatMessage,
-                               SimpMessageHeaderAccessor headerAccessor) {
+    //@SendTo("/topic/public")
+    public void addUser(@RequestBody UserConnectInfo userConnectInfo) {
         // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", "temSender");
-        return chatMessage;
-    }
+        //headerAccessor.getSessionAttributes().put("username", userConnectInfo.getSenderName());
+        LocalDateTime createdTS =LocalDateTime.now();
+        String connString = "<span class='font-bold text-red-500 text-base'>" + userConnectInfo.getSenderName() + "</span> has " +
+                "joined the chatroom...\uD83D\uDE0A";
+        Message connMsg = new Message(0, connString, null, new Channel(userConnectInfo.getSenderId()),
+                new User(userConnectInfo.getSenderId()), createdTS);
+        messageRepository.save(connMsg);
+        ChatMessage connChatMsg = new ChatMessage();
+        connChatMsg.setSenderName(userConnectInfo.getSenderName());
+        connChatMsg.setType(ChatMessage.MessageType.JOIN);
+        connChatMsg.setBody(connString);
+        connChatMsg.setSenderId(userConnectInfo.getSenderId());
+        connChatMsg.setCreatedTS(createdTS);
+        connChatMsg.setChannelId(userConnectInfo.getChannelId());
+        msgTemplate.convertAndSend("/chatroom/"+ connChatMsg.getChannelId(), connChatMsg);
 
-    @GetMapping("/send/{msg}")
-    @ResponseBody
-    public Message sendMessage(@PathVariable String msg) {
-
-        Message newMsg = new Message(1, msg);
-        messageRepository.save(newMsg);
-        return newMsg;
     }
 
     @RequestMapping(value = {"/index", "/"})
