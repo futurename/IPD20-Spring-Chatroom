@@ -78,14 +78,14 @@
                                 <span class="text-sm">(${(hour < 10)?then('0'+hour, hour + '')}:${(min < 10)?then('0'+min, min
                                     + '')}:${(sec < 10)?then('0'+sec, sec + '')})
                                 </span><br>
-                                <div class="text-sm">${msg.body}</div>
+                                    <div class="whitespace-pre-wrap text-sm break-words"><#noautoesc>${msg.body}</#noautoesc></div>
                             </div>
                         </#list>
                     </div>
 
                 </div>
                 <div class="mb-4">
-                    <textarea id="textInput" class="block w-full"></textarea>
+                    <div id="textInput" class="block w-full" contenteditable="true"></div>
                 </div>
                 <div class="inline-block flex mb-6 justify-between">
                     <div>
@@ -143,7 +143,8 @@
                     type: 'CHAT'
                 };
                 stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-                $(".ck-content").empty();
+                document.querySelector(".ck-content").firstElementChild.innerHTML = "";
+
 
             }
             event.preventDefault();
@@ -175,9 +176,12 @@
             var br = document.createElement('br');
 
             var spanMsg = document.createElement('div');
-            var msgText = document.createTextNode(msg.body)
-            spanMsg.append(msgText);
+
+            spanMsg.innerHTML = msg.body;
+
             spanMsg.classList.add("text-sm");
+            spanMsg.classList.add("whitespace-pre-wrap")
+            spanMsg.classList.add("break-words")
 
             li.append(spanUser);
             li.append(spanTime);
