@@ -4,10 +4,12 @@ import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
+import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
+import org.jboss.logging.annotations.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -19,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * @author Wei Wang
@@ -97,12 +100,32 @@ public class ChatController {
     @RequestMapping(value = {"/index", "/"})
     public String getAllMessages(Model model) {
         model.addAttribute("allChannels", channelRepository.findAll());
+
+        /*
+           FIX ME, USING user 1 as default user to retrieve fav channels.
+         */
+        User user = userRepository.findById(1).orElse(null);
+        Set<Channel> favChannels = user.getFavoriteChannels();
+        model.addAttribute("allFavChannels",favChannels);
         return "index";
     }
 
-    @GetMapping("/chatroom/addFavChannel")
-    public void addFavChannel(){
+    @PostMapping("/chatroom/addFavChannel")
+    public void addFavChannel(@RequestBody FavChannel favChannel){
+        User user = userRepository.findById(favChannel.getUserId()).orElse(null);
+        Set<Channel> favChannels = user.getFavoriteChannels();
+        Channel channel = new Channel();
+        channel.setId(favChannel.getChannelId());
+        favChannels.add(channel);
+        userRepository.save(user);
+    }
 
+    @DeleteMapping("/chatroom/delFavChannel")
+    public void deleteFavChannel(@RequestBody FavChannel favChannel){
+        User user = userRepository.findById(favChannel.getUserId()).orElse(null);
+        Set<Channel> favChannels = user.getFavoriteChannels();
+        favChannels.removeIf(a->a.getId()==favChannel.getChannelId());
+        userRepository.save(user);
     }
 
 

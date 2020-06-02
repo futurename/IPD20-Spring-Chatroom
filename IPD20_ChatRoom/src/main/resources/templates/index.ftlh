@@ -40,7 +40,8 @@
                 </div>
                 <div class="my-auto mr-5">
                     <button class="border-2 border-solid bg-red-600 text-white py-1 px-4 rounded-full font-bold">Create
-                        ChatRoom</button>
+                        ChatRoom
+                    </button>
                 </div>
             </div>
             <div class="border-2 border-solid flex flex-wrap">
@@ -51,7 +52,9 @@
                             <div class="channelTitle inline-block font-bold px-1 text-lg">${channel.title}</div>
                             <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
                         </a>
-                        <a class="px-2 py-1 my-auto favStar text-red-700 transform hover:scale-150" id="${channel.id}">
+
+                        <a class="px-2 py-1 my-auto favStar text-red-700 transform hover:scale-150"
+                           id="${channel.id}">
                             <i class="fas fa-star"></i>
                         </a>
                     </div>
@@ -67,43 +70,60 @@
     <script>
         $(".favStar").hide();
 
+        <#list allFavChannels as favChannel>
+         <#assign curFavId = favChannel.id>
+         $("#${curFavId}").addClass("showFav");
+         $("#${curFavId}").show();
+        </#list>
+
+
         $(document).ready(function () {
 
-            $(".channelWrapper").on("mouseover",function () {
-                if(!$(this).children("a:nth-child(2)").hasClass("showFav")){
+            $(".channelWrapper").on("mouseover", function () {
+                if (!$(this).children("a:nth-child(2)").hasClass("showFav")) {
                     $(this).children("a:nth-child(2)").show();
                 }
             });
 
             $(".channelWrapper").on("mouseout", function () {
-                if(!$(this).children("a:nth-child(2)").hasClass("showFav")){
+                if (!$(this).children("a:nth-child(2)").hasClass("showFav")) {
                     $(this).children("a:nth-child(2)").hide();
                 }
             })
 
             $(".favStar").on("click", function () {
-                if($(this).hasClass("showFav")){
+                if ($(this).hasClass("showFav")) {
                     $(this).removeClass("showFav");
                     $(this).hide();
-                }else{
-                    $(this).addClass("showFav");
-                    $(this).show();
-                    var dataContent = {
-                        "userId": 1,
-                        "channelId": $(this).id
-                    }
+                    var dataContent = {};
+                    dataContent['userId'] = 1;
+                    dataContent['channelId'] = $(this).attr("id");
                     $.ajax({
-                        url: "/chatroom/addFavChannel",
-                        type: "POST",
+                        url: "/chatroom/delFavChannel",
+                        type: "DELETE",
+                        contentType: "application/json",
                         dataType: "json",
                         data: JSON.stringify(dataContent),
                         error: function (jqxhr, status, errorThrown) {
 
-                        }.done(function (result) {
+                        }
+                    });
+                } else {
+                    $(this).addClass("showFav");
+                    $(this).show();
 
-                        }).always(function () {
+                    var dataContent = {};
+                    dataContent['userId'] = 1;
+                    dataContent['channelId'] = $(this).attr("id");
+                    $.ajax({
+                        url: "/chatroom/addFavChannel",
+                        type: "POST",
+                        contentType: "application/json",
+                        dataType: "json",
+                        data: JSON.stringify(dataContent),
+                        error: function (jqxhr, status, errorThrown) {
 
-                        })
+                        }
                     });
                 }
             })

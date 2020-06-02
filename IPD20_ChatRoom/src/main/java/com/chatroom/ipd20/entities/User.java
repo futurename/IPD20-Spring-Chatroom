@@ -65,4 +65,5 @@ public class User {
     )
     @ToString.Exclude
     private Set<Channel> favoriteChannels;
-}
+
+   }
