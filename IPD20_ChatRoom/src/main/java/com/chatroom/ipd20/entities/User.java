@@ -1,7 +1,6 @@
 package com.chatroom.ipd20.entities;
 
 import com.chatroom.ipd20.models.UserForm;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
@@ -10,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +24,7 @@ public class User {
         this.email = userForm.getEmail();
         this.name = userForm.getName();
         this.password = userForm.getPass1();
+        this.icon = userForm.getIconBlob();
     }
 
     @Id
@@ -48,6 +49,8 @@ public class User {
     @Column(length=50, nullable = false)
     private String password;
 
+    @Lob
+    private Blob icon;
 
     @OneToMany(mappedBy="owner")
     @ToString.Exclude

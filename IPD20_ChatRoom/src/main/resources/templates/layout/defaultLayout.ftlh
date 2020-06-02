@@ -20,7 +20,13 @@
                     <span class="text-4xl font-bold my-auto mx-auto pr-64" style="color: #ff5100">HEKO-WEI CHATROOM</span>
 
                     <#if user?? >
-                        <p>Hello, ${user.name} <a class="underline text-sm" href="/logout">logout</a></p>
+                        <div class="flex">
+                            <div class="flex mr-3 text-lg">
+                                    <img class="mx-1 w-8 h-8 border-2 border-gray-300 rounded-full" src="${user.base64Icon!'/images/default_icon.png'}" />
+                                ${user.name},
+                            </div>
+                            <a class="underline text-sm" href="/logout">logout</a>
+                        </div>
                     <#else>
                         <a class="underline text-sm" href="/login">Login</a>
                     </#if>

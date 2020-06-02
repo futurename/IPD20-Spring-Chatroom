@@ -37,18 +37,26 @@
                 <#if error >
                     <p class="text-sm text-red-400">Invalid confidential.</p>
                 </#if>
-                <form method="post" action="/login">
-                    <i class="fas fa-envelope"></i>
-                    <label for="email" class="text-lg font-bold py-1">Email</label><br>
-                    <input type="email" id="email" name="email" class="border-solid border-2 w-full mb-3"><br>
-                    <i class="fas fa-unlock-alt"></i>
-                    <label for="pass" class="text-lg font-bold py-1">Password</label><br>
+                <form method="post" action="/login" class="mb-6">
+                    <div>
+                        <div>
+                            <i class="fas fa-envelope"></i>
+                            <label for="email" class="text-lg font-bold py-1">Email</label>
+                        </div>
+                        <input type="email" id="email" name="email" value="aerry@aerry.com" class="border-solid border-2 w-full mb-3">
+                    </div>
+                    <div>
+                        <div>
+                            <i class="fas fa-unlock-alt"></i>
+                            <label for="pass" class="text-lg font-bold py-1">Password</label><br>
+                        </div>
+                        <input type="password" id="pass" name="password" value="aerry" class="border-solid border-2 w-full mb-3">
+                    </div>
 
-                    <input type="password" id="pass" name="password" class="border-solid border-2 w-full mb-3"><br>
-
-                    <div class="flex justify-center">
-                        <input type="submit" id="btSubmit" class="text-xl w-full font-bold py-2 text-center mt-2 mb-6
-                        rounded-full" style="background-color: #ff5100;color: white"    value="Submit">
+                    <div class="flex justify-center items-center">
+                        <button type="submit" id="btSubmit" class="text-xl text-white w-full font-bold mr-3 py-2 text-center
+                        rounded-full" style="background-color: #ff5100">Submit</button>
+                        <a href="/register" class="underline">Register</a>
                     </div>
                 </form>
             </div>

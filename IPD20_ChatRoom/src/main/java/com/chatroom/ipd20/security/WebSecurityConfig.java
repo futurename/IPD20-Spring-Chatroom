@@ -1,5 +1,7 @@
 package com.chatroom.ipd20.security;
 
+import com.chatroom.ipd20.security.handler.CustomLoginSuccessHandler;
+import com.chatroom.ipd20.services.BlobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,11 +13,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.sql.Blob;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     com.chatroom.ipd20.security.CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    BlobService blobService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -28,12 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
             .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
                 .permitAll()
+                .successHandler(new CustomLoginSuccessHandler(blobService))
                 .failureUrl("/login?error=true")
                 .and()
             .logout()
