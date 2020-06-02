@@ -88,9 +88,9 @@
                     <div id="textInput" class="block w-full" contenteditable="true"></div>
                 </div>
                 <div class="inline-block flex mb-6 justify-between">
-                    <div>
-                        <a id="btReturn" class="border-2 border-solid border-red-500 text-lg font-bold
-                    rounded-full py-1 px-8 hover:bg-red-500 hover:text-white" href="/">Return to index
+                    <div class="border-2 border-solid border-red-500 text-lg font-bold
+                    rounded-full py-1 px-6 hover:bg-red-500 hover:text-white">
+                        <a id="btReturn"  href="/">Return to index
                         </a>
                     </div>
                     <div>

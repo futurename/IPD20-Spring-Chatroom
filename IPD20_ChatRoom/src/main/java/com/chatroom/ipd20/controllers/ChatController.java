@@ -81,7 +81,6 @@ public class ChatController {
     }
 
     @MessageMapping("/chat.addUser")
-    //@SendTo("/topic/public")
     public void addUser(@RequestBody UserConnectInfo userConnectInfo) {
         // Add username in web socket session
         //headerAccessor.getSessionAttributes().put("username", userConnectInfo.getSenderName());
