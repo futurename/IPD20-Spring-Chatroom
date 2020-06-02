@@ -147,3 +147,30 @@
 
 3. Need assistance / figure things out
 - Google cloud for hosting
+
+*************************************************
+2020/06/02 Wang Wei
+1. Done since last scrum:
+- add richtext editor ckeditor
+- add emoji input
+
+
+2. To do until next Scrum:
+- session tracing
+
+3. Need assistance / figure things out
+
+
+
+2020/06/02 Donghyeok Seo
+1. Done since last scrum:
+- create layout
+- create test database in memory
+- create mock data
+
+2. To do until next Scrum:
+- Update Database
+- Hibernate Fuzzy Search
+
+3. Need assistance / figure things out
+- Google cloud for hosting

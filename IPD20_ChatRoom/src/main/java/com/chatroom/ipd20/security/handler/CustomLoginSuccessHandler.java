@@ -34,8 +34,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
             HttpServletResponse httpServletResponse,
             Authentication authentication
     ) throws IOException, ServletException {
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        blobService.createTmpImageFileForUserIcon(userDetails);
+        // Do nothing
         httpServletResponse.sendRedirect("/");
     }
 }

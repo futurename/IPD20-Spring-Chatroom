@@ -6,3 +6,4 @@ INSERT INTO messages (body, createdTS, filePath, channelId, userId) VALUES ('111
 INSERT INTO messages (body, createdTS, filePath, channelId, userId) VALUES ('2222', now(), null, 2, 1);
 INSERT INTO messages (body, createdTS, filePath, channelId, userId) VALUES ('Welcome to my room', now(), null, 4, 4);
 INSERT INTO messages (body, createdTS, filePath, channelId, userId) VALUES ('Channel 4 new message', now(), null, 4, 1);
+INSERT INTO messages (body, createdTS, filePath, channelId, userId) VALUES ('<strong>kljsddfgdfgafffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</strong>', now(), null, 4, 1);

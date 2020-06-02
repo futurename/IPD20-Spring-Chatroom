@@ -67,9 +67,9 @@
 
             <div id="content" class="w-2/5  px-2 flex-col flex">
                 <div class="h-full border-2 border-solid mb-4">
-                    <ul id="messagesList" class="p-2">
+                    <div id="messagesList" class="p-2">
                         <#list messageList as msg>
-                            <li>
+                            <div>
                                 <span class="text-base font-bold">${msg.user.name}</span>
                                 <#assign hour = msg.createdTS.hour>
                                 <#assign min =msg.createdTS.minute>
@@ -78,14 +78,14 @@
                                 <span class="text-sm">(${(hour < 10)?then('0'+hour, hour + '')}:${(min < 10)?then('0'+min, min
                                     + '')}:${(sec < 10)?then('0'+sec, sec + '')})
                                 </span><br>
-                                <pre class="text-sm">${msg.body}</pre>
-                            </li>
+                                <div class="whitespace-pre-wrap text-sm break-words"><#noautoesc>${msg.body}</#noautoesc></div>
+                            </div>
                         </#list>
-                    </ul>
+                    </div>
 
                 </div>
                 <div class="mb-4">
-                    <textarea id="textInput" class="block w-full"></textarea>
+                    <div id="textInput" class="block w-full" contenteditable="true"></div>
                 </div>
                 <div class="inline-block flex mb-6 justify-between">
                     <div>
@@ -101,10 +101,11 @@
                         </button>
                     </div>
                 </div>
-                <div id="right">
-                    <div id="editor">
+            </div>
 
-                    </div>
+            <div id="right">
+                <div id="editor">
+
                 </div>
             </div>
         </div>
@@ -126,6 +127,12 @@
             // alert("connecting...");
             stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
             // alert("finish");
+            var userConnInfo = {
+                senderName: "Jerry",
+                channelId:${curChannel.id},
+                senderId: 1
+            }
+            stompClient.send("/app/chat.addUser", {}, JSON.stringify(userConnInfo));
 
         }
 
@@ -138,11 +145,12 @@
                 var chatMessage = {
                     body: body,
                     channelId: ${curChannel.id},
-                    senderId: 2,
+                    senderId: 1,
                     type: 'CHAT'
                 };
                 stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-                $(".ck-content").empty();
+                document.querySelector(".ck-content").firstElementChild.innerHTML = "";
+
 
             }
             event.preventDefault();
@@ -154,7 +162,7 @@
 
             //alert("received msg: " + msg.body);
             var msgBox = document.querySelector('#messagesList');
-            var li = document.createElement('li');
+            var li = document.createElement('div');
 
             var spanUser = document.createElement('span');
             var userText = document.createTextNode(msg.senderName);
@@ -173,10 +181,13 @@
 
             var br = document.createElement('br');
 
-            var spanMsg = document.createElement('pre');
-            var msgText = document.createTextNode(msg.body)
-            spanMsg.append(msgText);
+            var spanMsg = document.createElement('div');
+
+            spanMsg.innerHTML = msg.body;
+
             spanMsg.classList.add("text-sm");
+            spanMsg.classList.add("whitespace-pre-wrap")
+            spanMsg.classList.add("break-words")
 
             li.append(spanUser);
             li.append(spanTime);
@@ -192,9 +203,6 @@
 
 
         $(document).ready(function () {
-            $("#btConn").on("click", function (e) {
-                connect(e);
-            });
 
             $("#btSubmit").on("click", function (e) {
                 sendMsg(e);
