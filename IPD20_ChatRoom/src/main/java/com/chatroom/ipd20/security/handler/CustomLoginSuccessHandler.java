@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.SQLException;
 
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -34,7 +35,12 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
             HttpServletResponse httpServletResponse,
             Authentication authentication
     ) throws IOException, ServletException {
-        // Do nothing
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+        Blob icon = userDetails.getIcon();
+        if(icon != null) {
+            userDetails.setBase64Icon(blobService.blobToBase64String(icon));
+        }
         httpServletResponse.sendRedirect("/");
     }
 }

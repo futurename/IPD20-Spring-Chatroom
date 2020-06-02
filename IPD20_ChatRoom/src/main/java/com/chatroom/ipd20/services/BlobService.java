@@ -16,13 +16,13 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Base64;
 
 @Service
 public class BlobService {
     private EntityManager entityManager;
 
-    private final int ICON_SIZE_FOR_DB = 300;
-    private final String TMP_ICON_PATH = "src/main/resources/static/tmp/usericons/";
+    private final int ICON_SIZE_FOR_DB = 30;
 
 
     @Autowired
@@ -39,22 +39,34 @@ public class BlobService {
                 .createBlob(scaleIconImage(content, ICON_SIZE_FOR_DB));
     }
 
-    public void createTmpImageFileForUserIcon(CustomUserDetails userDetails) throws IOException{
-        User user = userRepo.findById(userDetails.getId()).orElse(null);
-
-        if(user.getIcon() == null){ return; }
-
+    public String blobToBase64String (Blob img) throws IOException{
         try {
-            File tmpImgFile = new File(TMP_ICON_PATH);
-            String tmpFilePath = tmpImgFile.getAbsoluteFile() + "/" + user.getEmail() + ".png";;
-            FileOutputStream fos = new FileOutputStream(tmpFilePath);
-            fos.write(user.getIcon().getBinaryStream().readAllBytes());
-            fos.close();
-            userDetails.setHasIcon(true);
-        }catch (SQLException ex){
+            byte[] encoded = Base64.getEncoder().encode(img.getBinaryStream().readAllBytes());
+            String imgDataAsBase64 = new String(encoded);
+            return "data:image/png;base64," + imgDataAsBase64;
+        } catch (SQLException ex){
             throw new IOException(ex);
         }
     }
+
+//// Very slow, html fail to render
+//    private final String TMP_ICON_PATH = "src/main/resources/static/tmp/usericons/";
+//    public void createTmpImageFileForUserIcon(CustomUserDetails userDetails) throws IOException{
+//        User user = userRepo.findById(userDetails.getId()).orElse(null);
+//
+//        if(user.getIcon() == null){ return; }
+//
+//        try {
+//            File tmpImgFile = new File(TMP_ICON_PATH);
+//            String tmpFilePath = tmpImgFile.getAbsoluteFile() + "/" + user.getEmail() + ".png";
+//            FileOutputStream fos = new FileOutputStream(tmpFilePath);
+//            fos.write(user.getIcon().getBinaryStream().readAllBytes());
+//            fos.close();
+//            userDetails.setHasIcon(true);
+//        }catch (SQLException ex){
+//            throw new IOException(ex);
+//        }
+//    }
 
     private byte[] scaleIconImage(InputStream content, int size) throws IOException{
         BufferedImage bufImg = ImageIO.read(content);

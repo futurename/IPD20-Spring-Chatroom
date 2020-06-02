@@ -1,9 +1,7 @@
 package com.chatroom.ipd20.security;
 
 import com.chatroom.ipd20.security.handler.CustomLoginSuccessHandler;
-import com.chatroom.ipd20.security.handler.CustomLogoutSuccessHandler;
 import com.chatroom.ipd20.services.BlobService;
-import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.sql.Blob;
 
 @Configuration
 @EnableWebSecurity
@@ -46,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=true")
                 .and()
             .logout()
-                .logoutSuccessHandler(new CustomLogoutSuccessHandler())
                 .permitAll();
 
         // not to deny access h2-console
@@ -62,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
             "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**",
-            "/resources/static/**", "/fontawesome/**", "/fonts/**", "/tmp/**", "/userIcons/**",
+            "/resources/static/**", "/fontawesome/**", "/fonts/**",
             "/images/**", "/scss/**", "/vendor/**", "/favicon.ico", "/favicon.png"
         );
     }

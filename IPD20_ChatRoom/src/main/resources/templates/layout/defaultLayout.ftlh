@@ -22,11 +22,7 @@
                     <#if user?? >
                         <div class="flex">
                             <div class="flex mr-3 text-lg">
-                                <#if user.hasIcon >
-                                    <img class="mx-1 w-8 h-8 rounded-full" src="/tmp/usericons/${user.username}.png" />
-                                <#else>
-                                    <img class="mx-1 w-8 h-8 rounded-full" src="/tmp/usericons/icon.png" />
-                                </#if>
+                                    <img class="mx-1 w-8 h-8 border-2 border-gray-300 rounded-full" src="${user.base64Icon!'/images/default_icon.png'}" />
                                 ${user.name},
                             </div>
                             <a class="underline text-sm" href="/logout">logout</a>
