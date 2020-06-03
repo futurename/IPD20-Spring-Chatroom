@@ -2,8 +2,6 @@ package com.chatroom.ipd20.entities;
 
 import com.chatroom.ipd20.models.UserForm;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 
@@ -70,4 +68,14 @@ public class User {
     )
     @ToString.Exclude
     private Set<Channel> favoriteChannels;
-}
+
+    @ManyToMany
+    @JoinTable(
+            name = "activeChannels",
+            joinColumns = { @JoinColumn(name = "userId") },
+            inverseJoinColumns = { @JoinColumn(name = "channelId") }
+    )
+    @ToString.Exclude
+    private Set<Channel> activeChannels;
+
+   }
