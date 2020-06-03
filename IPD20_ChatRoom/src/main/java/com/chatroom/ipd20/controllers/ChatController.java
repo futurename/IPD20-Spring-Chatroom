@@ -7,6 +7,7 @@ import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.models.UserConnectInfo;
 import com.chatroom.ipd20.security.CustomUserDetails;
+import com.chatroom.ipd20.services.BlobService;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
@@ -41,17 +42,6 @@ public class ChatController {
 
     @Autowired
     UserRepository userRepository;
-
-    @ModelAttribute
-    public void addAttributes(Model model, Authentication authentication) {
-        if(authentication != null) {
-            Object object = authentication.getPrincipal();
-            if(object instanceof CustomUserDetails){
-                CustomUserDetails user = (CustomUserDetails) object;
-                model.addAttribute("user", user);
-            }
-        }
-    }
 
     private SimpMessagingTemplate msgTemplate;
 

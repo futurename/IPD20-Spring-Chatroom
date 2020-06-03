@@ -10,9 +10,7 @@ public class IconValidator implements ConstraintValidator<Icon, MultipartFile> {
     public boolean isValid(MultipartFile iconImg, ConstraintValidatorContext constraintContext){
         String contentType = iconImg.getContentType().toLowerCase();
 
-        if(iconImg.isEmpty()){
-            return true;
-        }
+        if(iconImg.isEmpty()){ return true; }
 
         if(contentType.equals("image/jpeg")
                 || contentType.equals("image/jpg")

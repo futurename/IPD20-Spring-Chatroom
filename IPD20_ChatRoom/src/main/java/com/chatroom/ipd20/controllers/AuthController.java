@@ -1,6 +1,5 @@
 package com.chatroom.ipd20.controllers;
 
-import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.UserForm;
 import com.chatroom.ipd20.security.CustomUserDetails;
@@ -13,39 +12,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Blob;
-import java.util.Set;
 
 @Controller
 public class AuthController {
 
     @Autowired
-    UserRepository userRepo;
+    UserRepository userRepository;
     @Autowired
-    ChannelRepository chRepo;
+    ChannelRepository channelRepository;
     @Autowired
     BlobService blobService;
 
-    @ModelAttribute
-    public void addAttributes(Model model, Authentication authentication) {
-        if(authentication != null) {
-            Object object = authentication.getPrincipal();
-            if(object instanceof CustomUserDetails){
-                CustomUserDetails user = (CustomUserDetails) object;
-                model.addAttribute("user", user);
-            }
-        }
-    }
-
-
     @GetMapping("/login")
-    public String loginPage(@RequestParam(required = false) String error, Model model, Principal principal, HttpSession session){
+    public String loginPage(
+            @RequestParam(required = false) String error,
+            Model model,
+            Principal principal,
+            HttpSession session)
+    {
         if(principal != null){
             return "redirect:/";
         }
@@ -82,7 +72,12 @@ public class AuthController {
             }
         }
 
-        userRepo.save(new User(userForm));
+        userRepository.save(new User(userForm));
         return "redirect:/login";
+    }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "profile";
     }
 }

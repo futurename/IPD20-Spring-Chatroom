@@ -22,7 +22,7 @@ import java.util.Base64;
 public class BlobService {
     private EntityManager entityManager;
 
-    private final int ICON_SIZE_FOR_DB = 30;
+    private final int ICON_SIZE_FOR_DB = 100;
 
 
     @Autowired
@@ -39,34 +39,17 @@ public class BlobService {
                 .createBlob(scaleIconImage(content, ICON_SIZE_FOR_DB));
     }
 
-    public String blobToBase64String (Blob img) throws IOException{
+    public String blobToBase64String (Blob img) {
         try {
             byte[] encoded = Base64.getEncoder().encode(img.getBinaryStream().readAllBytes());
             String imgDataAsBase64 = new String(encoded);
             return "data:image/png;base64," + imgDataAsBase64;
-        } catch (SQLException ex){
-            throw new IOException(ex);
+        } catch (SQLException|IOException ex){
+            System.out.println("Internal Error. Cannot convert Blob to base64.");
         }
+        return null;
     }
 
-//// Very slow, html fail to render
-//    private final String TMP_ICON_PATH = "src/main/resources/static/tmp/usericons/";
-//    public void createTmpImageFileForUserIcon(CustomUserDetails userDetails) throws IOException{
-//        User user = userRepo.findById(userDetails.getId()).orElse(null);
-//
-//        if(user.getIcon() == null){ return; }
-//
-//        try {
-//            File tmpImgFile = new File(TMP_ICON_PATH);
-//            String tmpFilePath = tmpImgFile.getAbsoluteFile() + "/" + user.getEmail() + ".png";
-//            FileOutputStream fos = new FileOutputStream(tmpFilePath);
-//            fos.write(user.getIcon().getBinaryStream().readAllBytes());
-//            fos.close();
-//            userDetails.setHasIcon(true);
-//        }catch (SQLException ex){
-//            throw new IOException(ex);
-//        }
-//    }
 
     private byte[] scaleIconImage(InputStream content, int size) throws IOException{
         BufferedImage bufImg = ImageIO.read(content);

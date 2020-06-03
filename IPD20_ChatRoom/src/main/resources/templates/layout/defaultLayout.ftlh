@@ -10,8 +10,8 @@
 
 
     </head>
-    <body class="" >
-        <div class=" h-screen flex">
+    <body>
+        <div class="flex">
             <#macro headerDiv>
                 <div class="w-full h-24 flex flex-row">
                     <div class="inline-block my-auto">
@@ -22,7 +22,7 @@
                     <#if user?? >
                         <div class="flex">
                             <div class="flex mr-3 text-lg">
-                                    <img class="mx-1 w-8 h-8 border-2 border-gray-300 rounded-full" src="${user.base64Icon!'/images/default_icon.png'}" />
+                                    <img class="mx-1 w-8 h-8 border-2 border-gray-300 rounded-full" src="${base64Icon!'/images/default_icon.png'}" />
                                 ${user.name},
                             </div>
                             <a class="underline text-sm" href="/logout">logout</a>
@@ -37,6 +37,40 @@
                 <div class="w-full h-24 bg-gray-300  text-center block">
                     <span class="text-3xl">This is footer</span>
                 </div>
+            </#macro>
+
+            <#macro profileDiv>
+                <#if user?? >
+                    <div class="p-4 border-2 border-gray-500 inline-block">
+                        <div class="flex justify-between items-center h-16">
+                            <img class="h-16 w-16 rounded-full border-2" src="${base64Icon!'/images/default_icon.png'}" />
+                            <p>${user.name}</p>
+                        </div>
+                        <p>${user.email}</p>
+                        <p>Total Message: ${totalMsg}</p>
+                        <p>Total Own Channels: ${totalOwnChannel}</p>
+                        <div>
+                            <p>Favorite Channels</p>
+                            <ul>
+                            <#list user.favoriteChannels as favChannel >
+                                <li class="text-xs text-right">
+                                    <a href="/chatroom/${favChannel.id}">
+                                        <#assign maxLength = 10 >
+                                        <#if favChannel.title?length < maxLength>
+                                            ${favChannel.title}
+                                        <#else>
+                                            ${favChannel.title?substring(0, maxLength - 3)} ...
+                                        </#if>
+                                    </a>
+                                </li>
+                            <#else>
+                                <li class="text-xs text-right">There is no Favorite Channel</li>
+                            </#list>
+                            </ul>
+                        </div>
+
+                    </div>
+                </#if>
             </#macro>
 
         </div>
