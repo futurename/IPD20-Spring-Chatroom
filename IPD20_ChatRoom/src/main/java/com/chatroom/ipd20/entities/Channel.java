@@ -1,10 +1,11 @@
 package com.chatroom.ipd20.entities;
 
 import com.chatroom.ipd20.models.ChannelForm;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
@@ -55,11 +56,12 @@ public class Channel {
 
     @ManyToOne
     @JoinColumn(name="ownerId", nullable = false)
-    @IndexedEmbedded(depth = 1)
+    @IndexedEmbedded
     @ToString.Exclude
     private User owner;
 
     @OneToMany(mappedBy = "channel")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private Set<Message> messages = new HashSet<Message>();
 
@@ -70,6 +72,4 @@ public class Channel {
     @NotNull
     @Column(nullable = false)
     private LocalDateTime createdTS = LocalDateTime.now();
-
-
 }

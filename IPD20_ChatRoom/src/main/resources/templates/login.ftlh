@@ -43,14 +43,14 @@
                             <i class="fas fa-envelope"></i>
                             <label for="email" class="text-lg font-bold py-1">Email</label>
                         </div>
-                        <input type="email" id="email" name="email" value="aerry@aerry.com" class="border-solid border-2 w-full mb-3">
+                        <input type="email" id="email" name="email" value="jerry@jerry.com" class="border-solid border-2 w-full mb-3">
                     </div>
                     <div>
                         <div>
                             <i class="fas fa-unlock-alt"></i>
                             <label for="pass" class="text-lg font-bold py-1">Password</label><br>
                         </div>
-                        <input type="password" id="pass" name="password" value="aerry" class="border-solid border-2 w-full mb-3">
+                        <input type="password" id="pass" name="password" value="jerry" class="border-solid border-2 w-full mb-3">
                     </div>
 
                     <div class="flex justify-center items-center">
