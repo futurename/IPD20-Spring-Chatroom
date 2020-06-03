@@ -69,4 +69,13 @@ public class User {
     @ToString.Exclude
     private Set<Channel> favoriteChannels;
 
+    @ManyToMany
+    @JoinTable(
+            name = "activeChannels",
+            joinColumns = { @JoinColumn(name = "userId") },
+            inverseJoinColumns = { @JoinColumn(name = "channelId") }
+    )
+    @ToString.Exclude
+    private Set<Channel> activeChannels;
+
    }

@@ -173,3 +173,30 @@
 
 3. Need assistance / figure things out
 - Google cloud for hosting
+
+
+*************************************************
+2020/06/03 Wang Wei
+1. Done since last scrum:
+- testing session
+
+
+2. To do until next Scrum:
+- @mention function
+
+
+3. Need assistance / figure things out
+
+
+
+2020/06/03 Donghyeok Seo
+1. Done since last scrum:
+- Update Database
+- Hibernate Fuzzy Search
+
+2. To do until next Scrum:
+- Add Icon in user, channel entities
+- Channel, message search
+
+3. Need assistance / figure things out
+- Google cloud for hosting

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -34,12 +36,18 @@ public class AuthController {
             @RequestParam(required = false) String error,
             Model model,
             Principal principal,
-            HttpSession session)
+            HttpSession session
+            )
     {
         if(principal != null){
+            String sessionId = session.getId();
+
             return "redirect:/";
         }
         model.addAttribute("error", error != null);
+
+
+
         return "login";
     }
 

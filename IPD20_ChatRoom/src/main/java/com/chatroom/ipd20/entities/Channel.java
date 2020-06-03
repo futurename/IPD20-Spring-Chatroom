@@ -67,6 +67,10 @@ public class Channel {
     @ToString.Exclude
     private Set<User> users = new HashSet<User>();
 
+    @ManyToMany(mappedBy = "activeChannels")
+    @ToString.Exclude
+    private Set<User> activeUsers = new HashSet<User>();
+
     @NotNull
     @Column(nullable = false)
     private LocalDateTime createdTS = LocalDateTime.now();
