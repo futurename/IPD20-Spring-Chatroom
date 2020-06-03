@@ -48,7 +48,7 @@
 
                 <#list allChannels as channel>
                     <div class="w-1/3 inline-block flex flex-row my-2 channelWrapper">
-                        <a class=" justify-start flex pl-2 my-2" href='/chatroom/${channel.id}'>
+                        <a class=" justify-start flex pl-2 my-2" onclick="joinChatroom();">
                             <div class="channelTitle inline-block font-bold px-1 text-lg">${channel.title}</div>
                             <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
                         </a>
@@ -68,6 +68,12 @@
     </body>
 
     <script>
+        var curUserId =
+
+        function joinChatroom(){
+
+        }
+
         $(".favStar").hide();
 
         <#list allFavChannels as favChannel>

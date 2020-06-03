@@ -116,7 +116,6 @@
         var stompClient = null;
 
         function connect() {
-
             var socket = new SockJS('/ws');
             stompClient = Stomp.over(socket);
             stompClient.connect({}, onConnected);
@@ -133,7 +132,6 @@
                 senderId: 1
             }
             stompClient.send("/app/chat.addUser", {}, JSON.stringify(userConnInfo));
-
         }
 
 
