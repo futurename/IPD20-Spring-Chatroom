@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ChannelController {
@@ -92,5 +93,30 @@ public class ChannelController {
         User owner = new User(((CustomUserDetails) authentication.getPrincipal()).getId());
         channelRepository.save(new Channel(channelForm, owner));
         return "redirect:/";
+    }
+
+    @DeleteMapping("/chatroom/{id}")
+    @ResponseBody
+    public String delete(@PathVariable int id, Authentication auth){
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        Channel channel = channelRepository.findById(id).orElse(null);
+
+        if(channel == null){ return "false"; }
+
+        User owner = channel.getOwner();
+        if(owner.getId() != userDetails.getId()){
+            return "false";
+        }
+
+        Set<User> users = channel.getUsers();
+        for(User user : users){
+            Set<Channel> favChannels = user.getFavoriteChannels();
+            favChannels.remove(channel);
+            userRepository.save(user);
+        }
+
+        channelRepository.delete(channel);
+
+        return "true";
     }
 }

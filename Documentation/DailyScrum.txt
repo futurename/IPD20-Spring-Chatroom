@@ -137,13 +137,11 @@
 
 2020/06/01 Donghyeok Seo
 1. Done since last scrum:
-- create layout
-- create test database in memory
-- create mock data
-
-2. To do until next Scrum:
 - Update Database
 - Hibernate Fuzzy Search
+
+2. To do until next Scrum:
+- Authentication, authorization
 
 3. Need assistance / figure things out
 - Google cloud for hosting
@@ -164,8 +162,7 @@
 
 2020/06/02 Donghyeok Seo
 1. Done since last scrum:
-- Update Database
-- Hibernate Fuzzy Search
+- Authentication, authorization
 
 2. To do until next Scrum:
 - Add Icon in user, channel entities
@@ -191,12 +188,11 @@
 
 2020/06/03 Donghyeok Seo
 1. Done since last scrum:
-- Update Database
-- Hibernate Fuzzy Search
-
-2. To do until next Scrum:
 - Add Icon in user, channel entities
 - Channel, message search
 
+2. To do until next Scrum:
+- User profile
+- Create/delete chatroom
+
 3. Need assistance / figure things out
-- Google cloud for hosting

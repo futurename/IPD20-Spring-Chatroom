@@ -37,6 +37,7 @@ public class AuthUserControllerAdviser {
         }
         model.addAttribute("totalMsg", user.getMessages().size());
         model.addAttribute("totalOwnChannel", user.getChannels().size());
+        model.addAttribute("totalFavChannel", user.getFavoriteChannels().size());
         model.addAttribute("user", user);
     }
 

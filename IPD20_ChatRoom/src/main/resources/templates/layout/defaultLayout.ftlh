@@ -46,11 +46,36 @@
                             <img class="h-16 w-16 rounded-full border-2" src="${base64Icon!'/images/default_icon.png'}" />
                             <p>${user.name}</p>
                         </div>
+
                         <p>${user.email}</p>
+
                         <p>Total Message: ${totalMsg}</p>
-                        <p>Total Own Channels: ${totalOwnChannel}</p>
+
                         <div>
-                            <p>Favorite Channels</p>
+                            <p>Your Channels: ${totalOwnChannel!0}</p>
+                            <ul>
+                                <#list user.channels as channel >
+                                    <li class="text-xs text-right">
+                                        <#assign maxLength = 10 >
+                                        <a href="/chatroom/${channel.id}">
+                                            <#if channel.title?length < maxLength>
+                                                ${channel.title}
+                                            <#else>
+                                                ${channel.title?substring(0, maxLength - 3)} ...
+                                            </#if>
+                                        </a>
+                                        <button class="btDeleteChannel border-2">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <span class="channelId hidden">${channel.id}</span>
+                                    </li>
+                                <#else>
+                                    <li class="text-xs text-right">You don't have Channel yet.</li>
+                                </#list>
+                            </ul>
+                        </div>
+                        <div>
+                            <p>Favorite Channels: ${totalFavChannels!0}</p>
                             <ul>
                             <#list user.favoriteChannels as favChannel >
                                 <li class="text-xs text-right">
@@ -71,8 +96,23 @@
 
                     </div>
                 </#if>
+                <script>
+                    $(document).ready(function () {
+                        $(".btDeleteChannel").click(function () {
+                            let id = $(this).next(".channelId").text();
+                            $.ajax({
+                                url: "/chatroom/" + id,
+                                type: "DELETE"
+                            }).done(function (result) {
+                                alert(result);
+                                location.reload();
+                            }).fail(function () {
+                                alert("Something is wrong with ajax.");
+                            });
+                        });
+                    });
+                </script>
             </#macro>
-
         </div>
 
 
