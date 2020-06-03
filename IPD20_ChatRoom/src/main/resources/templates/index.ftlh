@@ -39,9 +39,9 @@
                     <button><i class="fas fa-search p-2"></i></button>
                 </div>
                 <div class="my-auto mr-5">
-                    <button class="border-2 border-solid bg-red-600 text-white py-1 px-4 rounded-full font-bold">Create
+                    <a href="/chatroom" class="border-2 border-solid bg-red-600 text-white py-1 px-4 rounded-full font-bold">Create
                         ChatRoom
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="border-2 border-solid flex flex-wrap">

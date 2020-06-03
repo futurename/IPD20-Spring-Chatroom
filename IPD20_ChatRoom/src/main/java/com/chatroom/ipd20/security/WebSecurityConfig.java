@@ -1,7 +1,5 @@
 package com.chatroom.ipd20.security;
 
-import com.chatroom.ipd20.security.handler.CustomLoginSuccessHandler;
-import com.chatroom.ipd20.services.BlobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +19,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     com.chatroom.ipd20.security.CustomUserDetailsService userDetailsService;
 
-    @Autowired
-    BlobService blobService;
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -42,7 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .permitAll()
-                .successHandler(new CustomLoginSuccessHandler(blobService))
                 .failureUrl("/login?error=true")
                 .and()
             .logout()
