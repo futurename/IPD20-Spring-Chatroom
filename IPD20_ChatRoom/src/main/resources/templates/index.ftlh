@@ -68,18 +68,23 @@
     </body>
 
     <script>
-        var curUserId =
+        var curUserId = getJSessionId();
 
-        function joinChatroom(){
+
+        function getJSessionId() {
+
+        }
+
+        function joinChatroom() {
 
         }
 
         $(".favStar").hide();
 
         <#list allFavChannels as favChannel>
-         <#assign curFavId = favChannel.id>
-         $("#${curFavId}").addClass("showFav");
-         $("#${curFavId}").show();
+        <#assign curFavId = favChannel.id>
+        $("#${curFavId}").addClass("showFav");
+        $("#${curFavId}").show();
         </#list>
 
 
