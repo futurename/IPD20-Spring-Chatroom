@@ -75,9 +75,11 @@ public class ChatController {
         LocalDateTime createdTS = LocalDateTime.now();
         String connString = "<span class='font-bold text-red-500 text-base'>" + userConnectInfo.getSenderName() + "</span> has " +
                 "joined the chatroom...\uD83D\uDE0A";
-        Message connMsg = new Message(0, connString, null, new Channel(userConnectInfo.getSenderId()),
-                new User(userConnectInfo.getSenderId()), createdTS);
-        messageRepository.save(connMsg);
+
+//        Message connMsg = new Message(0, connString, null, new Channel(userConnectInfo.getSenderId()),
+//                new User(userConnectInfo.getSenderId()), createdTS);
+//        messageRepository.save(connMsg);
+
         ChatMessage connChatMsg = new ChatMessage();
         connChatMsg.setSenderName(userConnectInfo.getSenderName());
         connChatMsg.setType(ChatMessage.MessageType.JOIN);
