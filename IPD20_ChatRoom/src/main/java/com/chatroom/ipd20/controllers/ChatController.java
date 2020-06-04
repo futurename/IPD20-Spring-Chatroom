@@ -94,7 +94,7 @@ public class ChatController {
         model.addAttribute("allChannels", channelRepository.findAll());
 
         String sessionId = request.getRequestedSessionId();
-        int userId =
+
 
         /*
            FIX ME, USING user 1 as default user to retrieve fav channels.
