@@ -49,17 +49,43 @@ public class ChannelController {
     }
 
     @GetMapping("/chatroom/{id}")
-    public String enterChatroom(Model model, @PathVariable int id) {
+    public String enterChatroom(Model model, @PathVariable int id, Authentication auth) {
         int channelId = id;
-        Channel curChannel = channelRepository.findById(channelId).get();
-        List<User> userList = userRepository.findAll();
 
-        List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
+        //Check whether this channelId exists in ActiveChannels table.
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        int userId = userDetails.getId();
+        User curUser = userRepository.findById(userId).orElse(null);
+        Set<Channel> activeChannels = curUser.getActiveChannels();
+        boolean isExistsInActiveChannelTable = activeChannels.stream().anyMatch(a->a.getId() == channelId);
 
-        model.addAttribute("curChannel", curChannel);
-        model.addAttribute("userList", userList);
-        model.addAttribute("messageList", messageList);
-        return "chatroom";
+        if(isExistsInActiveChannelTable){
+            model.addAttribute("activeChannelStatus", true);
+            model.addAttribute("errorMsg", "You've joined this channel somewere else!");
+            model.addAttribute("allChannels", channelRepository.findAll());
+            Set<Channel> favChannels = curUser.getFavoriteChannels();
+            model.addAttribute("allFavChannels", favChannels);
+            model.addAttribute("userId",userId);
+            model.addAttribute("activeChannels", curUser.getActiveChannels());
+            return "index";
+        }else{
+            Channel curChannel = channelRepository.findById(channelId).get();
+            List<User> userList = userRepository.findAll();
+            List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
+
+            model.addAttribute("curChannel", curChannel);
+            model.addAttribute("userList", userList);
+            model.addAttribute("messageList", messageList);
+
+            Set<Channel> allActiveChannels = curUser.getActiveChannels();
+            Channel activeChannel = new Channel();
+            activeChannel.setId(channelId);
+            activeChannel.setOwner(new User(userId));
+            allActiveChannels.add(activeChannel);
+            userRepository.save(curUser);
+
+            return "chatroom";
+        }
     }
 
 

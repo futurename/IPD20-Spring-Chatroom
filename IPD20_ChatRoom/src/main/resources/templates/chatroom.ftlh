@@ -90,7 +90,7 @@
                 <div class="inline-block flex mb-6 justify-between">
                     <div class="border-2 border-solid border-red-500 text-lg font-bold
                     rounded-full py-1 px-6 hover:bg-red-500 hover:text-white">
-                        <a id="btReturn"  href="/">Return to index
+                        <a id="btReturn"  href="/chatroom/leave/${curChannel.id}">Return to index
                         </a>
                     </div>
                     <div>

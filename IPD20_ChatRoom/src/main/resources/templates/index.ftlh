@@ -44,13 +44,23 @@
                     </a>
                 </div>
             </div>
+            <div>
+
+                <#if activeChannelStatus??>
+                    <p class="font-bold text-lg bg-yellow-300 text-red-500">${errorMsg}</p>
+                </#if>
+            </div>
             <div class="border-2 border-solid flex flex-wrap">
 
                 <#list allChannels as channel>
                     <div class="w-1/3 inline-block flex flex-row my-2 channelWrapper">
-                        <a class=" justify-start flex pl-2 my-2" onclick="joinChatroom();" href="/chatroom/${channel.id}">
+                        <a class=" justify-start flex pl-2 my-2" href="/chatroom/${channel.id}">
                             <div class="channelTitle inline-block font-bold px-1 text-lg">${channel.title}</div>
                             <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
+                            <div class="chatting text-sm text-blue-700 my-auto inline-block font-bold pl-2"
+                                 id="channel_${channel.id}">
+                                Chatting...
+                            </div>
                         </a>
 
                         <a class="px-2 py-1 my-auto favStar text-red-700 transform hover:scale-150"
@@ -68,23 +78,20 @@
     </body>
 
     <script>
-        var curUserId = getJSessionId();
-
-
-        function getJSessionId() {
-
-        }
-
-        function joinChatroom() {
-
-        }
 
         $(".favStar").hide();
+        $(".chatting").hide();
 
         <#list allFavChannels as favChannel>
         <#assign curFavId = favChannel.id>
         $("#${curFavId}").addClass("showFav");
         $("#${curFavId}").show();
+        </#list>
+
+        <#list activeChannels as activeChannel>
+        <#assign activeId = activeChannel.id>
+        $('#channel_${activeChannel.id}').show();
+
         </#list>
 
 
@@ -124,7 +131,7 @@
                     $(this).show();
 
                     var dataContent = {};
-                    dataContent['userId'] = 1;
+                    dataContent['userId'] = ${userId};
                     dataContent['channelId'] = $(this).attr("id");
                     $.ajax({
                         url: "/chatroom/addFavChannel",

@@ -6,18 +6,17 @@ import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.models.UserConnectInfo;
+import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -90,18 +89,19 @@ public class ChatController {
     }
 
     @RequestMapping(value = {"/index", "/"})
-    public String getAllMessages(Model model, HttpServletRequest request) {
+    public String getAllMessages(Model model, HttpServletRequest request, Authentication authentication) {
         model.addAttribute("allChannels", channelRepository.findAll());
 
         String sessionId = request.getRequestedSessionId();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        int userId = userDetails.getId();
 
-
-        /*
-           FIX ME, USING user 1 as default user to retrieve fav channels.
-         */
-        User user = userRepository.findById(1).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
         Set<Channel> favChannels = user.getFavoriteChannels();
         model.addAttribute("allFavChannels", favChannels);
+        model.addAttribute("userId",userId);
+        model.addAttribute("activeChannels", user.getActiveChannels());
+
         return "index";
     }
 
@@ -121,6 +121,24 @@ public class ChatController {
         Set<Channel> favChannels = user.getFavoriteChannels();
         favChannels.removeIf(a -> a.getId() == favChannel.getChannelId());
         userRepository.save(user);
+    }
+
+    @GetMapping("/chatroom/leave/{channelId}")
+    public String leaveChatRoom(Authentication authentication, @PathVariable int channelId, Model model) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        int userId = userDetails.getId();
+
+        User user = userRepository.findById(userId).get();
+
+        Set<Channel> allActiveChannels = user.getActiveChannels();
+        allActiveChannels.removeIf(a -> a.getId() == channelId);
+        userRepository.save(user);
+        model.addAttribute("allChannels", channelRepository.findAll());
+        Set<Channel> favChannels = user.getFavoriteChannels();
+        model.addAttribute("allFavChannels", favChannels);
+        model.addAttribute("userId",userId);
+        model.addAttribute("activeChannels", user.getActiveChannels());
+        return "index";
     }
 
 
