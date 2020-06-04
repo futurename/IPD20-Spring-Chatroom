@@ -125,6 +125,8 @@
         function onConnected() {
             // alert("connecting...");
             stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
+            stompClient.subscribe('/notification/' + ${user.id}, notification);
+            stompClient.subscribe('/chatroomNotification/' + ${curChannel.id}, chatroomNotification);
             // alert("finish");
             var userConnInfo = {
                 senderName: "Jerry",
@@ -152,6 +154,17 @@
 
             }
             event.preventDefault();
+        }
+
+        function chatroomNotification(payload){
+            setTimeout(function () { alert("Channel will delete in 3 seconds."); }, 1000);
+            setTimeout(function () { alert("Channel will delete in 2 seconds."); }, 2000);
+            setTimeout(function () { alert("Let's move to home page."); }, 3000);
+            setTimeout(function () {window.location.replace("/"); }, 4000);
+        }
+
+        function notification(payload){
+            alert(payload);
         }
 
         function messageReceieved(payload) {

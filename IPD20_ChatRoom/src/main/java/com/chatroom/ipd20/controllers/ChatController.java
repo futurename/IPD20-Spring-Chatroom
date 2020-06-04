@@ -14,10 +14,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -108,6 +105,7 @@ public class ChatController {
     }
 
     @PostMapping("/chatroom/addFavChannel")
+    @ResponseBody
     public void addFavChannel(@RequestBody FavChannel favChannel) {
         User user = userRepository.findById(favChannel.getUserId()).orElse(null);
         Set<Channel> favChannels = user.getFavoriteChannels();
@@ -118,6 +116,7 @@ public class ChatController {
     }
 
     @DeleteMapping("/chatroom/delFavChannel")
+    @ResponseBody
     public void deleteFavChannel(@RequestBody FavChannel favChannel) {
         User user = userRepository.findById(favChannel.getUserId()).orElse(null);
         Set<Channel> favChannels = user.getFavoriteChannels();

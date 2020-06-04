@@ -7,6 +7,7 @@ import com.chatroom.ipd20.models.ChannelForm;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,11 @@ public class ChannelController {
     @Autowired
     HibernateSearchService searchService;
     @Autowired
+    NotificationService notificationService;
+    @Autowired
     BlobService blobService;
+    @Autowired
+    SimpMessagingTemplate msgTemplate;
 
     @GetMapping("/channel")
     public String search(@RequestParam(required = false) String search, Model model) {
@@ -108,14 +113,8 @@ public class ChannelController {
             return "false";
         }
 
-        Set<User> users = channel.getUsers();
-        for(User user : users){
-            Set<Channel> favChannels = user.getFavoriteChannels();
-            favChannels.remove(channel);
-            userRepository.save(user);
-        }
-
-        channelRepository.delete(channel);
+        msgTemplate.convertAndSend("/chatroomNotification/" + channel.getId(), "end");
+        notificationService.deleteChannel(channel);
 
         return "true";
     }
