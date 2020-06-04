@@ -25,7 +25,7 @@
         <!-- SockJs -->
         <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     </head>
-    <body>
+    <body onload="connect();">
 
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
@@ -78,6 +78,25 @@
     </body>
 
     <script>
+
+        var stompClient = null;
+
+        function connect() {
+            var socket = new SockJS('/ws');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, onConnected);
+            // event.preventDefault();
+        }
+
+        function onConnected() {
+            stompClient.subscribe('/status/${userId}', displayInfo);
+
+        }
+
+        function displayInfo(payload){
+            document.location.href="/";
+        }
+
 
         $(".favStar").hide();
         $(".chatting").hide();

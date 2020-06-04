@@ -90,7 +90,7 @@
                 <div class="inline-block flex mb-6 justify-between">
                     <div class="border-2 border-solid border-red-500 text-lg font-bold
                     rounded-full py-1 px-6 hover:bg-red-500 hover:text-white">
-                        <a id="btReturn"  href="/chatroom/leave/${curChannel.id}">Return to index
+                        <a id="btReturn" href="/chatroom/leave/${curChannel.id}">Return to index
                         </a>
                     </div>
                     <div>
@@ -127,13 +127,13 @@
             stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
             stompClient.subscribe('/notification/' + ${user.id}, notification);
             stompClient.subscribe('/chatroomNotification/' + ${curChannel.id}, chatroomNotification);
+
             // alert("finish");
             var userConnInfo = {
                 channelId:${curChannel.id}
             }
             stompClient.send("/app/chat.addUser", {}, JSON.stringify(userConnInfo));
         }
-
 
         function sendMsg(event) {
             var body = $(".ck-content").html();
@@ -154,14 +154,22 @@
             event.preventDefault();
         }
 
-        function chatroomNotification(payload){
-            setTimeout(function () { alert("Channel will delete in 3 seconds."); }, 1000);
-            setTimeout(function () { alert("Channel will delete in 2 seconds."); }, 2000);
-            setTimeout(function () { alert("Let's move to home page."); }, 3000);
-            setTimeout(function () {window.location.replace("/"); }, 4000);
+        function chatroomNotification(payload) {
+            setTimeout(function () {
+                alert("Channel will delete in 3 seconds.");
+            }, 1000);
+            setTimeout(function () {
+                alert("Channel will delete in 2 seconds.");
+            }, 2000);
+            setTimeout(function () {
+                alert("Let's move to home page.");
+            }, 3000);
+            setTimeout(function () {
+                window.location.replace("/");
+            }, 4000);
         }
 
-        function notification(payload){
+        function notification(payload) {
             alert(payload);
         }
 

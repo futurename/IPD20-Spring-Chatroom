@@ -120,6 +120,8 @@ public class ChatController {
         connChatMsg.setChannelId(connChannel.getChannelId());
         msgTemplate.convertAndSend("/chatroom/" + connChatMsg.getChannelId(), connChatMsg);
 
+        msgTemplate.convertAndSend("/status/" + userId, "refresh");
+
     }
 
     @RequestMapping(value = {"/index", "/"})
@@ -148,6 +150,8 @@ public class ChatController {
         channel.setId(favChannel.getChannelId());
         favChannels.add(channel);
         userRepository.save(user);
+
+        msgTemplate.convertAndSend("/status/" + favChannel.getUserId() , "refresh");
     }
 
     @DeleteMapping("/chatroom/delFavChannel")
@@ -194,6 +198,7 @@ public class ChatController {
         chatMessage.setBody(leaveString);
 
         msgTemplate.convertAndSend("/chatroom/" + channelId, chatMessage);
+        msgTemplate.convertAndSend("/status/" + userId, "refresh");
 
         return "index";
     }
