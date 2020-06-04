@@ -4,8 +4,8 @@ import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
-import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.models.ConnChannel;
+import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
@@ -20,7 +20,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author Wei Wang
@@ -50,11 +55,10 @@ public class ChatController {
 
     @MessageMapping("/chat.sendMessage")
     public void sendMessage(ChatMessage chatMessage) {
-        /*
-         * FixMe: simulate saving message sent by user 2
-         */
         LocalDateTime createdTS = LocalDateTime.now();
-        Message newMsg = new Message(0, chatMessage.getBody(), null,
+        String messsage = processMsg(chatMessage.getBody());
+
+        Message newMsg = new Message(0, messsage, null,
                 new Channel(chatMessage.getChannelId()), new User(chatMessage.getSenderId()), createdTS);
 
         messageRepository.save(newMsg);
@@ -63,8 +67,33 @@ public class ChatController {
 
         chatMessage.setCreatedTS(createdTS);
         chatMessage.setSenderName(senderName);
+        chatMessage.setBody(messsage);
 
         msgTemplate.convertAndSend("/chatroom/" + chatMessage.getChannelId(), chatMessage);
+    }
+
+    private String processMsg(String body) {
+        List<String> tokens = getAllTokens(body);
+        String result = "";
+
+        List<User> allUsers = userRepository.findAll();
+        List<String> validTokens =
+                tokens.stream().filter(a -> allUsers.stream().anyMatch(b -> b.getName().equals(a))).collect(Collectors.toList());
+
+        for (String str : validTokens) {
+            body = body.replaceAll("@" + str, "<span class='font-bold text-blue-500 underline'>@" + str + "</span>");
+        }
+        return body;
+    }
+
+    private List<String> getAllTokens(String body) {
+        ArrayList<String> result = new ArrayList<>();
+        Matcher matcher = Pattern.compile("@[a-zA-Z]+").matcher(body);
+        while (matcher.find()) {
+            result.add(matcher.group().replace("@", ""));
+        }
+        return result;
+
     }
 
     @MessageMapping("/chat.addUser")
@@ -101,7 +130,7 @@ public class ChatController {
         User user = userRepository.findById(userId).orElse(null);
         Set<Channel> favChannels = user.getFavoriteChannels();
         model.addAttribute("allFavChannels", favChannels);
-        model.addAttribute("userId",userId);
+        model.addAttribute("userId", userId);
         model.addAttribute("activeChannels", user.getActiveChannels());
 
         return "index";
@@ -140,7 +169,7 @@ public class ChatController {
         model.addAttribute("allChannels", channelRepository.findAll());
         Set<Channel> favChannels = user.getFavoriteChannels();
         model.addAttribute("allFavChannels", favChannels);
-        model.addAttribute("userId",userId);
+        model.addAttribute("userId", userId);
         model.addAttribute("activeChannels", user.getActiveChannels());
         return "index";
     }
