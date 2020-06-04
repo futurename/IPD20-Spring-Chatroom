@@ -6,22 +6,20 @@ import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.models.UserConnectInfo;
-import com.chatroom.ipd20.security.CustomUserDetails;
-import com.chatroom.ipd20.services.BlobService;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
-import org.jboss.logging.annotations.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -46,7 +44,7 @@ public class ChatController {
     private SimpMessagingTemplate msgTemplate;
 
     @Autowired
-    public ChatController(SimpMessagingTemplate template){
+    public ChatController(SimpMessagingTemplate template) {
         this.msgTemplate = template;
     }
 
@@ -67,14 +65,14 @@ public class ChatController {
         chatMessage.setCreatedTS(createdTS);
         chatMessage.setSenderName(senderName);
 
-        msgTemplate.convertAndSend("/chatroom/"+chatMessage.getChannelId(), chatMessage);
+        msgTemplate.convertAndSend("/chatroom/" + chatMessage.getChannelId(), chatMessage);
     }
 
     @MessageMapping("/chat.addUser")
     public void addUser(@RequestBody UserConnectInfo userConnectInfo) {
         // Add username in web socket session
         //headerAccessor.getSessionAttributes().put("username", userConnectInfo.getSenderName());
-        LocalDateTime createdTS =LocalDateTime.now();
+        LocalDateTime createdTS = LocalDateTime.now();
         String connString = "<span class='font-bold text-red-500 text-base'>" + userConnectInfo.getSenderName() + "</span> has " +
                 "joined the chatroom...\uD83D\uDE0A";
         Message connMsg = new Message(0, connString, null, new Channel(userConnectInfo.getSenderId()),
@@ -87,25 +85,28 @@ public class ChatController {
         connChatMsg.setSenderId(userConnectInfo.getSenderId());
         connChatMsg.setCreatedTS(createdTS);
         connChatMsg.setChannelId(userConnectInfo.getChannelId());
-        msgTemplate.convertAndSend("/chatroom/"+ connChatMsg.getChannelId(), connChatMsg);
+        msgTemplate.convertAndSend("/chatroom/" + connChatMsg.getChannelId(), connChatMsg);
 
     }
 
     @RequestMapping(value = {"/index", "/"})
-    public String getAllMessages(Model model) {
+    public String getAllMessages(Model model, HttpServletRequest request) {
         model.addAttribute("allChannels", channelRepository.findAll());
+
+        String sessionId = request.getRequestedSessionId();
+        int userId =
 
         /*
            FIX ME, USING user 1 as default user to retrieve fav channels.
          */
         User user = userRepository.findById(1).orElse(null);
         Set<Channel> favChannels = user.getFavoriteChannels();
-        model.addAttribute("allFavChannels",favChannels);
+        model.addAttribute("allFavChannels", favChannels);
         return "index";
     }
 
     @PostMapping("/chatroom/addFavChannel")
-    public void addFavChannel(@RequestBody FavChannel favChannel){
+    public void addFavChannel(@RequestBody FavChannel favChannel) {
         User user = userRepository.findById(favChannel.getUserId()).orElse(null);
         Set<Channel> favChannels = user.getFavoriteChannels();
         Channel channel = new Channel();
@@ -115,10 +116,10 @@ public class ChatController {
     }
 
     @DeleteMapping("/chatroom/delFavChannel")
-    public void deleteFavChannel(@RequestBody FavChannel favChannel){
+    public void deleteFavChannel(@RequestBody FavChannel favChannel) {
         User user = userRepository.findById(favChannel.getUserId()).orElse(null);
         Set<Channel> favChannels = user.getFavoriteChannels();
-        favChannels.removeIf(a->a.getId()==favChannel.getChannelId());
+        favChannels.removeIf(a -> a.getId() == favChannel.getChannelId());
         userRepository.save(user);
     }
 
