@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class UserConnectInfo {
-    private String senderName;
+public class ConnChannel {
     private int channelId;
-    private int senderId;
 }
