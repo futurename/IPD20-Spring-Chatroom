@@ -127,9 +127,7 @@
             stompClient.subscribe('/chatroom/' + ${curChannel.id}, messageReceieved);
             // alert("finish");
             var userConnInfo = {
-                senderName: "Jerry",
-                channelId:${curChannel.id},
-                senderId: 1
+                channelId:${curChannel.id}
             }
             stompClient.send("/app/chat.addUser", {}, JSON.stringify(userConnInfo));
         }

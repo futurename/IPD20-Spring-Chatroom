@@ -5,7 +5,7 @@ import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.FavChannel;
-import com.chatroom.ipd20.models.UserConnectInfo;
+import com.chatroom.ipd20.models.ConnChannel;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
@@ -68,22 +68,27 @@ public class ChatController {
     }
 
     @MessageMapping("/chat.addUser")
-    public void addUser(@RequestBody UserConnectInfo userConnectInfo) {
-        // Add username in web socket session
-        //headerAccessor.getSessionAttributes().put("username", userConnectInfo.getSenderName());
+    public void addUser(@RequestBody ConnChannel connChannel, Authentication authentication) {
+
         LocalDateTime createdTS = LocalDateTime.now();
-        String connString = "<span class='font-bold text-red-500 text-base'>" + userConnectInfo.getSenderName() + "</span> has " +
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        User user = userRepository.findById(customUserDetails.getId()).get();
+
+        String senderName = user.getName();
+        int userId = user.getId();
+        String connString = "<span class='font-bold text-red-500 text-base'>" + senderName + "</span> has " +
                 "joined the chatroom...\uD83D\uDE0A";
-        Message connMsg = new Message(0, connString, null, new Channel(userConnectInfo.getSenderId()),
-                new User(userConnectInfo.getSenderId()), createdTS);
+        Message connMsg = new Message(0, connString, null, new Channel(connChannel.getChannelId()),
+                new User(userId), createdTS);
+
         messageRepository.save(connMsg);
         ChatMessage connChatMsg = new ChatMessage();
-        connChatMsg.setSenderName(userConnectInfo.getSenderName());
+        connChatMsg.setSenderName(senderName);
         connChatMsg.setType(ChatMessage.MessageType.JOIN);
         connChatMsg.setBody(connString);
-        connChatMsg.setSenderId(userConnectInfo.getSenderId());
+        connChatMsg.setSenderId(userId);
         connChatMsg.setCreatedTS(createdTS);
-        connChatMsg.setChannelId(userConnectInfo.getChannelId());
+        connChatMsg.setChannelId(connChannel.getChannelId());
         msgTemplate.convertAndSend("/chatroom/" + connChatMsg.getChannelId(), connChatMsg);
 
     }
