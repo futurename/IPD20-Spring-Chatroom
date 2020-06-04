@@ -196,3 +196,30 @@
 - Create/delete chatroom
 
 3. Need assistance / figure things out
+
+
+*************************************************
+2020/06/04 Wang Wei
+1. Done since last scrum:
+- add user chatting status in seperate table, an user cannot join a chatroom twice.
+
+
+2. To do until next Scrum:
+- @mention function
+- popup notificaion.
+
+
+3. Need assistance / figure things out
+
+
+
+2020/06/04 Donghyeok Seo
+1. Done since last scrum:
+- Add Icon in user, channel entities
+- Channel, message search
+
+2. To do until next Scrum:
+- User profile
+- Create/delete chatroom
+
+3. Need assistance / figure things out
