@@ -36,16 +36,13 @@ import java.util.stream.Collectors;
 @Controller
 public class ChatController {
 
+    private final SimpMessagingTemplate msgTemplate;
     @Autowired
     MessageRepository messageRepository;
-
     @Autowired
     ChannelRepository channelRepository;
-
     @Autowired
     UserRepository userRepository;
-
-    private SimpMessagingTemplate msgTemplate;
 
     @Autowired
     public ChatController(SimpMessagingTemplate template) {
@@ -81,7 +78,8 @@ public class ChatController {
                 tokens.stream().filter(a -> allUsers.stream().anyMatch(b -> b.getName().equals(a))).collect(Collectors.toList());
 
         for (String str : validTokens) {
-            body = body.replaceAll("@" + str, "<span class='font-bold text-blue-500 underline'>@" + str + "</span>");
+            body = body.replaceAll("@" + str, "<span class='font-bold text-blue-500'>@</span>" +
+                    "<span class='underline font-bold text-blue-500'>" + str + "</span>");
         }
         return body;
     }
@@ -107,6 +105,11 @@ public class ChatController {
         int userId = user.getId();
         String connString = "<span class='font-bold text-red-500 text-base'>" + senderName + "</span> has " +
                 "joined the chatroom...\uD83D\uDE0A";
+
+        Message newMsg = new Message(0, connString, null,
+                new Channel(connChannel.getChannelId()), new User(userId), createdTS);
+
+        messageRepository.save(newMsg);
 
         ChatMessage connChatMsg = new ChatMessage();
         connChatMsg.setSenderName(senderName);
@@ -171,6 +174,27 @@ public class ChatController {
         model.addAttribute("allFavChannels", favChannels);
         model.addAttribute("userId", userId);
         model.addAttribute("activeChannels", user.getActiveChannels());
+
+
+        String leaveString = "<span class='font-bold text-red-500 text-base'>" + user.getName() + "</span> just " +
+                "left the chatroom...\uD83D\uDE02";
+
+        LocalDateTime createdTS = LocalDateTime.now();
+        Message newMsg = new Message(0, leaveString, null,
+                new Channel(channelId), new User(userId), createdTS);
+
+        messageRepository.save(newMsg);
+
+        ChatMessage chatMessage = new ChatMessage();
+
+        String senderName = userRepository.findById(userId).get().getName();
+
+        chatMessage.setCreatedTS(createdTS);
+        chatMessage.setSenderName(senderName);
+        chatMessage.setBody(leaveString);
+
+        msgTemplate.convertAndSend("/chatroom/" + channelId, chatMessage);
+
         return "index";
     }
 
