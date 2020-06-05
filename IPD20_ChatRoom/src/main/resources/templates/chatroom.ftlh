@@ -39,33 +39,32 @@
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
 
-        <div class="flex block justify-center">
-            <div id="left" class="flex flex-col block w-1/6">
+        <div class="max-w-2xl mx-auto flex flex-col sm:flex-row">
+            <div id="left" class="flex flex-col sm:w-1/3">
                 <div class="inline-block border-solid border-2 bg-blue-200 pl-2 justify-between flex">
                     <span class="text-2xl font-bold my-auto">${curChannel.title}</span>
                     <button class="mr-0 p-2 hover:text-orange-500">
                         <i class="fas fa-chevron-circle-down fa-2x my-auto"></i>
                     </button>
                 </div>
-                <div class="inline-block border-solid border-2 justify-between flex">
-                    <input type="text" class=" py-1 px-2" placeholder="Search user here">
-                    <button class="mr-0 p-2 hover:text-orange-500">
-                        <i class="fas fa-search fa-2x"></i>
+                <div class="relative flex mx-2 border-solid border-2 items-center justify-between">
+                    <input type="text" class="py-1 px-2 w-full" placeholder="Search user here">
+                    <button class="absolute text-lg block right-0 hover:text-orange-500">
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <div>
+                <div class="hidden sm:block">
                     <#list userList as user>
                         <div class="flex flex-col py-1 pl-2 ">
                             <a class="inline-block" href="#">
                                 <span class="font-bold text-lg">${user.name}</span><br>
                             </a>
                         </div>
-
                     </#list>
                 </div>
             </div>
 
-            <div id="content" class="w-2/5  px-2 flex-col flex">
+            <div id="content" class="px-2 flex flex-col sm:w-2/3">
                 <div class="h-full border-2 border-solid mb-4">
                     <div id="messagesList" class="p-2">
                         <#list messageList as msg>
@@ -90,7 +89,9 @@
                 <div class="inline-block flex mb-6 justify-between">
                     <div class="border-2 border-solid border-red-500 text-lg font-bold
                     rounded-full py-1 px-6 hover:bg-red-500 hover:text-white">
-                        <a id="btReturn" href="/chatroom/leave/${curChannel.id}">Return to index
+                        <a id="btReturn" href="/chatroom/leave/${curChannel.id}">
+                            <span class="hidden sm:inline">Return to index</span>
+                            <span class="sm:hidden"><i class="fas fa-arrow-left"></i></span>
                         </a>
                     </div>
                     <div>
