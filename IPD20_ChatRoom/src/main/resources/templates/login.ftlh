@@ -30,8 +30,8 @@
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
 
-        <div class="block flex justify-center h-full">
-            <div class="my-5 w-1/6">
+        <div class="max-w-2xl mx-auto flex justify-center h-full">
+            <div class="my-5">
                 <span class="text-3xl font-bold mb-5 inline-block w-full text-center">Login</span><br>
 
                 <#if error >
@@ -61,14 +61,6 @@
                 </form>
             </div>
         </div>
-
         <@defPage.footerDiv/>
-
-        <script>
-            $(document).ready(function () {
-
-            })
-        </script>
-
     </body>
 </html>

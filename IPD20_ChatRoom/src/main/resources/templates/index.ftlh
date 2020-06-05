@@ -30,47 +30,58 @@
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
 
-        <div class="flex flex-col w-1/2 mx-auto text-center my-5">
-            <span class="text-2xl font-bold mb-2">Find Chat Room</span><br>
-            <span class="text-lg font-bold mb-2">Select a room you would like to join from the list below</span><br>
-            <div class="block flex justify-between mb-2 bg-gray-200">
-                <div class="w-1/2 inline-block my-auto py-2 flex justify-start">
-                    <input type="text" class="border-solid border-2 w-2/3 ml-4" placeholder="Search chatroom">
+        <div class="flex flex-col max-w-2xl mx-auto text-center my-5">
+            <p class="text-2xl font-bold mb-2">Find Chat Room</p>
+            <p class="text-lg font-bold mb-2">Select a room you would like to join from the list below</p>
+
+            <div class="flex justify-evenly items-center p-2 mb-2 bg-gray-200">
+                <div class="flex">
+                    <input type="text" class="border-solid border-2 p-1" placeholder="Search chatroom">
                     <button><i class="fas fa-search p-2"></i></button>
                 </div>
-                <div class="my-auto mr-5">
-                    <a href="/chatroom" class="border-2 border-solid bg-red-600 text-white py-1 px-4 rounded-full font-bold">Create
-                        ChatRoom
-                    </a>
-                </div>
+                <a href="/chatroom" class="hidden sm:block bg-red-600 text-white py-1 px-4 rounded-full font-bold">
+                    Create ChatRoom
+                </a>
+                <a href="/chatroom" class="sm:hidden bg-red-600 text-white px-3 py-1 rounded-full font-bold">
+                    <i class="fas fa-plus"></i>
+                </a>
             </div>
-            <div>
 
-                <#if activeChannelStatus??>
-                    <p class="font-bold text-lg bg-yellow-300 text-red-500">${errorMsg}</p>
-                </#if>
-            </div>
-            <div class="border-2 border-solid flex flex-wrap">
+            <#if activeChannelStatus??>
+                <p class="font-bold text-lg bg-yellow-300 text-red-500">${errorMsg}</p>
+            </#if>
 
+            <div class="p-2 sm:flex sm:flex-wrap border-2 border-solid">
                 <#list allChannels as channel>
-                    <div class="w-1/3 inline-block flex flex-row my-2 channelWrapper">
-                        <a class=" justify-start flex pl-2 my-2" href="/chatroom/${channel.id}">
-                            <div class="channelTitle inline-block font-bold px-1 text-lg">${channel.title}</div>
-                            <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
-                            <div class="chatting text-sm text-blue-700 my-auto inline-block font-bold pl-2"
-                                 id="channel_${channel.id}">
-                                Chatting...
-                            </div>
-                        </a>
+                    <div class="mb-1 sm:w-1/3 flex items-center sm:block">
+                        <div class="flex flex-row items-center border-l-4 border-orange-500 channelWrapper">
+                            <a class="p-2 block justify-start items-center font-bold text-lg
+                                    hover:underline"
+                               href="/chatroom/${channel.id}"
+                               title="${channel.title}">
+                                <#assign maxLength = 20 >
+                                <#if channel.title?length < maxLength>
+                                    ${channel.title}
+                                <#else>
+                                    ${channel.title?substring(0, maxLength - 3)} ...
+                                </#if>
+                            </a>
 
-                        <a class="px-2 py-1 my-auto favStar text-red-700 transform hover:scale-150"
-                           id="${channel.id}">
-                            <i class="fas fa-star"></i>
-                        </a>
+                            <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
+
+                            <a class="px-2 py-1 my-auto favStar text-red-700 transform hover:scale-150"
+                               id="${channel.id}">
+                                <i class="fas fa-star"></i>
+                            </a>
+                        </div>
+                        <div class="hidden ml-2 sm:-mt-2 sm:block chatting text-sm text-blue-700 font-bold"
+                             id="channel_${channel.id}">
+                            Chatting...
+                        </div>
                     </div>
                 </#list>
-
             </div>
+
 
         </div>
         <@defPage.footerDiv/>
@@ -117,14 +128,14 @@
         $(document).ready(function () {
 
             $(".channelWrapper").on("mouseover", function () {
-                if (!$(this).children("a:nth-child(2)").hasClass("showFav")) {
-                    $(this).children("a:nth-child(2)").show();
+                if (!$(this).children(".favStar").hasClass("showFav")) {
+                    $(this).children(".favStar").show();
                 }
             });
 
             $(".channelWrapper").on("mouseout", function () {
-                if (!$(this).children("a:nth-child(2)").hasClass("showFav")) {
-                    $(this).children("a:nth-child(2)").hide();
+                if (!$(this).children(".favStar").hasClass("showFav")) {
+                    $(this).children(".favStar").hide();
                 }
             })
 
@@ -164,7 +175,6 @@
                     });
                 }
             })
-
         })
     </script>
 </html>
