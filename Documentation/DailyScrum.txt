@@ -188,12 +188,11 @@
 
 2020/06/03 Donghyeok Seo
 1. Done since last scrum:
-- Add Icon in user, channel entities
-- Channel, message search
-
-2. To do until next Scrum:
 - User profile
 - Create/delete chatroom
+
+2. To do until next Scrum:
+- Edit app's layout
 
 3. Need assistance / figure things out
 
@@ -215,12 +214,10 @@
 
 2020/06/04 Donghyeok Seo
 1. Done since last scrum:
-- Add Icon in user, channel entities
-- Channel, message search
+- Edit app's layout
 
 2. To do until next Scrum:
-- User profile
-- Create/delete chatroom
+- index page channel pagination
 
 3. Need assistance / figure things out
 
@@ -239,12 +236,10 @@
 
 2020/06/05 Donghyeok Seo
 1. Done since last scrum:
-- Add Icon in user, channel entities
-- Channel, message search
+- index page channel pagination
 
 2. To do until next Scrum:
-- User profile
-- Create/delete chatroom
+- Channel search with pagination
 
 3. Need assistance / figure things out
 
@@ -261,11 +256,9 @@
 
 2020/06/06 Donghyeok Seo
 1. Done since last scrum:
-- Add Icon in user, channel entities
-- Channel, message search
+- Channel search with pagination
 
 2. To do until next Scrum:
-- User profile
-- Create/delete chatroom
+- Message search
 
 3. Need assistance / figure things out
