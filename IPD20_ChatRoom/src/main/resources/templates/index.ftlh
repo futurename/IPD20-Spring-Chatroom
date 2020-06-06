@@ -91,27 +91,6 @@
 
         function enterChatroom(curChannelId) {
             window.location = "/chatroom/"+curChannelId + "/" + sessionStorage.getItem("unique_id");
-          /*  var dataContent = {}
-            dataContent['channelId'] = curChannelId;
-            dataContent['uniqueId'] = sessionStorage.getItem("unique_id");
-            dataContent['userId'] =${userId};
-
-           // alert("unique_id: " + dataContent['uniqueId']);
-
-            $.ajax({
-                url: "/chatroom/updateDb",
-                type: "POST",
-                data: dataContent,
-                error: function (jqxhr, status, errorThrown) {
-                    var url = jqxhr.responseText;
-                    //alert("error:" + url);
-                    window.location = "/index";
-                },
-                success: function (page) {
-                   // alert("success: " + page);
-                    window.location = "/chatroom/"+curChannelId + "/" + sessionStorage.getItem("unique_id");
-                }
-            })*/
         }
 
         var stompClient = null;

@@ -116,22 +116,6 @@
 
         function leaveChatroom(){
             window.location = "/chatroom/leave/" + ${curChannel.id} + "/" + sessionStorage.getItem("unique_id");
-           /* var dataContent = {};
-            dataContent['channelId']= ${curChannel.id};
-            dataContent['userId']=${userId};
-            dataContent['uniqueId']=sessionStorage.getItem("unique_id");
-            $.ajax({
-                url: "/chatroom/leave",
-                type: "POST",
-                data: dataContent,
-                error: function (jqxhr, status, errorThrown) {
-                    alert("error:" + jqxhr.responseText);
-                },
-                success: function (payload) {
-                   // alert("success");
-                    window.location = "/chatroom/leave/" + ${curChannel.id} + "/" + sessionStorage.getItem("unique_id");
-                }
-            })*/
         }
 
         var stompClient = null;
