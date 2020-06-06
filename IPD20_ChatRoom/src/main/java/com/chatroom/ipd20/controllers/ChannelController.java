@@ -1,8 +1,10 @@
 package com.chatroom.ipd20.controllers;
 
+import com.chatroom.ipd20.entities.ActiveChatting;
 import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
+import com.chatroom.ipd20.models.ActiveChattingForm;
 import com.chatroom.ipd20.models.ChannelForm;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.*;
@@ -38,6 +40,8 @@ public class ChannelController {
     BlobService blobService;
     @Autowired
     SimpMessagingTemplate msgTemplate;
+    @Autowired
+    ActiveChattingRepository activeChattingRepository;
 
     @GetMapping("/channel")
     public String search(@RequestParam(required = false) String search, Model model) {
@@ -54,7 +58,8 @@ public class ChannelController {
     }
 
     @GetMapping("/chatroom/{id}")
-    public String enterChatroom(Model model, @PathVariable int id, Authentication auth) {
+    public String enterChatroomGet(Model model, @PathVariable int id, Authentication auth) {
+
         int channelId = id;
 
         //Check whether this channelId exists in ActiveChannels table.
@@ -62,18 +67,18 @@ public class ChannelController {
         int userId = userDetails.getId();
         User curUser = userRepository.findById(userId).orElse(null);
         Set<Channel> activeChannels = curUser.getActiveChannels();
-        boolean isExistsInActiveChannelTable = activeChannels.stream().anyMatch(a->a.getId() == channelId);
+        boolean isExistsInActiveChannelTable = activeChannels.stream().anyMatch(a -> a.getId() == channelId);
 
-        if(isExistsInActiveChannelTable){
+        if (isExistsInActiveChannelTable) {
             model.addAttribute("activeChannelStatus", true);
             model.addAttribute("errorMsg", "You've joined this channel somewere else!");
             model.addAttribute("allChannels", channelRepository.findAll());
             Set<Channel> favChannels = curUser.getFavoriteChannels();
             model.addAttribute("allFavChannels", favChannels);
-            model.addAttribute("userId",userId);
+            model.addAttribute("userId", userId);
             model.addAttribute("activeChannels", curUser.getActiveChannels());
             return "index";
-        }else{
+        } else {
             Channel curChannel = channelRepository.findById(channelId).get();
             List<User> userList = userRepository.findAll();
             List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
@@ -81,6 +86,7 @@ public class ChannelController {
             model.addAttribute("curChannel", curChannel);
             model.addAttribute("userList", userList);
             model.addAttribute("messageList", messageList);
+            model.addAttribute("userId", userId);
 
             Set<Channel> allActiveChannels = curUser.getActiveChannels();
             Channel activeChannel = new Channel();
@@ -93,9 +99,47 @@ public class ChannelController {
         }
     }
 
+    @PostMapping("/chatroom/updateDb")
+    public String enterChatroomPost(Model model, ActiveChattingForm activeChatting) {
+        int userId = activeChatting.getUserId();
+        int channelId = activeChatting.getChannelId();
+        String uniqueId = activeChatting.getUniqueId();
+
+        List<ActiveChatting> allActiveChattings = activeChattingRepository.findAll();
+        boolean isExistsInActiveChannelTable = allActiveChattings.stream().anyMatch(a ->
+                a.getChannelId() == channelId &&
+                        a.getUserId() == userId &&
+                        a.getUniqueId().equals(uniqueId));
+        User curUser = userRepository.findById(userId).get();
+
+        if (isExistsInActiveChannelTable) {
+            model.addAttribute("activeChannelStatus", true);
+            model.addAttribute("errorMsg", "You've joined this channel somewere else!");
+            model.addAttribute("allChannels", channelRepository.findAll());
+            Set<Channel> favChannels = curUser.getFavoriteChannels();
+            model.addAttribute("allFavChannels", favChannels);
+            model.addAttribute("userId", userId);
+            model.addAttribute("activeChannels", curUser.getActiveChannels());
+            return "index";
+        } else {
+            ActiveChatting newActiveChatting = new ActiveChatting(0,userId, channelId,uniqueId);
+            activeChattingRepository.save(newActiveChatting);
+            Channel curChannel = channelRepository.findById(channelId).get();
+            List<User> userList = userRepository.findAll();
+            List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
+
+            model.addAttribute("curChannel", curChannel);
+            model.addAttribute("userList", userList);
+            model.addAttribute("messageList", messageList);
+            model.addAttribute("userId", userId);
+
+            return "chatroom";
+        }
+    }
+
 
     @GetMapping("/chatroom")
-    public String index(){
+    public String index() {
         return "chatroom_form";
     }
 
@@ -104,15 +148,14 @@ public class ChannelController {
             @Valid ChannelForm channelForm,
             BindingResult bindingResult,
             Authentication authentication,
-            Model model)
-    {
-        if(bindingResult.hasErrors()){
-            model.addAttribute("bindingResult",bindingResult);
+            Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("bindingResult", bindingResult);
             return "chatroom_form";
         }
 
         // Set Icon image. Scale down and convert to png extension.
-        if(!channelForm.getIcon().isEmpty()) {
+        if (!channelForm.getIcon().isEmpty()) {
             try {
                 Blob iconBlob = blobService.createBlob(channelForm.getIcon().getInputStream());
                 channelForm.setIconBlob(iconBlob);
@@ -128,14 +171,16 @@ public class ChannelController {
 
     @DeleteMapping("/chatroom/{id}")
     @ResponseBody
-    public String delete(@PathVariable int id, Authentication auth){
+    public String delete(@PathVariable int id, Authentication auth) {
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         Channel channel = channelRepository.findById(id).orElse(null);
 
-        if(channel == null){ return "false"; }
+        if (channel == null) {
+            return "false";
+        }
 
         User owner = channel.getOwner();
-        if(owner.getId() != userDetails.getId()){
+        if (owner.getId() != userDetails.getId()) {
             return "false";
         }
 

@@ -24,6 +24,7 @@
 
         <!-- SockJs -->
         <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
     </head>
     <body onload="connect();">
 
@@ -56,9 +57,7 @@
                     <div class="mb-1 sm:w-1/3 flex items-center sm:block">
                         <div class="flex flex-row items-center border-l-4 border-orange-500 channelWrapper">
                             <a class="p-2 block justify-start items-center font-bold text-lg
-                                    hover:underline"
-                               href="/chatroom/${channel.id}"
-                               title="${channel.title}">
+                                    hover:underline" href="#" onclick="enterChatroom(${channel.id});" title="${channel.title}">
                                 <#assign maxLength = 20 >
                                 <#if channel.title?length < maxLength>
                                     ${channel.title}
@@ -90,22 +89,71 @@
 
     <script>
 
+        function enterChatroom(curChannelId) {
+            var dataContent = {}
+            dataContent['channelId'] = curChannelId;
+            dataContent['uniqueId'] = sessionStorage.getItem("unique_id");
+            dataContent['userId'] =${userId};
+            alert("unique_id: " + dataContent['uniqueId']);
+            $.ajax({
+                url: "/chatroom/updateDb",
+                type: "POST",
+                data: dataContent,
+                error: function (jqxhr, status, errorThrown) {
+                    var url = jqxhr.responseText;
+                    alert("error:" + url);
+                    window.location = "/index";
+                },
+                success: function (page) {
+                    alert("success: " + page);
+                    window.location = "/chatroom/"+curChannelId;
+
+                }
+            })
+        }
+
         var stompClient = null;
 
         function connect() {
+
+            initSessionId();
+
             var socket = new SockJS('/ws');
             stompClient = Stomp.over(socket);
             stompClient.connect({}, onConnected);
             // event.preventDefault();
         }
 
+        function initSessionId() {
+            var curSessionId = sessionStorage.getItem("unique_id");
+            curSessionId = (curSessionId === null) ? "undefined" : curSessionId;
+            var dataContent = {};
+            dataContent['sessionId'] = curSessionId;
+            alert(curSessionId);
+
+            $.ajax({
+                url: "/chatroom/requestSessionId",
+                type: "POST",
+                data: dataContent,
+            }).done(function(payload) {
+                alert("success: " + payload);
+                sessionStorage.setItem("unique_id",payload);
+            }).fail(function(jqxhr) {
+                alert("error:" + jqxhr.responseText);
+
+
+            })
+
+        }
+
+
         function onConnected() {
             stompClient.subscribe('/status/${userId}', displayInfo);
 
         }
 
-        function displayInfo(payload){
-            document.location.href="/";
+        function displayInfo(payload) {
+            document.location.href = "/";
         }
 
 
@@ -151,7 +199,7 @@
                         type: "DELETE",
                         contentType: "application/json",
                         dataType: "json",
-                        data: JSON.stringify(dataContent),
+                        data: dataContent,
                         error: function (jqxhr, status, errorThrown) {
 
                         }

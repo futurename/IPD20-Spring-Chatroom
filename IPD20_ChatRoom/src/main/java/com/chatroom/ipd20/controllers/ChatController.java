@@ -1,15 +1,19 @@
 package com.chatroom.ipd20.controllers;
 
+import com.chatroom.ipd20.entities.ActiveChatting;
 import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
+import com.chatroom.ipd20.models.ActiveChattingForm;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.ConnChannel;
 import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.security.CustomUserDetails;
+import com.chatroom.ipd20.services.ActiveChattingRepository;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
+import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -17,11 +21,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,6 +49,9 @@ public class ChatController {
     ChannelRepository channelRepository;
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ActiveChattingRepository activeChattingRepository;
 
     @Autowired
     public ChatController(SimpMessagingTemplate template) {
@@ -121,14 +130,12 @@ public class ChatController {
         msgTemplate.convertAndSend("/chatroom/" + connChatMsg.getChannelId(), connChatMsg);
 
         msgTemplate.convertAndSend("/status/" + userId, "refresh");
-
     }
 
     @RequestMapping(value = {"/index", "/"})
-    public String getAllMessages(Model model, HttpServletRequest request, Authentication authentication) {
+    public String getAllMessages(Model model, HttpServletResponse response, Authentication authentication) {
         model.addAttribute("allChannels", channelRepository.findAll());
 
-        String sessionId = request.getRequestedSessionId();
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         int userId = userDetails.getId();
 
@@ -141,6 +148,24 @@ public class ChatController {
         return "index";
     }
 
+    @PostMapping("/chatroom/requestSessionId")
+    @ResponseBody
+    public String checkSessionId(String sessionId) {
+//        return "true";
+        if (sessionId.contains("undefined")) {
+            String springSessionPrefix = RequestContextHolder.currentRequestAttributes().getSessionId();
+            sessionId = generateSessionId(springSessionPrefix);
+        }
+        return sessionId;
+    }
+
+    private String generateSessionId(String sessionId) {
+        final int NUM_RANGE = 1000000;
+        Random random = new Random();
+        int randNum = random.nextInt(NUM_RANGE);
+        return sessionId + "_append_" + randNum;
+    }
+
     @PostMapping("/chatroom/addFavChannel")
     @ResponseBody
     public void addFavChannel(@RequestBody FavChannel favChannel) {
@@ -151,7 +176,7 @@ public class ChatController {
         favChannels.add(channel);
         userRepository.save(user);
 
-        msgTemplate.convertAndSend("/status/" + favChannel.getUserId() , "refresh");
+        msgTemplate.convertAndSend("/status/" + favChannel.getUserId(), "refresh");
     }
 
     @DeleteMapping("/chatroom/delFavChannel")
@@ -202,6 +227,21 @@ public class ChatController {
 
         return "index";
     }
+
+    @PostMapping("/chatroom/leave")
+    public @ResponseBody String leaveChatRoom(@RequestBody ActiveChattingForm activeChattingForm) {
+
+        int userId = activeChattingForm.getUserId();
+        String uniqueId = activeChattingForm.getUniqueId();
+        int channelId = activeChattingForm.getChannelId();
+
+        User user = userRepository.findById(userId).get();
+
+        activeChattingRepository.delete(new ActiveChatting(0,userId,channelId,uniqueId));
+
+        return "true";
+    }
+
 
 
 }
