@@ -4,7 +4,6 @@ import com.chatroom.ipd20.entities.ActiveChatting;
 import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
-import com.chatroom.ipd20.models.ActiveChattingForm;
 import com.chatroom.ipd20.models.ChannelForm;
 import com.chatroom.ipd20.security.CustomUserDetails;
 import com.chatroom.ipd20.services.*;
@@ -22,6 +21,7 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class ChannelController {
@@ -62,8 +62,8 @@ public class ChannelController {
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         int userId = userDetails.getId();
         User curUser = userRepository.findById(userId).orElse(null);
-       // model.addAttribute("activeChannelStatus", true);
-       // model.addAttribute("errorMsg", "You are not allowed or have joined this chatroom!");
+        // model.addAttribute("activeChannelStatus", true);
+        // model.addAttribute("errorMsg", "You are not allowed or have joined this chatroom!");
         model.addAttribute("allChannels", channelRepository.findAll());
         Set<Channel> favChannels = curUser.getFavoriteChannels();
         model.addAttribute("allFavChannels", favChannels);
@@ -98,14 +98,21 @@ public class ChannelController {
             ActiveChatting newActiveChatting = new ActiveChatting(0, userId, channelId, uniqueId);
             activeChattingRepository.save(newActiveChatting);
 
+            List<Integer> activeUserIdList = activeChattingRepository.findAllByChannelId(channelId).stream()
+                    .map(ActiveChatting::getUserId).collect(Collectors.toList());
+
+            List<User> activeUserList =
+                    activeUserIdList.stream().map(a->userRepository.findById(a).get()).collect(Collectors.toList());
+
             Channel curChannel = channelRepository.findById(channelId).get();
             List<User> userList = userRepository.findAll();
             List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
 
             model.addAttribute("curChannel", curChannel);
-            model.addAttribute("userList", userList);
+           // model.addAttribute("userList", userList);
             model.addAttribute("messageList", messageList);
             model.addAttribute("userId", userId);
+            model.addAttribute("userList", activeUserList);
 
             Set<Channel> allActiveChannels = curUser.getActiveChannels();
             Channel activeChannel = new Channel();
