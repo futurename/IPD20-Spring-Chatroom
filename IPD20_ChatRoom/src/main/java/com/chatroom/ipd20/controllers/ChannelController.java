@@ -43,18 +43,31 @@ public class ChannelController {
     @Autowired
     ActiveChattingRepository activeChattingRepository;
 
-    @GetMapping("/channel")
-    public String search(@RequestParam(required = false) String search, Model model) {
-        List<Channel> searchResults = new ArrayList<>();
+    @GetMapping("/ajax/chatroom")
+    public String allChatroom(String keyword, String page, Model model){
+        int pageNum = 1;
 
-        if (search == null || search.isEmpty()) {
-            model.addAttribute("searchList", searchResults);
-            return "channel";
+        try { pageNum = Integer.parseInt(page); }
+        catch (NumberFormatException ex){
+            // Do nothing;
         }
 
-        searchResults = searchService.channelSearch(search, 1, 1);
-        model.addAttribute("searchList", searchResults);
-        return "channel";
+        int totalPage = searchService.getTotalChannelPage(keyword);
+        List<Channel> allChannels;
+
+        if(totalPage != 0) {
+            if(pageNum < 1){ pageNum = 1; }
+            else if(pageNum > totalPage){ pageNum = totalPage; }
+
+            allChannels = searchService.channelSearch(keyword, pageNum, totalPage);
+        } else {
+            allChannels = new ArrayList<Channel>();
+        }
+        model.addAttribute("allChannels", allChannels);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", pageNum);
+
+        return "chatroomList";
     }
 
     @GetMapping("/chatroom/{channelId}")

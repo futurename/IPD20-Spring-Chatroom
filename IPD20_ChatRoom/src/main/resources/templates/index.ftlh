@@ -52,34 +52,7 @@
                 <p class="font-bold text-lg bg-yellow-300 text-red-500">${errorMsg}</p>
             </#if>
 
-            <div class="p-2 sm:flex sm:flex-wrap border-2 border-solid">
-                <#list allChannels as channel>
-                    <div class="mb-1 sm:w-1/3 flex items-center sm:block">
-                        <div class="flex flex-row items-center border-l-4 border-orange-500 channelWrapper">
-                            <a class="p-2 block justify-start items-center font-bold text-lg
-                                    hover:underline" href="#" onclick="enterChatroom(${channel.id});" title="${channel.title}">
-                                <#assign maxLength = 20 >
-                                <#if channel.title?length < maxLength>
-                                    ${channel.title}
-                                <#else>
-                                    ${channel.title?substring(0, maxLength - 3)} ...
-                                </#if>
-                            </a>
-
-                            <div class="ChannelInfo inline-block ml-2 my-auto">(34)</div>
-
-                            <a class="px-2 py-1 my-auto favStar text-red-700 transform hover:scale-150"
-                               id="${channel.id}">
-                                <i class="fas fa-star"></i>
-                            </a>
-                        </div>
-                        <div class="hidden ml-2 sm:-mt-2 sm:block chatting text-sm text-blue-700 font-bold"
-                             id="channel_${channel.id}">
-                            Chatting...
-                        </div>
-                    </div>
-                </#list>
-            </div>
+            <div id="channelList"></div>
 
 
         </div>
@@ -94,6 +67,7 @@
         }
 
         var stompClient = null;
+        let currentPage = 1;
 
         function connect() {
 
@@ -133,36 +107,32 @@
         }
 
 
-        $(".favStar").hide();
-        $(".chatting").hide();
-
-        <#list allFavChannels as favChannel>
-        <#assign curFavId = favChannel.id>
-        $("#${curFavId}").addClass("showFav");
-        $("#${curFavId}").show();
-        </#list>
-
-        <#list activeChannels as activeChannel>
-        <#assign activeId = activeChannel.id>
-        $('#channel_${activeChannel.channelId}').show();
-
-        </#list>
-
+        function reloadChannel(keyword = "", page = "1") {
+            $.ajax({
+                url: "/ajax/chatroom?keyword=" + keyword + "&page=" + page,
+                type: "GET"
+            }).done(function (payload) {
+                currentPage = page;
+                $("#channelList").html(payload);
+            });
+        }
 
         $(document).ready(function () {
-            $(".channelWrapper").on("mouseover", function () {
+            reloadChannel();
+
+            $("#channelList").on("mouseover", ".channelWrapper", function () {
                 if (!$(this).children(".favStar").hasClass("showFav")) {
                     $(this).children(".favStar").show();
                 }
             });
 
-            $(".channelWrapper").on("mouseout", function () {
+            $("#channelList").on("mouseout", ".channelWrapper", function () {
                 if (!$(this).children(".favStar").hasClass("showFav")) {
                     $(this).children(".favStar").hide();
                 }
             })
 
-            $(".favStar").on("click", function () {
+            $("#channelList").on("click", ".favStar", function () {
                 if ($(this).hasClass("showFav")) {
                     $(this).removeClass("showFav");
                     $(this).hide();
@@ -198,6 +168,28 @@
                     });
                 }
             })
+
+
+            $("#keyword").on("input", function () {
+                let keyword = $("#keyword").val();
+                currentPage = 1;
+                reloadChannel(keyword, currentPage);
+            });
+
+            // Channel list (channelList.ftlh file)
+            $("#channelList").on("click", ".pages", function () {
+                currentPage = $(this).text() - 0;
+                let keyword = $("#keyword").val();
+                reloadChannel(keyword, currentPage);
+            });
+            $("#channelList").on("click", "#prev", function () {
+                let keyword = $("#keyword").val();
+                reloadChannel(keyword, currentPage - 1);
+            });
+            $("#channelList").on("click", "#next", function () {
+                let keyword = $("#keyword").val();
+                reloadChannel(keyword, 1 + (currentPage - 0));
+            });
         })
     </script>
 </html>
