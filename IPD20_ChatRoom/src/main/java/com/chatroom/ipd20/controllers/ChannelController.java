@@ -117,30 +117,6 @@ public class ChannelController {
             return "chatroom";
         }
     }
-/*
-
-    @PostMapping("/chatroom/updateDb")
-    public String enterChatroomPost(ActiveChattingForm activeChatting) {
-        int userId = activeChatting.getUserId();
-        int channelId = activeChatting.getChannelId();
-        String uniqueId = activeChatting.getUniqueId();
-
-        List<ActiveChatting> allActiveChattings = activeChattingRepository.findAll();
-        boolean isExistsInActiveChannelTable = allActiveChattings.stream().anyMatch(a ->
-                a.getChannelId() == channelId &&
-                        a.getUserId() == userId &&
-                        a.getUniqueId().equals(uniqueId));
-
-        if (isExistsInActiveChannelTable) {
-            return "index";
-        } else {
-            ActiveChatting newActiveChatting = new ActiveChatting(0, userId, channelId, uniqueId);
-            activeChattingRepository.save(newActiveChatting);
-            return "chatroom";
-        }
-    }
-*/
-
 
     @GetMapping("/chatroom")
     public String index() {

@@ -247,21 +247,4 @@ public class ChatController {
 
         return "index";
     }
-
-/*    @PostMapping("/chatroom/leave")
-    public @ResponseBody String leaveChatRoom(ActiveChattingForm activeChattingForm) {
-
-        int userId = activeChattingForm.getUserId();
-        String uniqueId = activeChattingForm.getUniqueId();
-        int channelId = activeChattingForm.getChannelId();
-
-        ActiveChatting curActiveChatting = activeChattingRepository.findByUserIdAndChannelIdAndUniqueId(userId,channelId,
-                uniqueId).get(0);
-
-        activeChattingRepository.delete(curActiveChatting);
-
-        return "true";
-    }*/
-
-
 }
