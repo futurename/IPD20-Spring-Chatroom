@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -44,7 +42,10 @@ public class ChannelController {
     ActiveChattingRepository activeChattingRepository;
 
     @GetMapping("/ajax/chatroom")
-    public String allChatroom(String keyword, String page, Model model){
+    public String allChatroom(String keyword, String page, Model model, Authentication auth){
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        int userId = userDetails.getId();
+
         int pageNum = 1;
 
         try { pageNum = Integer.parseInt(page); }
@@ -63,9 +64,18 @@ public class ChannelController {
         } else {
             allChannels = new ArrayList<Channel>();
         }
+
+        List<ActiveChatting> activeChattingList = activeChattingRepository.findAllByUserId(userId);
+        List<Integer> activeChannelList = activeChattingList.stream().map(a->a.getChannelId()).collect(Collectors.toList());
+
+        HashMap<Integer, Integer> activeUserCountMap = new HashMap<>();
+        allChannels.forEach(a-> activeUserCountMap.put(a.getId(), activeChattingRepository.findAllByChannelId(a.getId()).size()));
+
         model.addAttribute("allChannels", allChannels);
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("currentPage", pageNum);
+        model.addAttribute("activeUserCount", activeUserCountMap);
+        model.addAttribute("activeChannels",activeChannelList.toArray());
 
         return "chatroomList";
     }
