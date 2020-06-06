@@ -5,12 +5,16 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+@Indexed
 @Entity @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +27,7 @@ public class Message {
     @NotNull
     @Size(min=1, max=1000)
     @Column(length=1000, nullable = false)
+    @Field
     private String body;
 
     @Column(length=200)
@@ -35,6 +40,7 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name="userId", nullable = false)
+    @IndexedEmbedded
     @ToString.Exclude
     private User user;
 

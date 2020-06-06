@@ -1,6 +1,7 @@
 package com.chatroom.ipd20.services;
 
 import com.chatroom.ipd20.entities.Channel;
+import com.chatroom.ipd20.entities.Message;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Session;
@@ -21,6 +22,7 @@ public class HibernateSearchService {
 
     private EntityManager entityManager;
     private final int CHANNEL_PER_PAGE = 6;
+    private final int MESSAGE_PER_PAGE = 20;
 
     @Autowired
     ChannelRepository channelRepository;
@@ -41,6 +43,7 @@ public class HibernateSearchService {
         }
     }
 
+
     public List<Channel> channelSearch(String keyword, int page, int totalPage) {
         javax.persistence.Query persistenceQuery
                 = getPersistenceQueryForChannel(keyword);
@@ -49,6 +52,18 @@ public class HibernateSearchService {
         persistenceQuery.setMaxResults(CHANNEL_PER_PAGE);
 
         List<Channel> result = persistenceQuery.getResultList();
+
+        return result;
+    }
+
+    public List<Message> messageSearch(String keyword, int page, int totalPage) {
+        javax.persistence.Query persistenceQuery
+                = getPersistenceQueryForChannel(keyword);
+
+        persistenceQuery.setFirstResult((page - 1)* MESSAGE_PER_PAGE);
+        persistenceQuery.setMaxResults(MESSAGE_PER_PAGE);
+
+        List<Message> result = persistenceQuery.getResultList();
 
         return result;
     }
@@ -62,6 +77,18 @@ public class HibernateSearchService {
 
         int totalChannel = result.size();
         int totalPage = (int) Math.ceil((double)totalChannel / CHANNEL_PER_PAGE);
+        return totalPage;
+    }
+
+    public int getTotalMassagePage(String keyword){
+
+        javax.persistence.Query persistenceQuery
+                = getPersistenceQueryForMessage(keyword);
+
+        List result = persistenceQuery.getResultList();
+
+        int totalMessage = result.size();
+        int totalPage = (int) Math.ceil((double)totalMessage / MESSAGE_PER_PAGE);
         return totalPage;
     }
 
@@ -86,6 +113,29 @@ public class HibernateSearchService {
         }
 
         return fullTextEntityManager.createFullTextQuery(query, Channel.class);
+    }
 
+    private javax.persistence.Query getPersistenceQueryForMessage(String keyword){
+        FullTextEntityManager fullTextEntityManager
+                = Search.getFullTextEntityManager(entityManager);
+        QueryBuilder qb = fullTextEntityManager.getSearchFactory()
+                .buildQueryBuilder().forEntity(Message.class).get();
+
+        org.apache.lucene.search.Query query;
+
+        if(keyword == null || keyword.isEmpty()){
+            query = qb.all().createQuery();
+        } else {
+            query = qb
+                    .keyword()
+                        .fuzzy()
+                        .withEditDistanceUpTo(1)
+                        .withPrefixLength(1)
+                    .onFields("body", "user.name")
+                    .matching(keyword)
+                    .createQuery();
+        }
+
+        return fullTextEntityManager.createFullTextQuery(query, Message.class);
     }
 }

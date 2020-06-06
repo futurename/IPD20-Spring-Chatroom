@@ -37,7 +37,7 @@
 
             <div class="flex justify-evenly items-center p-2 mb-2 bg-gray-200">
                 <div class="flex">
-                    <input type="text" class="border-solid border-2 p-1" placeholder="Search chatroom">
+                    <input type="text" id="keyword" class="border-solid border-2 p-1" placeholder="Search chatroom">
                     <button><i class="fas fa-search p-2"></i></button>
                 </div>
                 <a href="/chatroom" class="hidden sm:block bg-red-600 text-white py-1 px-4 rounded-full font-bold">

@@ -35,12 +35,12 @@
             <form method="post" action="/chatroom" enctype="multipart/form-data">
                 <div>
                     <label for="title" class="text-lg font-bold py-1">Title</label>
-                    <input type="text" id="title" name="title" value="${(chatroomForm.title)!"title"}" class="border-solid border-2 w-full mb-3">
+                    <input type="text" id="title" name="title" value="${(chatroomForm.title)!}" class="border-solid border-2 w-full mb-3">
                     <p class="-mt-3 p-2 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("title").getDefaultMessage())!}</p>
                 </div>
                 <div>
                     <label for="description" class="text-lg font-bold py-1">Description</label>
-                    <textarea id="description" name="description" class="border-solid border-2 w-full mb-3">${(chatroomForm.description)!"description"}</textarea>
+                    <textarea id="description" name="description" class="border-solid border-2 w-full mb-3">${(chatroomForm.description)!}</textarea>
                     <p class="-mt-3 p-2 h-3 text-right text-xs text-red-400">${(bindingResult.getFieldError("description").getDefaultMessage())!}</p>
                 </div>
                 <div class="flex">
