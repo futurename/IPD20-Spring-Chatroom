@@ -48,7 +48,7 @@ public class ChannelController {
             return "channel";
         }
 
-        searchResults = searchService.channelSearch(search);
+        searchResults = searchService.channelSearch(search,1 ,1);
         model.addAttribute("searchList", searchResults);
         return "channel";
     }
@@ -93,6 +93,32 @@ public class ChannelController {
         }
     }
 
+    @GetMapping("/ajax/chatroom")
+    public String allChatroom(String keyword, String page, Model model){
+        int pageNum = 1;
+
+        try { pageNum = Integer.parseInt(page); }
+        catch (NumberFormatException ex){
+            // Do nothing;
+        }
+
+        int totalPage = searchService.getTotalChannelPage(keyword);
+        List<Channel> allChannels;
+
+        if(totalPage != 0) {
+            if(pageNum < 1){ pageNum = 1; }
+            else if(pageNum > totalPage){ pageNum = totalPage; }
+
+            allChannels = searchService.channelSearch(keyword, pageNum, totalPage);
+        } else {
+            allChannels = new ArrayList<Channel>();
+        }
+        model.addAttribute("allChannels", allChannels);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", pageNum);
+
+        return "chatroomList";
+    }
 
     @GetMapping("/chatroom")
     public String index(){

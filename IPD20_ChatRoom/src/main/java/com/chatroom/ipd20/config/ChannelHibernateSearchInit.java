@@ -20,7 +20,6 @@ public class ChannelHibernateSearchInit implements ApplicationListener<ContextRe
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event){
-
         HibernateSearchService searchService = new HibernateSearchService(entityManager);
         searchService.initializeHibernateSearch();
     }

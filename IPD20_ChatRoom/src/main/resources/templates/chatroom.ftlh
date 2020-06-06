@@ -40,20 +40,20 @@
         <@defPage.headerDiv/>
 
         <div class="max-w-2xl mx-auto flex flex-col sm:flex-row">
-            <div id="left" class="flex flex-col sm:w-1/3">
-                <div class="inline-block border-solid border-2 bg-blue-200 pl-2 justify-between flex">
-                    <span class="text-2xl font-bold my-auto">${curChannel.title}</span>
-                    <button class="mr-0 p-2 hover:text-orange-500">
-                        <i class="fas fa-chevron-circle-down fa-2x my-auto"></i>
+            <div id="left" class="flex flex-col p-2 sm:w-1/3">
+                <div class="relative flex bg-blue-200 border-2 items-center justify-between">
+                    <span class="text-2xl px-1 font-bold my-auto">${curChannel.title}</span>
+                    <button class="absolute text-xl block right-0 hover:text-orange-500">
+                        <i class="fas fa-chevron-circle-down"></i>
                     </button>
                 </div>
-                <div class="relative flex mx-2 border-solid border-2 items-center justify-between">
+                <div class="relative flex border-2 items-center justify-between">
                     <input type="text" class="py-1 px-2 w-full" placeholder="Search user here">
                     <button class="absolute text-lg block right-0 hover:text-orange-500">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <div class="hidden sm:block">
+                <div class="hidden sm:block border-2">
                     <#list userList as user>
                         <div class="flex flex-col py-1 pl-2 ">
                             <a class="inline-block" href="#">
