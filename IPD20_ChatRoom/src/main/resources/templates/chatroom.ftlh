@@ -89,7 +89,7 @@
                 <div class="inline-block flex mb-6 justify-between">
                     <div class="border-2 border-solid border-red-500 text-lg font-bold
                     rounded-full py-1 px-6 hover:bg-red-500 hover:text-white">
-                        <a id="btReturn" onclick="leaveChatroom();" href="#">
+                        <a id="btReturn" onclick="leaveChatroom();">
                             <span class="hidden sm:inline">Return to index</span>
                             <span class="sm:hidden"><i class="fas fa-arrow-left"></i></span>
                         </a>
@@ -115,23 +115,23 @@
     <script>
 
         function leaveChatroom(){
-            var dataContent = {};
+            window.location = "/chatroom/leave/" + ${curChannel.id} + "/" + sessionStorage.getItem("unique_id");
+           /* var dataContent = {};
             dataContent['channelId']= ${curChannel.id};
             dataContent['userId']=${userId};
             dataContent['uniqueId']=sessionStorage.getItem("unique_id");
             $.ajax({
                 url: "/chatroom/leave",
                 type: "POST",
-                contentType: "application/json",
-                dataType: "json",
-                data: JSON.stringify(dataContent),
+                data: dataContent,
                 error: function (jqxhr, status, errorThrown) {
                     alert("error:" + jqxhr.responseText);
                 },
                 success: function (payload) {
-                    alert(payload);
+                   // alert("success");
+                    window.location = "/chatroom/leave/" + ${curChannel.id} + "/" + sessionStorage.getItem("unique_id");
                 }
-            })
+            })*/
         }
 
         var stompClient = null;
@@ -169,8 +169,6 @@
                 };
                 stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
                 document.querySelector(".ck-content").firstElementChild.innerHTML = "";
-
-
             }
             event.preventDefault();
         }

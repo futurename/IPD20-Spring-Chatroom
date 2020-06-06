@@ -4,7 +4,6 @@ import com.chatroom.ipd20.entities.ActiveChatting;
 import com.chatroom.ipd20.entities.Channel;
 import com.chatroom.ipd20.entities.Message;
 import com.chatroom.ipd20.entities.User;
-import com.chatroom.ipd20.models.ActiveChattingForm;
 import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.ConnChannel;
 import com.chatroom.ipd20.models.FavChannel;
@@ -13,7 +12,6 @@ import com.chatroom.ipd20.services.ActiveChattingRepository;
 import com.chatroom.ipd20.services.ChannelRepository;
 import com.chatroom.ipd20.services.MessageRepository;
 import com.chatroom.ipd20.services.UserRepository;
-import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -143,7 +141,7 @@ public class ChatController {
         Set<Channel> favChannels = user.getFavoriteChannels();
         model.addAttribute("allFavChannels", favChannels);
         model.addAttribute("userId", userId);
-        model.addAttribute("activeChannels", user.getActiveChannels());
+        model.addAttribute("activeChannels", activeChattingRepository.findAllByUserId(userId));
 
         return "index";
     }
@@ -188,22 +186,43 @@ public class ChatController {
         userRepository.save(user);
     }
 
-    @GetMapping("/chatroom/leave/{channelId}")
-    public String leaveChatRoom(Authentication authentication, @PathVariable int channelId, Model model) {
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+    @GetMapping(value = {"/chatroom/leave", "/chatroom/leave/{channelId}"})
+    public String leaveChatRoomInvalid(@PathVariable int channelId, Model model, Authentication auth) {
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         int userId = userDetails.getId();
+        User curUser = userRepository.findById(userId).orElse(null);
+        model.addAttribute("activeChannelStatus", true);
+        model.addAttribute("errorMsg", "You are not allowed or have joined this chatroom!");
+        model.addAttribute("allChannels", channelRepository.findAll());
+        Set<Channel> favChannels = curUser.getFavoriteChannels();
+        model.addAttribute("allFavChannels", favChannels);
+        model.addAttribute("userId", userId);
+        model.addAttribute("activeChannels", activeChattingRepository.findAllByUserId(userId));
+        return "/index";
+    }
 
+    @GetMapping("/chatroom/leave/{channelId}/{uniqueId}")
+    public String leaveChatRoom(@PathVariable int channelId, Model model,
+                                @PathVariable String uniqueId, Authentication auth) {
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        int userId = userDetails.getId();
+        List<ActiveChatting> allActiveChattings = activeChattingRepository.findAll();
+        boolean isCurChattingExist = allActiveChattings.stream().anyMatch(a -> a.getUniqueId().equals(uniqueId) &&
+                a.getUserId() == userId && a.getChannelId() == channelId);
+
+        if (isCurChattingExist) {
+            ActiveChatting curActiveChatting = activeChattingRepository.findByUserIdAndChannelIdAndUniqueId(userId, channelId,
+                    uniqueId).get(0);
+
+            activeChattingRepository.delete(curActiveChatting);
+        }
         User user = userRepository.findById(userId).get();
 
-        Set<Channel> allActiveChannels = user.getActiveChannels();
-        allActiveChannels.removeIf(a -> a.getId() == channelId);
-        userRepository.save(user);
         model.addAttribute("allChannels", channelRepository.findAll());
         Set<Channel> favChannels = user.getFavoriteChannels();
         model.addAttribute("allFavChannels", favChannels);
         model.addAttribute("userId", userId);
-        model.addAttribute("activeChannels", user.getActiveChannels());
-
+        model.addAttribute("activeChannels", activeChattingRepository.findAllByUserId(userId));
 
         String leaveString = "<span class='font-bold text-red-500 text-base'>" + user.getName() + "</span> just " +
                 "left the chatroom...\uD83D\uDE02";
@@ -225,23 +244,24 @@ public class ChatController {
         msgTemplate.convertAndSend("/chatroom/" + channelId, chatMessage);
         msgTemplate.convertAndSend("/status/" + userId, "refresh");
 
+
         return "index";
     }
 
-    @PostMapping("/chatroom/leave")
-    public @ResponseBody String leaveChatRoom(@RequestBody ActiveChattingForm activeChattingForm) {
+/*    @PostMapping("/chatroom/leave")
+    public @ResponseBody String leaveChatRoom(ActiveChattingForm activeChattingForm) {
 
         int userId = activeChattingForm.getUserId();
         String uniqueId = activeChattingForm.getUniqueId();
         int channelId = activeChattingForm.getChannelId();
 
-        User user = userRepository.findById(userId).get();
+        ActiveChatting curActiveChatting = activeChattingRepository.findByUserIdAndChannelIdAndUniqueId(userId,channelId,
+                uniqueId).get(0);
 
-        activeChattingRepository.delete(new ActiveChatting(0,userId,channelId,uniqueId));
+        activeChattingRepository.delete(curActiveChatting);
 
         return "true";
-    }
-
+    }*/
 
 
 }

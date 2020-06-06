@@ -52,33 +52,52 @@ public class ChannelController {
             return "channel";
         }
 
-        searchResults = searchService.channelSearch(search);
+        searchResults = searchService.channelSearch(search, 1, 1);
         model.addAttribute("searchList", searchResults);
         return "channel";
     }
 
-    @GetMapping("/chatroom/{id}")
-    public String enterChatroomGet(Model model, @PathVariable int id, Authentication auth) {
+    @GetMapping("/chatroom/{channelId}")
+    public String enterChatroomGetRedirect(Model model, @PathVariable int channelId, Authentication auth) {
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        int userId = userDetails.getId();
+        User curUser = userRepository.findById(userId).orElse(null);
+       // model.addAttribute("activeChannelStatus", true);
+       // model.addAttribute("errorMsg", "You are not allowed or have joined this chatroom!");
+        model.addAttribute("allChannels", channelRepository.findAll());
+        Set<Channel> favChannels = curUser.getFavoriteChannels();
+        model.addAttribute("allFavChannels", favChannels);
+        model.addAttribute("userId", userId);
+        model.addAttribute("activeChannels", activeChattingRepository.findAllByUserId(userId));
+        return "index";
+    }
 
-        int channelId = id;
+    @GetMapping("/chatroom/{channelId}/{uniqueId}")
+    public String enterChatroomGet(Model model, @PathVariable int channelId, @PathVariable String uniqueId, Authentication auth) {
 
         //Check whether this channelId exists in ActiveChannels table.
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         int userId = userDetails.getId();
         User curUser = userRepository.findById(userId).orElse(null);
-        Set<Channel> activeChannels = curUser.getActiveChannels();
-        boolean isExistsInActiveChannelTable = activeChannels.stream().anyMatch(a -> a.getId() == channelId);
+
+        List<ActiveChatting> allActiveChattings = activeChattingRepository.findAll();
+        boolean isExistsInActiveChannelTable = allActiveChattings.stream().anyMatch(a ->
+                a.getChannelId() == channelId &&
+                        a.getUserId() == userId);
 
         if (isExistsInActiveChannelTable) {
             model.addAttribute("activeChannelStatus", true);
-            model.addAttribute("errorMsg", "You've joined this channel somewere else!");
+            model.addAttribute("errorMsg", "You are not allowed or have joined this chatroom!");
             model.addAttribute("allChannels", channelRepository.findAll());
             Set<Channel> favChannels = curUser.getFavoriteChannels();
             model.addAttribute("allFavChannels", favChannels);
             model.addAttribute("userId", userId);
-            model.addAttribute("activeChannels", curUser.getActiveChannels());
+            model.addAttribute("activeChannels", activeChattingRepository.findAllByUserId(userId));
             return "index";
         } else {
+            ActiveChatting newActiveChatting = new ActiveChatting(0, userId, channelId, uniqueId);
+            activeChattingRepository.save(newActiveChatting);
+
             Channel curChannel = channelRepository.findById(channelId).get();
             List<User> userList = userRepository.findAll();
             List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
@@ -98,9 +117,10 @@ public class ChannelController {
             return "chatroom";
         }
     }
+/*
 
     @PostMapping("/chatroom/updateDb")
-    public String enterChatroomPost(Model model, ActiveChattingForm activeChatting) {
+    public String enterChatroomPost(ActiveChattingForm activeChatting) {
         int userId = activeChatting.getUserId();
         int channelId = activeChatting.getChannelId();
         String uniqueId = activeChatting.getUniqueId();
@@ -110,32 +130,16 @@ public class ChannelController {
                 a.getChannelId() == channelId &&
                         a.getUserId() == userId &&
                         a.getUniqueId().equals(uniqueId));
-        User curUser = userRepository.findById(userId).get();
 
         if (isExistsInActiveChannelTable) {
-            model.addAttribute("activeChannelStatus", true);
-            model.addAttribute("errorMsg", "You've joined this channel somewere else!");
-            model.addAttribute("allChannels", channelRepository.findAll());
-            Set<Channel> favChannels = curUser.getFavoriteChannels();
-            model.addAttribute("allFavChannels", favChannels);
-            model.addAttribute("userId", userId);
-            model.addAttribute("activeChannels", curUser.getActiveChannels());
             return "index";
         } else {
-            ActiveChatting newActiveChatting = new ActiveChatting(0,userId, channelId,uniqueId);
+            ActiveChatting newActiveChatting = new ActiveChatting(0, userId, channelId, uniqueId);
             activeChattingRepository.save(newActiveChatting);
-            Channel curChannel = channelRepository.findById(channelId).get();
-            List<User> userList = userRepository.findAll();
-            List<Message> messageList = messageRepository.findByChannel(new Channel(channelId));
-
-            model.addAttribute("curChannel", curChannel);
-            model.addAttribute("userList", userList);
-            model.addAttribute("messageList", messageList);
-            model.addAttribute("userId", userId);
-
             return "chatroom";
         }
     }
+*/
 
 
     @GetMapping("/chatroom")

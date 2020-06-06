@@ -90,26 +90,28 @@
     <script>
 
         function enterChatroom(curChannelId) {
-            var dataContent = {}
+            window.location = "/chatroom/"+curChannelId + "/" + sessionStorage.getItem("unique_id");
+          /*  var dataContent = {}
             dataContent['channelId'] = curChannelId;
             dataContent['uniqueId'] = sessionStorage.getItem("unique_id");
             dataContent['userId'] =${userId};
-            alert("unique_id: " + dataContent['uniqueId']);
+
+           // alert("unique_id: " + dataContent['uniqueId']);
+
             $.ajax({
                 url: "/chatroom/updateDb",
                 type: "POST",
                 data: dataContent,
                 error: function (jqxhr, status, errorThrown) {
                     var url = jqxhr.responseText;
-                    alert("error:" + url);
+                    //alert("error:" + url);
                     window.location = "/index";
                 },
                 success: function (page) {
-                    alert("success: " + page);
-                    window.location = "/chatroom/"+curChannelId;
-
+                   // alert("success: " + page);
+                    window.location = "/chatroom/"+curChannelId + "/" + sessionStorage.getItem("unique_id");
                 }
-            })
+            })*/
         }
 
         var stompClient = null;
@@ -129,27 +131,22 @@
             curSessionId = (curSessionId === null) ? "undefined" : curSessionId;
             var dataContent = {};
             dataContent['sessionId'] = curSessionId;
-            alert(curSessionId);
+          //  alert(curSessionId);
 
             $.ajax({
                 url: "/chatroom/requestSessionId",
                 type: "POST",
                 data: dataContent,
             }).done(function(payload) {
-                alert("success: " + payload);
+               // alert("success: " + payload);
                 sessionStorage.setItem("unique_id",payload);
             }).fail(function(jqxhr) {
-                alert("error:" + jqxhr.responseText);
-
-
+                //alert("error:" + jqxhr.responseText);
             })
-
         }
-
 
         function onConnected() {
             stompClient.subscribe('/status/${userId}', displayInfo);
-
         }
 
         function displayInfo(payload) {
@@ -168,13 +165,12 @@
 
         <#list activeChannels as activeChannel>
         <#assign activeId = activeChannel.id>
-        $('#channel_${activeChannel.id}').show();
+        $('#channel_${activeChannel.channelId}').show();
 
         </#list>
 
 
         $(document).ready(function () {
-
             $(".channelWrapper").on("mouseover", function () {
                 if (!$(this).children(".favStar").hasClass("showFav")) {
                     $(this).children(".favStar").show();
