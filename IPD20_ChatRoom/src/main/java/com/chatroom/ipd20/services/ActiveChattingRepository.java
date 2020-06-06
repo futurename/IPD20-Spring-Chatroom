@@ -12,4 +12,6 @@ public interface ActiveChattingRepository extends JpaRepository<ActiveChatting, 
     List<ActiveChatting> findByUserIdAndChannelIdAndUniqueId(@NotNull int userId, @NotNull int channelId,
                                                                @NotNull String uniqueId);
     List<ActiveChatting> findAllByUserId(@NotNull int userId);
+
+    List<ActiveChatting> findAllByChannelId(@NotNull int channelId);
 }
