@@ -244,7 +244,18 @@ public class ChatController {
         msgTemplate.convertAndSend("/chatroom/" + channelId, chatMessage);
         msgTemplate.convertAndSend("/status/" + userId, "refresh");
 
-
         return "index";
+    }
+
+    @PostMapping("/chatroom/validateStatus")
+    @ResponseBody
+    public int validateChattingStatus(String uniqueId){
+        List<ActiveChatting> activeChattingList = activeChattingRepository.findAllByUniqueId(uniqueId);
+
+        int count = activeChattingList.size();
+
+        activeChattingList.forEach(a->activeChattingRepository.delete(a));
+
+        return count;
     }
 }
