@@ -108,8 +108,10 @@
                 url:"/chatroom/validateStatus",
                 type: "POST",
                 data: dataContent
-            }).done(function (payload) {
-                alert("clear session: " + payload);
+            }).done(function (count) {
+               if(count !== 0){
+                   location.reload();
+               }
             })
         }
 
