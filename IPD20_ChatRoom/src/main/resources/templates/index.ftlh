@@ -93,8 +93,25 @@
             }).done(function(payload) {
                // alert("success: " + payload);
                 sessionStorage.setItem("unique_id",payload);
+
+                validateStatus();
+
             }).fail(function(jqxhr) {
                 //alert("error:" + jqxhr.responseText);
+            })
+        }
+
+        function validateStatus(){
+            var dataContent = {};
+            dataContent['uniqueId'] = sessionStorage.getItem("unique_id");
+            $.ajax({
+                url:"/chatroom/validateStatus",
+                type: "POST",
+                data: dataContent
+            }).done(function (count) {
+               if(count !== 0){
+                   location.reload();
+               }
             })
         }
 

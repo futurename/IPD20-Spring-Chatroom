@@ -8,7 +8,10 @@ import com.chatroom.ipd20.models.ChatMessage;
 import com.chatroom.ipd20.models.ConnChannel;
 import com.chatroom.ipd20.models.FavChannel;
 import com.chatroom.ipd20.security.CustomUserDetails;
-import com.chatroom.ipd20.services.*;
+import com.chatroom.ipd20.services.ActiveChattingRepository;
+import com.chatroom.ipd20.services.ChannelRepository;
+import com.chatroom.ipd20.services.MessageRepository;
+import com.chatroom.ipd20.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -44,8 +47,6 @@ public class ChatController {
     ChannelRepository channelRepository;
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    HibernateSearchService searchService;
 
     @Autowired
     ActiveChattingRepository activeChattingRepository;
@@ -243,35 +244,18 @@ public class ChatController {
         msgTemplate.convertAndSend("/chatroom/" + channelId, chatMessage);
         msgTemplate.convertAndSend("/status/" + userId, "refresh");
 
-
         return "index";
     }
 
+    @PostMapping("/chatroom/validateStatus")
+    @ResponseBody
+    public int validateChattingStatus(String uniqueId){
+        List<ActiveChatting> activeChattingList = activeChattingRepository.findAllByUniqueId(uniqueId);
 
-    @GetMapping("/ajax/message")
-    public String allMessage(String keyword, String page, Model model){
-        int pageNum = 1;
+        int count = activeChattingList.size();
 
-        try { pageNum = Integer.parseInt(page); }
-        catch (NumberFormatException ex){
-            // Do nothing;
-        }
+        activeChattingList.forEach(a->activeChattingRepository.delete(a));
 
-        int totalPage = searchService.getTotalMassagePage(keyword);
-        List<Message> allMessages;
-
-        if(totalPage != 0) {
-            if(pageNum < 1){ pageNum = 1; }
-            else if(pageNum > totalPage){ pageNum = totalPage; }
-
-            allMessages = searchService.messageSearch(keyword, pageNum, totalPage);
-        } else {
-            allMessages = new ArrayList<Message>();
-        }
-//        model.addAttribute("allMessages", allMessages);
-//        model.addAttribute("totalPage", totalPage);
-//        model.addAttribute("currentPage", pageNum);
-
-        return "allMessages";
+        return count;
     }
 }
