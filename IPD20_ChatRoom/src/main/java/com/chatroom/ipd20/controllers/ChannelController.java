@@ -194,7 +194,7 @@ public class ChannelController {
             return "false";
         }
 
-        msgTemplate.convertAndSend("/chatroomNotification/" + channel.getId(), "end");
+        msgTemplate.convertAndSend("/chatroomNotification/" + channel.getId(), "delete");
         notificationService.deleteChannel(channel);
 
         return "true";

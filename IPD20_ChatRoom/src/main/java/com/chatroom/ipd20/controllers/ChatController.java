@@ -31,12 +31,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/**
- * @author Wei Wang
- * @version 1.0
- * @since 2020/05/29
- **/
-
 @Controller
 public class ChatController {
 
@@ -58,7 +52,7 @@ public class ChatController {
 
 
     @MessageMapping("/chat.sendMessage")
-    public void sendMessage(ChatMessage chatMessage) {
+    public void sendMessage(ChatMessage chatMessage, Authentication authentication) {
         LocalDateTime createdTS = LocalDateTime.now();
         String messsage = processMsg(chatMessage.getBody());
 
@@ -67,7 +61,11 @@ public class ChatController {
 
         messageRepository.save(newMsg);
 
-        String senderName = userRepository.findById(chatMessage.getSenderId()).get().getName();
+
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        User user = userRepository.findById(customUserDetails.getId()).get();
+
+        String senderName = user.getName();
 
         chatMessage.setCreatedTS(createdTS);
         chatMessage.setSenderName(senderName);
@@ -224,24 +222,29 @@ public class ChatController {
         model.addAttribute("userId", userId);
         model.addAttribute("activeChannels", activeChattingRepository.findAllByUserId(userId));
 
-        String leaveString = "<span class='font-bold text-red-500 text-base'>" + user.getName() + "</span> just " +
-                "left the chatroom...\uD83D\uDE02";
+        Channel channel = channelRepository.findById(channelId).orElse(null);
 
-        LocalDateTime createdTS = LocalDateTime.now();
-        Message newMsg = new Message(0, leaveString, null,
-                new Channel(channelId), new User(userId), createdTS);
+        if(channel != null) {
 
-        messageRepository.save(newMsg);
+            String leaveString = "<span class='font-bold text-red-500 text-base'>" + user.getName() + "</span> just " +
+                    "left the chatroom...\uD83D\uDE02";
 
-        ChatMessage chatMessage = new ChatMessage();
+            LocalDateTime createdTS = LocalDateTime.now();
+            Message newMsg = new Message(0, leaveString, null,
+                    new Channel(channelId), new User(userId), createdTS);
 
-        String senderName = userRepository.findById(userId).get().getName();
+            messageRepository.save(newMsg);
 
-        chatMessage.setCreatedTS(createdTS);
-        chatMessage.setSenderName(senderName);
-        chatMessage.setBody(leaveString);
+            ChatMessage chatMessage = new ChatMessage();
 
-        msgTemplate.convertAndSend("/chatroom/" + channelId, chatMessage);
+            String senderName = userRepository.findById(userId).get().getName();
+
+            chatMessage.setCreatedTS(createdTS);
+            chatMessage.setSenderName(senderName);
+            chatMessage.setBody(leaveString);
+
+            msgTemplate.convertAndSend("/chatroom/" + channelId, chatMessage);
+        }
         msgTemplate.convertAndSend("/status/" + userId, "refresh");
 
         return "index";

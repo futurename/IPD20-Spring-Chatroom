@@ -124,7 +124,6 @@
                     url: "/chatroom/" + id,
                     type: "DELETE"
                 }).done(function (result) {
-                    alert(result);
                     location.reload();
                 }).fail(function () {
                     alert("Something is wrong with ajax.");

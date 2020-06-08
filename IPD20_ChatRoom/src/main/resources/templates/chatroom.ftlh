@@ -38,6 +38,9 @@
 
         <#import "layout/defaultLayout.ftlh" as defPage>
         <@defPage.headerDiv/>
+        <p id="message" class="hidden text-center text-xl">
+            <span class="text-blue-500">Channel will delete in <span id="msgSecond" class="text-red-400 font-bold">3</span> seconds.</span>
+        </p>
 
         <div class="max-w-2xl mx-auto flex flex-col sm:flex-row">
             <div id="left" class="flex flex-col p-2 sm:w-1/3">
@@ -158,18 +161,21 @@
         }
 
         function chatroomNotification(payload) {
-            setTimeout(function () {
-                alert("Channel will delete in 3 seconds.");
-            }, 1000);
-            setTimeout(function () {
-                alert("Channel will delete in 2 seconds.");
-            }, 2000);
-            setTimeout(function () {
-                alert("Let's move to home page.");
-            }, 3000);
-            setTimeout(function () {
-                window.location.replace("/");
-            }, 4000);
+            if(payload.body == "delete"){
+                $("#message").show();
+                setTimeout(function () {
+                    $("#msgSecond").text("3");
+                }, 1000);
+                setTimeout(function () {
+                    $("#msgSecond").text("2");
+                }, 2000);
+                setTimeout(function () {
+                    $("#msgSecond").text("1");
+                }, 3000);
+                setTimeout(function () {
+                    window.location.replace("/");
+                }, 4000);
+            }
         }
 
         function notification(payload) {
@@ -206,8 +212,8 @@
             spanMsg.innerHTML = msg.body;
 
             spanMsg.classList.add("text-sm");
-            spanMsg.classList.add("whitespace-pre-wrap")
-            spanMsg.classList.add("break-words")
+            spanMsg.classList.add("whitespace-pre-wrap");
+            spanMsg.classList.add("break-words");
 
             li.append(spanUser);
             li.append(spanTime);

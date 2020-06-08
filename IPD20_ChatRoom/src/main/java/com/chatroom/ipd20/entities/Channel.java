@@ -70,6 +70,7 @@ public class Channel {
     private Set<User> users = new HashSet<User>();
 
     @ManyToMany(mappedBy = "activeChannels")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private Set<User> activeUsers = new HashSet<User>();
 

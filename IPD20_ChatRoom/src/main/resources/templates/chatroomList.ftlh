@@ -44,6 +44,8 @@
     <div>There is no channel.</div>
 </#list>
 </div>
+
+<#if totalPage != 0>
 <div>
     <#if currentPage != 1>
         <span id="prev" class="text-sm cursor-pointer hover:underline">prev</span>
@@ -59,6 +61,7 @@
         <span id="next" class="text-sm cursor-pointer hover:underline">next</span>
     </#if>
 </div>
+</#if>
 <script>
 
     function enterChatroom(curChannelId) {
