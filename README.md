@@ -1,7 +1,7 @@
 # IPD20-SPRING-Chatroom
 
-This project implements user login, create channels, chatting rooms, etc. with Spring boot.
-Deployed on http://35.203.70.240/
+This project implements user login, create channels, chatting rooms, etc. with Spring boot.<br>
+Deployed on <a href="http://35.203.70.240/" target = "_blank">http://35.203.70.240/</a>
 
 #### **User Story:**
 <ul>
