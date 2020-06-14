@@ -1,6 +1,6 @@
 # IPD20-SPRING-Chatroom
 
-This project implements user login, create channels, chatting room with Spring boot.
+This project implements user login, create channels, chatting rooms, etc. with Spring boot.
 
 #### **User Story:**
 <ul>
